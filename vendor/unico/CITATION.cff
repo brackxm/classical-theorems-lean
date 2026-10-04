@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use or reference these formal proofs, please cite this repository."
+title: "unico-lean-proofs: machine-verified Lean 4 proofs from the UNICO/NOUS pipeline"
+type: software
+authors:
+  - name: "UNICO / NOUS project (Solarys431)"
+repository-code: "https://github.com/Solarys431/unico-lean-proofs"
+license: Apache-2.0
+date-released: "2026-07-12"
+keywords:
+  - Lean 4
+  - mathlib
+  - formal verification
+  - formalized mathematics
+  - Morley's trisector theorem
+  - Erdős problems
+  - AI-assisted theorem proving

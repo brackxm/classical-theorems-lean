@@ -1,0 +1,51 @@
+{
+  "id": "hol-light-port",
+  "repository": "https://github.com/jrh13/hol-light",
+  "revision": "cba9198db76e9dfb89cbd653df9412d01f65b22a",
+  "package": "HOLLightPort",
+  "target_toolchain": "leanprover/lean4:v4.34.0",
+  "target_mathlib_revision": "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d",
+  "license": "BSD-2-Clause",
+  "verification": "verified",
+  "upstream_toolchain": "HOL Light / OCaml",
+  "source_language": "HOL Light",
+  "license_files": [
+    "LICENSE"
+  ],
+  "source_modules": [
+    "HOLLightPort.Desargues",
+    "HOLLightPort.Pascal"
+  ],
+  "upstream_paths": {
+    "LICENSE": "LICENSE",
+    "upstream/desargues.ml.txt": "100/desargues.ml",
+    "upstream/pascal.ml.txt": "100/pascal.ml"
+  },
+  "upstream_sha256": {
+    "LICENSE": "fd1a38c49a5b6acbdf1baa9e544006be3e889cd83703745a42b36a68dc084481",
+    "upstream/desargues.ml.txt": "4a2e50e603ff2fe94cf622c36c652fbbb0e05be9084c0bd406edd49d9458330a",
+    "upstream/pascal.ml.txt": "516aca235c3ff1f51fa9c5d86d3b2e4fbd62c6763a584fc2cf1fd95ba16c4786"
+  },
+  "local_sha256": {
+    "HOLLightPort.lean": "253e962baa7c9fd913ebab02a443b92f213534398c6355a826373a7a290df7e7",
+    "HOLLightPort/Desargues.lean": "78bdbc7d81e4f3d0a629da0368e8c7870811b282f131d0045575d2ab195f4872",
+    "HOLLightPort/Pascal.lean": "ada44c3c09a2a858ba57bb2d8dd96d5a395e421b4ae55d3a479e9002147cd88a",
+    "LICENSE": "fd1a38c49a5b6acbdf1baa9e544006be3e889cd83703745a42b36a68dc084481",
+    "patches.diff": "c7b95508584f071e52cc7a6d9dd6dd8d757a4ad89860ba34ea339a56e4277e41",
+    "lakefile.toml": "b683c02443615eea99568b6ee7ea917af9aef865b9ad4cd6a2d8ca319adf3855",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "upstream/desargues.ml.txt": "4a2e50e603ff2fe94cf622c36c652fbbb0e05be9084c0bd406edd49d9458330a",
+    "upstream/pascal.ml.txt": "516aca235c3ff1f51fa9c5d86d3b2e4fbd62c6763a584fc2cf1fd95ba16c4786"
+  },
+  "modified_files": [],
+  "local_entry_points": [
+    "HOLLightPort.lean",
+    "HOLLightPort/Desargues.lean",
+    "HOLLightPort/Pascal.lean"
+  ],
+  "port_notes": "Manual mathematical adaptation of the homogeneous coordinate/bracket proofs. Original sources retained byte-for-byte as noncompiled text. New determinant certificates are checked afresh by Lean; no foreign proof objects or extra axioms are trusted.",
+  "selection": {
+    "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
+    "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."
+  }
+}

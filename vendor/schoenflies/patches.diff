@@ -1,0 +1,247 @@
+--- upstream/Schoenflies/Endgame.lean
++++ local/Schoenflies/Endgame.lean
+@@ -2,6 +2,7 @@
+ Copyright (c) 2026 Álvaro Begué. All rights reserved.
+ Released under Apache 2.0 license as described in the file LICENSE.
+ Authors: Álvaro Begué
++Modified for the ClassicalTheorems project: update domain-restriction API.
+ -/
+ import Schoenflies.Inversion
+ import Schoenflies.JordanClosed
+@@ -115,18 +116,18 @@
+     ⟨?_, ?_, ?_, ?_, ?_, ?_⟩, fun z hz => dif_pos hz⟩
+   · exact fun z hz => by simp only [dif_pos hz]; exact (e ⟨z, hz⟩).2
+   · exact fun w hw => by simp only [dif_pos hw]; exact (e.symm ⟨w, hw⟩).2
+-  · rw [continuousOn_iff_continuous_restrict]
+-    have heq : (S.restrict fun z => if hz : z ∈ S then (e ⟨z, hz⟩ : Plane) else z) =
++  · rw [continuousOn_iff_continuous_domRestrict]
++    have heq : (S.domRestrict fun z => if hz : z ∈ S then (e ⟨z, hz⟩ : Plane) else z) =
+         fun z : ↥S => (e z : Plane) := by
+       funext z
+-      simp only [Set.restrict_apply, dif_pos z.2]
++      simp only [Set.domRestrict_apply, dif_pos z.2]
+     rw [heq]
+     exact continuous_subtype_val.comp e.continuous
+-  · rw [continuousOn_iff_continuous_restrict]
+-    have heq : (T.restrict fun w => if hw : w ∈ T then (e.symm ⟨w, hw⟩ : Plane) else w) =
++  · rw [continuousOn_iff_continuous_domRestrict]
++    have heq : (T.domRestrict fun w => if hw : w ∈ T then (e.symm ⟨w, hw⟩ : Plane) else w) =
+         fun w : ↥T => (e.symm w : Plane) := by
+       funext w
+-      simp only [Set.restrict_apply, dif_pos w.2]
++      simp only [Set.domRestrict_apply, dif_pos w.2]
+     rw [heq]
+     exact continuous_subtype_val.comp e.symm.continuous
+   · intro z hz
+--- upstream/Schoenflies/Graph/Cycle.lean
++++ local/Schoenflies/Graph/Cycle.lean
+@@ -2,6 +2,7 @@
+ Copyright (c) 2026 Álvaro Begué. All rights reserved.
+ Released under Apache 2.0 license as described in the file LICENSE.
+ Authors: Álvaro Begué
++Modified for the ClassicalTheorems project: avoid mathlib bridge-name collision.
+ -/
+ import Mathlib.Combinatorics.Graph.Delete
+ import Schoenflies.Graph.Walk
+@@ -61,7 +62,7 @@
+   edge lies on a cycle if and only if deleting it does not disconnect its endpoints", both
+   directions, with the finiteness the proof does not use dropped. The two halves are
+   `Graph.LiesOnCycle.deleteEdges_reaches` and `Graph.LiesOnCycle.of_deleteEdges_reaches`.
+-* `Graph.IsBridge`, `Graph.isBridge_iff_not_reaches` — the bridges of
++* `Graph.SchoenfliesIsBridge`, `Graph.isBridge_iff_not_reaches` — the bridges of
+   `lem:subdivision-ear-preserve` ("a 2-connected graph has no bridge. Indeed, if `uv` were a
+   bridge, the two components of `G - uv` …"), stated as the separation of the two ends.
+ * `Graph.IsAcyclic`, `Graph.Connected.deleteEdges_singleton` — the acyclicity underneath
+@@ -281,41 +282,41 @@
+ 
+ /-! ### Bridges -/
+ 
+-/-- `G.IsBridge e` : an edge of `G` that lies on no cycle. Equivalently — and this is the
++/-- `G.SchoenfliesIsBridge e` : an edge of `G` that lies on no cycle. Equivalently — and this is the
+ form every use wants — an edge whose deletion separates its two ends
+ (`Graph.isBridge_iff_not_reaches`). -/
+-def IsBridge (G : Graph α β) (e : β) : Prop := e ∈ E(G) ∧ ¬ G.LiesOnCycle e
+-
+-theorem IsBridge.edge_mem (h : G.IsBridge e) : e ∈ E(G) := h.1
+-
+-theorem IsBridge.not_liesOnCycle (h : G.IsBridge e) : ¬ G.LiesOnCycle e := h.2
++def SchoenfliesIsBridge (G : Graph α β) (e : β) : Prop := e ∈ E(G) ∧ ¬ G.LiesOnCycle e
++
++theorem SchoenfliesIsBridge.edge_mem (h : G.SchoenfliesIsBridge e) : e ∈ E(G) := h.1
++
++theorem SchoenfliesIsBridge.not_liesOnCycle (h : G.SchoenfliesIsBridge e) : ¬ G.LiesOnCycle e := h.2
+ 
+ /-- **Deleting a bridge separates its ends.** -/
+-theorem IsBridge.not_reaches (h : G.IsBridge e) (hl : G.IsLink e u v) :
++theorem SchoenfliesIsBridge.not_reaches (h : G.SchoenfliesIsBridge e) (hl : G.IsLink e u v) :
+     ¬ (G.deleteEdges {e}).Reaches u v :=
+   fun hR ↦ h.not_liesOnCycle (LiesOnCycle.of_deleteEdges_reaches hl hR)
+ 
+ /-- **An edge whose deletion separates its ends is a bridge.** -/
+ theorem isBridge_of_not_reaches (hl : G.IsLink e u v)
+-    (h : ¬ (G.deleteEdges {e}).Reaches u v) : G.IsBridge e :=
++    (h : ¬ (G.deleteEdges {e}).Reaches u v) : G.SchoenfliesIsBridge e :=
+   ⟨hl.edge_mem, fun hc ↦ h (hc.deleteEdges_reaches hl)⟩
+ 
+ /-- **A bridge is exactly an edge whose deletion separates its ends** — the cycle criterion,
+ negated. -/
+ theorem isBridge_iff_not_reaches (hl : G.IsLink e u v) :
+-    G.IsBridge e ↔ ¬ (G.deleteEdges {e}).Reaches u v :=
++    G.SchoenfliesIsBridge e ↔ ¬ (G.deleteEdges {e}).Reaches u v :=
+   ⟨fun h ↦ h.not_reaches hl, isBridge_of_not_reaches hl⟩
+ 
+ /-- A bridge is never a loop: a loop is a cycle. -/
+-theorem IsBridge.not_isLoopAt (h : G.IsBridge e) (x : α) : ¬ G.IsLoopAt e x :=
++theorem SchoenfliesIsBridge.not_isLoopAt (h : G.SchoenfliesIsBridge e) (x : α) : ¬ G.IsLoopAt e x :=
+   fun hloop ↦ h.not_liesOnCycle (liesOnCycle_of_isLoopAt hloop)
+ 
+ /-- **A graph is acyclic exactly when every one of its edges is a bridge.** This is the form
+ the tree module wants acyclicity in: "it is a tree — an edge of a cycle could be deleted"
+ reads backwards as "no edge can be deleted without separating its ends". -/
+-theorem isAcyclic_iff_forall_isBridge : G.IsAcyclic ↔ ∀ e ∈ E(G), G.IsBridge e :=
++theorem isAcyclic_iff_forall_isBridge : G.IsAcyclic ↔ ∀ e ∈ E(G), G.SchoenfliesIsBridge e :=
+   ⟨fun h _ he ↦ ⟨he, h he⟩, fun h _ he ↦ (h _ he).not_liesOnCycle⟩
+ 
+-theorem IsAcyclic.isBridge (h : G.IsAcyclic) (he : e ∈ E(G)) : G.IsBridge e := ⟨he, h he⟩
++theorem IsAcyclic.isBridge (h : G.IsAcyclic) (he : e ∈ E(G)) : G.SchoenfliesIsBridge e := ⟨he, h he⟩
+ 
+ end Graph
+--- upstream/Schoenflies/InitialPair.lean
++++ local/Schoenflies/InitialPair.lean
+@@ -2,6 +2,7 @@
+ Copyright (c) 2026 Álvaro Begué. All rights reserved.
+ Released under Apache 2.0 license as described in the file LICENSE.
+ Authors: Álvaro Begué
++Modified for the ClassicalTheorems project: update domain-restriction API.
+ -/
+ import Schoenflies.CombinatorialInvariance
+ import Schoenflies.GeneralCrosscut
+@@ -154,16 +155,16 @@
+   obtain ⟨h⟩ := hC.homeomorph_modelCurve
+   refine ⟨fun p => if hp : p ∈ C then (h ⟨p, hp⟩ : Plane) else 0,
+     fun q => if hq : q ∈ modelCurve then (h.symm ⟨q, hq⟩ : Plane) else 0, ?_, ?_, ?_, ?_, ?_, ?_⟩
+-  · rw [continuousOn_iff_continuous_restrict]
+-    have : (C.restrict fun p => if hp : p ∈ C then (h ⟨p, hp⟩ : Plane) else 0) =
++  · rw [continuousOn_iff_continuous_domRestrict]
++    have : (C.domRestrict fun p => if hp : p ∈ C then (h ⟨p, hp⟩ : Plane) else 0) =
+         fun p : ↥C => (h p : Plane) := by
+-      funext p; simp [Set.restrict, p.2]
++      funext p; simp [Set.domRestrict, p.2]
+     rw [this]
+     exact continuous_subtype_val.comp h.continuous
+-  · rw [continuousOn_iff_continuous_restrict]
+-    have : (modelCurve.restrict fun q => if hq : q ∈ modelCurve then (h.symm ⟨q, hq⟩ : Plane)
++  · rw [continuousOn_iff_continuous_domRestrict]
++    have : (modelCurve.domRestrict fun q => if hq : q ∈ modelCurve then (h.symm ⟨q, hq⟩ : Plane)
+         else 0) = fun q : ↥modelCurve => (h.symm q : Plane) := by
+-      funext q; simp [Set.restrict, q.2]
++      funext q; simp [Set.domRestrict, q.2]
+     rw [this]
+     exact continuous_subtype_val.comp h.symm.continuous
+   · intro p hp; simp only [dif_pos hp]; exact (h ⟨p, hp⟩).2
+--- upstream/Schoenflies/Subarc.lean
++++ local/Schoenflies/Subarc.lean
+@@ -2,6 +2,7 @@
+ Copyright (c) 2026 Álvaro Begué. All rights reserved.
+ Released under Apache 2.0 license as described in the file LICENSE.
+ Authors: Álvaro Begué
++Modified for the ClassicalTheorems project: explicit unit-interval unfolding.
+ -/
+ import Schoenflies.Curve
+ 
+@@ -78,7 +79,8 @@
+ theorem image_reparam_I : reparam a b '' I = uIcc a b := by
+   have h : (fun θ : ℝ => a + θ • (b - a)) '' Icc (0 : ℝ) 1 = uIcc a b := by
+     rw [← segment_eq_image' ℝ a b, segment_eq_uIcc]
+-  simpa [reparam, smul_eq_mul] using h
++  change (fun θ : ℝ => a + θ * (b - a)) '' Icc (0 : ℝ) 1 = uIcc a b
++  simpa only [smul_eq_mul] using h
+ 
+ theorem mapsTo_reparam : MapsTo (reparam a b) I (uIcc a b) :=
+   mapsTo_iff_image_subset.mpr image_reparam_I.subset
+--- upstream/lakefile.toml
++++ local/lakefile.toml
+@@ -1,30 +1,16 @@
+ name = "schoenflies-lean"
+ version = "0.1.0"
+-keywords = ["math"]
+ defaultTargets = ["Schoenflies"]
+ 
+ [leanOptions]
+-pp.unicode.fun = true # pretty-prints `fun a ↦ b`
++pp.unicode.fun = true
+ relaxedAutoImplicit = false
+-weak.linter.mathlibStandardSet = true
+ maxSynthPendingDepth = 3
+ 
+ [[require]]
+ name = "mathlib"
+-scope = "leanprover-community"
+-rev = "v4.32.2"
++git = "https://github.com/leanprover-community/mathlib4.git"
++rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+ 
+ [[lean_lib]]
+ name = "Schoenflies"
+-
+-# The trusted challenge and actual solution modules used by leanprover/comparator.
+-# These are not default targets, so the intentional challenge `sorry` does not
+-# enter the ordinary library build or axiom audit. Keeping them as separate Lean
+-# libraries matches Comparator's challenge/solution trust boundary.
+-[[lean_lib]]
+-name = "Challenge"
+-srcDir = "Comparator"
+-
+-[[lean_lib]]
+-name = "Solution"
+-srcDir = "Comparator"
+--- upstream/lean-toolchain
++++ local/lean-toolchain
+@@ -1 +1 @@
+-leanprover/lean4:v4.32.2
++leanprover/lean4:v4.34.0
+--- /dev/null
++++ local/Schoenflies.lean
+@@ -0,0 +1 @@
++import Schoenflies.JordanSchoenflies
+--- upstream/lakefile.toml
++++ local/lakefile.toml
+@@ -1,30 +1,16 @@
+ name = "schoenflies-lean"
+ version = "0.1.0"
+-keywords = ["math"]
+ defaultTargets = ["Schoenflies"]
+ 
+ [leanOptions]
+-pp.unicode.fun = true # pretty-prints `fun a ↦ b`
++pp.unicode.fun = true
+ relaxedAutoImplicit = false
+-weak.linter.mathlibStandardSet = true
+ maxSynthPendingDepth = 3
+ 
+ [[require]]
+ name = "mathlib"
+-scope = "leanprover-community"
+-rev = "v4.32.2"
++git = "https://github.com/leanprover-community/mathlib4.git"
++rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+ 
+ [[lean_lib]]
+ name = "Schoenflies"
+-
+-# The trusted challenge and actual solution modules used by leanprover/comparator.
+-# These are not default targets, so the intentional challenge `sorry` does not
+-# enter the ordinary library build or axiom audit. Keeping them as separate Lean
+-# libraries matches Comparator's challenge/solution trust boundary.
+-[[lean_lib]]
+-name = "Challenge"
+-srcDir = "Comparator"
+-
+-[[lean_lib]]
+-name = "Solution"
+-srcDir = "Comparator"
+--- upstream/lean-toolchain
++++ local/lean-toolchain
+@@ -1 +1 @@
+-leanprover/lean4:v4.32.2
++leanprover/lean4:v4.34.0

@@ -1,0 +1,61 @@
+--- /dev/null
++++ local/MovingSofa.lean
+@@ -0,0 +1,3 @@
++import MovingSofa.Curve.Jordan.SignedArea
++import MovingSofa.Analysis.Stieltjes.Smooth
++import MovingSofa.Analysis.Stieltjes.DensityIntegration
+--- upstream/lakefile.toml
++++ local/lakefile.toml
+@@ -1,41 +1,15 @@
+ name = "MovingSofa"
+-defaultTargets = ["MovingSofa", "MovingSofaSubmission"]
+-
+-[[require]]
+-name = "jordan_pick"
+-git = "https://github.com/rkirov/jordan_pick.git"
+-rev = "b3c9b7cf7358bf81a077d78ad67e6e8247869ddd"
+-
+-[[require]]
+-name = "leancert"
+-git = "https://github.com/alerad/leancert"
+-rev = "571a228555ae38742448854be81d7b59d994a8e3"
++version = "0.1.0"
++defaultTargets = ["MovingSofa"]
+ 
+ [[require]]
+ name = "mathlib"
+ git = "https://github.com/leanprover-community/mathlib4.git"
+-rev = "v4.35.0-rc1"
++rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+ 
++[[require]]
++name = "jordan_pick"
++path = "../jordan-pick"
+ 
+ [[lean_lib]]
+ name = "MovingSofa"
+-
+-[[lean_lib]]
+-name = "MovingSofaSubmission"
+-globs = ["MovingSofaSubmission.+"]
+-
+-# Vendored sources. They are libraries of this package, not path dependencies, so that their
+-# build output goes to this package's `.lake`, the only directory Comparator lets a build write to.
+-[[lean_lib]]
+-name = "GerverSofa"
+-srcDir = "vendor/gerver-sofa"
+-
+-[[lean_lib]]
+-name = "LeanPool"
+-srcDir = "vendor/lean-pool"
+-leanOptions = { pp.unicode.fun = true, relaxedAutoImplicit = false, maxSynthPendingDepth = 3, weak.linter.mathlibStandardSet = true }
+-
+-[[lean_lib]]
+-name = "TauCeti"
+-srcDir = "vendor/tauceti"
+-leanOptions = { weak.linter.mathlibStandardSet = true }
+--- upstream/lean-toolchain
++++ local/lean-toolchain
+@@ -1 +1 @@
+-leanprover/lean4:v4.35.0-rc1
++leanprover/lean4:v4.34.0

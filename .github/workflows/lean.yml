@@ -1,0 +1,29 @@
+name: ClassicalTheorems
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    env:
+      LEAN_NUM_THREADS: "4"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check release metadata
+        run: python3 scripts/release.py --metadata-only
+      - name: Check source and license integrity
+        run: python3 scripts/check_vendor.py
+      - name: Check the complete source import closure
+        run: python3 scripts/check_imports.py
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: "false"
+          build: "true"
+          use-mathlib-cache: "true"
+      - name: Check standalone source and dependency layout
+        run: python3 scripts/check_standalone.py
+      - name: Check proof-audit regressions
+        run: python3 scripts/test_checks.py

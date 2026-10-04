@@ -1,0 +1,35 @@
+name = "classical_theorems"
+version = "0.0.1"
+defaultTargets = ["ClassicalTheorems"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+
+[[require]]
+name = "Foundation"
+path = "vendor/foundation"
+
+[[require]]
+name = "unico-lean-proofs"
+path = "vendor/unico"
+
+[[require]]
+name = "MovingSofa"
+path = "vendor/moving-sofa"
+
+[[require]]
+name = "jordan_pick"
+path = "vendor/jordan-pick"
+
+[[require]]
+name = "schoenflies-lean"
+path = "vendor/schoenflies"
+
+[[lean_lib]]
+name = "ClassicalTheorems"
+
+[[require]]
+name = "HOLLightPort"
+path = "vendor/hol-light-port"

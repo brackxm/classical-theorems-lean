@@ -1,0 +1,26 @@
+{
+  "cff-version": "1.2.0",
+  "message": "If you use this software, please cite this release.",
+  "type": "software",
+  "title": "Classical Theorems in Lean",
+  "version": "0.0.1",
+  "doi": "10.5281/zenodo.23144255",
+  "date-released": "2026-10-04",
+  "authors": [
+    {
+      "family-names": "Brackx",
+      "given-names": "Michael"
+    }
+  ],
+  "license": "Apache-2.0",
+  "abstract": "A standalone Lean 4 library containing proofs of eight classical theorems: incompleteness for Robinson arithmetic Q, independence of the parallel postulate, Euler’s polyhedron formula, Green’s theorem, the isoperimetric theorem with equality exactly for circles, Heron’s formula for the area of a Euclidean triangle, Pascal’s hexagon theorem and Desargues’s theorem. Ten main Lean declarations cover the eight theorems, with reusable supporting mathematics. Precise hypotheses and declaration names are documented in theorems.md. Pascal and Desargues are translations of HOL Light arguments, proved anew in Lean. The library uses Lean 4.34.0 and fixes the revisions of mathlib and its supporting sources. The build checks the axioms used by the main theorems and their dependencies, accepting only propext, Classical.choice and Quot.sound. Supporting sources retain their attribution and licenses. Original project code and documentation are licensed under Apache-2.0; files carrying BSD-2-Clause notices and bundled third-party sources retain their respective licenses. OpenAI Codex was used extensively under human direction to develop proof strategies, write and refactor this project’s Lean code, and prepare documentation. Lean’s kernel checks the formal proof terms. This release makes no claim to be the first formalization of these theorems.",
+  "keywords": [
+    "Lean 4",
+    "formal verification",
+    "formalized mathematics",
+    "theorem proving",
+    "geometry",
+    "analysis",
+    "mathematical logic"
+  ]
+}

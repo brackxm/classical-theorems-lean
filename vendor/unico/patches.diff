@@ -1,0 +1,297 @@
+--- upstream/UnicoProofs/Platonici/Balinski.lean
++++ local/UnicoProofs/Platonici/Balinski.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Benchmark
+ import UnicoProofs.Platonici.ConnessioneVentaglio
+@@ -154,6 +157,6 @@
+     linarith
+   have hwalk := camminata_del_simplesso X (AdiacentiVertici P) l
+     hlg hw hunico hu
+-  exact hwalk.mono (fun _ _ hstep => hstep.2)
++  exact Relation.ReflTransGen.mono (fun _ _ hstep => hstep.2) _ _ hwalk
+ 
+ end LeanEval.Geometry.PlatonicClassification
+--- upstream/UnicoProofs/Platonici/ConnessioneVentaglio.lean
++++ local/UnicoProofs/Platonici/ConnessioneVentaglio.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Benchmark
+ import UnicoProofs.Platonici.PerturbazioneFinita
+@@ -785,7 +788,7 @@
+       exact hdist hxzeq
+   have hwalk := camminata_del_simplesso X (CondividonoFaccetta P v) φ
+     hlg (xs := es) (by simp [X]) hunico (x₀ := e₀) (by simp [X])
+-  exact hwalk.mono (fun _ _ hstep => hstep.2)
++  exact Relation.ReflTransGen.mono (fun _ _ hstep => hstep.2) _ _ hwalk
+ 
+ /-- Ogni faccetta che contiene `v` contiene uno spigolo per `v`. -/
+ theorem esiste_spigolo_nella_faccetta (P : ConvexPolytope 3)
+--- upstream/UnicoProofs/Platonici/DodecaedroTestimone.lean
++++ local/UnicoProofs/Platonici/DodecaedroTestimone.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Fondamenta
+ import UnicoProofs.Platonici.Trasferimento
+@@ -259,7 +262,7 @@
+     rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+   all_goals norm_num [supportL, a0, a1, a2, a3, a4, a5, a6, a7,
+     b0, b1, b2, b3, c0D, c1D, c2D, c3D, d0, d1D, d2D, d3]
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   all_goals nlinarith [golden_inv_nf, Real.goldenRatio_sq]
+ 
+@@ -281,7 +284,7 @@
+   all_goals exfalso
+   all_goals norm_num [supportL, a0, a1, a2, a3, a4, a5, a6, a7,
+     b0, b1, b2, b3, c0D, c1D, c2D, c3D, d0, d1D, d2D, d3] at heq
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at heq
+   all_goals nlinarith [golden_inv_nf, Real.goldenRatio_sq]
+ 
+@@ -595,42 +598,48 @@
+ 
+ theorem rho_faceCycle (i : Fin 5) :
+     ρ (faceCycle i) = faceCycle (finRotate 5 i) := by
++  have hgold : 1 + Real.sqrt 5 = 2 * φ := by rw [Real.goldenRatio]; ring
++  have hden : 1 + Real.sqrt 5 ≠ 0 := by positivity
+   have h01 : ρ x0 = x1 := by
+     apply E3_ext
+     all_goals norm_num [rhoFormula, x0, x1, a7, b3]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+     all_goals rw [golden_inv_nf] at *
+-    all_goals nlinarith [Real.goldenRatio_sq]
++    all_goals try simp only [div_self hden] at *
++    all_goals nlinarith [Real.goldenRatio_sq, hgold]
+   have h12 : ρ x1 = x2 := by
+     apply E3_ext
+     all_goals norm_num [rhoFormula, x1, x2, b3, b1]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+     all_goals rw [golden_inv_nf] at *
+-    all_goals nlinarith [Real.goldenRatio_sq]
++    all_goals try simp only [div_self hden] at *
++    all_goals nlinarith [Real.goldenRatio_sq, hgold]
+   have h23 : ρ x2 = x3 := by
+     apply E3_ext
+     all_goals norm_num [rhoFormula, x2, x3, b1, a5]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+     all_goals rw [golden_inv_nf] at *
+-    all_goals nlinarith [Real.goldenRatio_sq]
++    all_goals try simp only [div_self hden] at *
++    all_goals nlinarith [Real.goldenRatio_sq, hgold]
+   have h34 : ρ x3 = x4 := by
+     apply E3_ext
+     all_goals norm_num [rhoFormula, x3, x4, a5, c3D]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+     all_goals rw [golden_inv_nf] at *
+     all_goals nlinarith [golden_sqrt_five, Real.goldenRatio_sq]
+   have h40 : ρ x4 = x0 := by
+     apply E3_ext
+     all_goals norm_num [rhoFormula, x4, x0, c3D, a7]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+     all_goals rw [golden_inv_nf] at *
+     all_goals try simp only [golden_den_self] at *
+-    all_goals nlinarith [Real.goldenRatio_sq]
++    all_goals try simp only [div_self hden] at *
++    all_goals nlinarith [Real.goldenRatio_sq, hgold]
+   fin_cases i
+   · exact h01
+   · exact h12
+@@ -707,7 +716,7 @@
+       (WithLp.toLp 2 ![(1 : ℝ), 1 - φ⁻¹, 1 - φ] : E3) := by
+     apply E3_ext
+     all_goals norm_num [x0, x1, a7, b3]
+-    all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++    all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+       Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   rw [hsub]
+   change ‖(WithLp.toLp 2 ![(1 : ℝ), 1 - φ⁻¹, 1 - φ] : E3)‖ = 2 * φ⁻¹
+@@ -1962,7 +1971,7 @@
+   all_goals apply E3_ext
+   all_goals norm_num [rhoFormula, a0, a1, a2, a3, a4, a5, a6, a7,
+     b0, b1, b2, b3, c0D, c1D, c2D, c3D, d0, d1D, d2D, d3]
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   all_goals rw [golden_inv_nf] at *
+   all_goals try simp only [golden_den_self] at *
+--- upstream/UnicoProofs/Platonici/FacceConnesse.lean
++++ local/UnicoProofs/Platonici/FacceConnesse.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Benchmark
+ import UnicoProofs.Platonici.ConnessioneVentaglio
+@@ -61,7 +64,7 @@
+     (hB : P.IsFace B) (hdB : faceDim B = 2) (hvB : v ∈ B) :
+     Relation.ReflTransGen (FaccetteAdiacenti P) A B := by
+   have h := ventaglio_connesso P hfull hv hA hdA hvA hB hdB hvB
+-  refine h.mono ?_
++  refine Relation.ReflTransGen.mono ?_ _ _ h
+   rintro X Y ⟨⟨hY, hdY, _⟩, δ, hδ, hdδ, _, hδX, hδY⟩
+   exact ⟨⟨hY, hdY⟩, δ, hδ, hdδ, hδX, hδY⟩
+ 
+--- upstream/UnicoProofs/Platonici/IcosaedroTestimone.lean
++++ local/UnicoProofs/Platonici/IcosaedroTestimone.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Fondamenta
+ import UnicoProofs.Platonici.Trasferimento
+@@ -203,7 +206,7 @@
+     rfl | rfl | rfl | rfl | rfl | rfl
+   all_goals norm_num [supportLI, a0I, a1I, a2I, a3I, b0I, b1I, b2I, b3I,
+     c0I, c1I, c2I, c3I]
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   all_goals nlinarith [Real.goldenRatio_sq]
+ 
+@@ -219,7 +222,7 @@
+   all_goals exfalso
+   all_goals norm_num [supportLI, a0I, a1I, a2I, a3I, b0I, b1I, b2I, b3I,
+     c0I, c1I, c2I, c3I] at heq
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at heq
+   all_goals nlinarith [Real.goldenRatio_sq]
+ 
+@@ -519,7 +522,7 @@
+   all_goals apply E3_extI
+   all_goals simp only [rho_applyI, rhoFormulaI, a0I, a1I, a2I, a3I,
+     b0I, b1I, b2I, b3I, c0I, c1I, c2I, c3I]
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   all_goals rw [golden_invI]
+   all_goals norm_num
+@@ -675,6 +678,7 @@
+ 
+ theorem fanSupport_fanCycle (i : Fin 5) (j : Fin 3) :
+     fanSupport i (fanCycle i j) = φ + 1 := by
++  have hsqrt : 0 ≤ Real.sqrt 5 := Real.sqrt_nonneg _
+   fin_cases i <;> fin_cases j
+   all_goals simp only [rotate5_zero, rotate5_one, rotate5_two,
+     rotate5_three, rotate5_four] at *
+@@ -682,10 +686,10 @@
+     fanSupport1, fanSupport2,
+     fanSupport3, fanSupport4, supportLI, fanCycle, neighbor,
+     a3I, b3I, c3I, a1I, c1I, b2I]
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at *
+   all_goals try simp only [golden_inv_nfI, golden_den_selfI] at *
+-  all_goals nlinarith [Real.goldenRatio_sq]
++  all_goals nlinarith [Real.goldenRatio_sq, hsqrt]
+ 
+ theorem fanFace_support (i : Fin 5) (z : E3) (hz : z ∈ fanFaceI i) :
+     fanSupport i z = φ + 1 := by
+@@ -743,14 +747,14 @@
+   all_goals exfalso
+   all_goals simp only [rotate5_zero, rotate5_one, rotate5_two,
+     rotate5_three, rotate5_four] at e0 e1
+-  all_goals norm_num [Fin.add_def, fanSupport, fanSupport0,
++  all_goals try simp [Fin.add_def, fanSupport, fanSupport0,
+     fanSupport1, fanSupport2,
+     fanSupport3, fanSupport4, supportLI, neighbor,
+     a3I, b3I, c3I, a1I, c1I, b2I] at e0 e1
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at e0 e1
+   all_goals try simp only [golden_inv_nfI, golden_den_selfI] at e0 e1
+-  all_goals nlinarith [Real.goldenRatio_sq, Real.goldenRatio_pos]
++  all_goals nlinarith [Real.goldenRatio_sq, Real.goldenRatio_pos, Real.sqrt_nonneg (5 : ℝ)]
+ 
+ set_option maxHeartbeats 1000000 in
+ theorem fanFace_spigolo_dueI (i j : Fin 5) (z : E3)
+@@ -772,7 +776,7 @@
+   all_goals norm_num [Fin.add_def, fanSupport, fanSupport0,
+     fanSupport1, fanSupport2,
+     fanSupport3, fanSupport4, supportLI, a3I] at e0 e1 ej ⊢
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at e0 e1 ej ⊢
+   all_goals try simp only [golden_inv_nfI, golden_den_selfI] at e0 e1 ej
+   all_goals nlinarith [Real.goldenRatio_sq, Real.goldenRatio_pos]
+@@ -908,7 +912,7 @@
+   all_goals norm_num [Fin.add_def, fanSupport, fanSupport0, fanSupport1,
+     fanSupport2, fanSupport3, fanSupport4, supportLI, fanCycle, neighbor,
+     a0I, a1I, a2I, a3I, b0I, b1I, b2I, b3I, c0I, c1I, c2I, c3I] at heq
+-  all_goals simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
++  all_goals try simp only [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+     Function.comp_apply, Matrix.cons_val_zero, Matrix.cons_val_succ] at heq
+   all_goals try simp only [golden_inv_nfI, golden_den_selfI] at heq
+   all_goals nlinarith [Real.goldenRatio_sq]
+--- upstream/UnicoProofs/Platonici/PoligonoConnesso.lean
++++ local/UnicoProofs/Platonici/PoligonoConnesso.lean
+@@ -1,3 +1,6 @@
++/- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++
+ import Mathlib
+ import UnicoProofs.Platonici.Benchmark
+ import UnicoProofs.Platonici.VerticiEsposti
+@@ -115,7 +118,7 @@
+       ∃ e : Set (E n), Q.IsFace e ∧ faceDim e = 1 ∧ p ∈ e ∧ q ∈ e)
+     (fun y => l y) ?_ hxs ?_ hx₀
+   · -- adattamento della relazione
+-    refine Relation.ReflTransGen.mono ?_ hcam
++    refine Relation.ReflTransGen.mono ?_ _ _ hcam
+     rintro p q ⟨hqX, hpq, e, he⟩
+     exact ⟨hqX, hpq, e, he⟩
+   · -- il principio locale-globale
+--- upstream/lean-toolchain
++++ local/lean-toolchain
+@@ -1 +1 @@
+-leanprover/lean4:v4.32.0-rc1
++leanprover/lean4:v4.34.0
+--- upstream/lakefile.toml
++++ local/lakefile.toml
+@@ -1,12 +1,12 @@
++# Modified for ClassicalTheorems on 2026-10-02: selected modules, shared pinned mathlib.
+ name = "unico-lean-proofs"
+ version = "0.1.0"
+-keywords = ["math", "erdos", "formal-proofs"]
+ defaultTargets = ["UnicoProofs"]
+ 
+ [[require]]
+ name = "mathlib"
+-scope = "leanprover-community"
+-rev = "v4.32.0-rc1"
++git = "https://github.com/leanprover-community/mathlib4.git"
++rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+ 
+ [[lean_lib]]
+ name = "UnicoProofs"
+--- /dev/null
++++ local/UnicoProofs.lean
+@@ -0,0 +1,4 @@
++-- Local package entry point for the selected vendored modules.
++import UnicoProofs.Feuerbach.Main
++import UnicoProofs.Platonici.TeoremaPlatonici
++import UnicoProofs.Morley

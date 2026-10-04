@@ -1,0 +1,54 @@
+ClassicalTheorems
+Copyright 2026 Michael Brackx
+
+Original project code and documentation are licensed under Apache-2.0, except
+files with an explicit separate license notice. The local parallel-postulate
+model adaptations marked BSD-2-Clause retain that license. Bundled third-party
+sources and mathematical translations retain their respective license terms.
+See LICENSE, third-party.md and the source notices.
+
+Supporting libraries retain their original attribution and licenses.
+
+foundation: https://github.com/FormalizedFormalLogic/Foundation, revision 7906b595899b0823922baf03a942b7126b52e759, Apache-2.0. See vendor/foundation/LICENSE and upstream.json.
+unico: https://github.com/Solarys431/unico-lean-proofs, revision 794568d279e377c34e3ab93a5e0626467f7d9e0d, Apache-2.0. See vendor/unico/LICENSE and upstream.json.
+moving-sofa: https://github.com/deancureton/MovingSofa, revision 4d5569131940815f47a9ccf3e90a4c5043c56127, Apache-2.0. See vendor/moving-sofa/LICENSE and upstream.json.
+jordan-pick: https://github.com/rkirov/jordan_pick, revision b3c9b7cf7358bf81a077d78ad67e6e8247869ddd, Apache-2.0. See vendor/jordan-pick/LICENSE and upstream.json.
+schoenflies: https://github.com/alonamaloh/schoenflies-lean, revision 05a43d29cde026618777db3d4e4316204ccca237, Apache-2.0. See vendor/schoenflies/LICENSE and upstream.json.
+
+HOL Light mathematical model strategy: John Harrison and contributors; BSD-2-Clause. See proofs.md for source provenance and vendor/hol-light-port/LICENSE for the license.
+
+Pascal and Desargues Lean adaptations: ClassicalTheorems contributors, 2026. Original HOL Light copyright and BSD-2-Clause conditions follow; also retained in vendor/hol-light-port/LICENSE and source headers.
+
+            HOL Light copyright notice, licence and disclaimer
+
+                     (c) University of Cambridge 1998
+                  (c) Copyright, John Harrison and others 1998-2012
+
+        Some files in this package are distributed under other licenses;
+        please check individual files or subdirectories for such cases.
+
+                            All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+ o Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+ o Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the
+   distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
