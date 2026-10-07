@@ -4,8 +4,8 @@
   "revision": "b3c9b7cf7358bf81a077d78ad67e6e8247869ddd",
   "package": "jordan_pick",
   "upstream_toolchain": "leanprover/lean4:v4.33.0",
-  "target_toolchain": "leanprover/lean4:v4.34.0",
-  "target_mathlib_revision": "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d",
+  "target_toolchain": "leanprover/lean4:v4.34.1",
+  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -40,10 +40,10 @@
     "JordanPick/JordanCurve/Counting.lean": "f5fde414341094d0b4fdb7915570db4a304b16c6c577b00cbb668d46048c8c06",
     "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "patches.diff": "109e3bf39c215497fd8959fc41ff71a541022c2abacb0d0ab08bf72951f6cdad",
-    "lakefile.toml": "c14952e57646f73d4adf4c5db5b035c00286276712af411539e2302fffc3cf6d",
-    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632"
+    "lakefile.toml": "c24434640f0c628145bc9ff7dc399e46ebecf75f83f7a0ca7f3ede50187fbcfa",
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
   },
-  "port_notes": "Unchanged geometric Pick closure and Jordan-curve separation/Brouwer closure, selected for Green signed-area support. Only package/toolchain configuration changed. Other upstream developments, including Rado, are omitted.",
+  "port_notes": "Unchanged geometric Pick closure and Jordan-curve separation/Brouwer closure, selected for Green signed-area support. Only package/toolchain configuration changed. Other upstream developments, including Rado, are omitted. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
     "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."

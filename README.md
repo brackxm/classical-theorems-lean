@@ -17,7 +17,7 @@ The eight theorems are represented by **ten audited Lean declarations**; Pascal 
 
 **AI-use disclosure:** OpenAI Codex was used extensively, under human direction, to develop proof strategies, write and refactor this project’s Lean code, and prepare documentation. Lean’s kernel checks the resulting formal proof terms, and the build audits their axioms as described below.
 
-Use Lean **4.34.0**, Python **3.11 or newer**, and the pinned mathlib revision in `lake-manifest.json`:
+Use Lean **4.34.1**, Python **3.11 or newer**, and the pinned mathlib revision in `lake-manifest.json`:
 
 ```sh
 lake exe cache get
@@ -40,8 +40,8 @@ Run the verification command above before sharing changed sources.
 
 Original project code and documentation are licensed under [Apache-2.0](LICENSE). Files with explicit BSD-2-Clause notices and bundled third-party sources retain their respective licenses; see [NOTICE](NOTICE) and [third-party.md](third-party.md).
 
-Citation metadata is in [CITATION.cff](CITATION.cff):
+Citation metadata for version 0.0.2 is in [CITATION.cff](CITATION.cff). The published version 0.0.1 can be cited as:
 
 Brackx, M. (2026). *Classical Theorems in Lean* (Version 0.0.1) [Software]. Zenodo. [https://doi.org/10.5281/zenodo.23144255](https://doi.org/10.5281/zenodo.23144255).
 
-The Zenodo release uses a source ZIP of the Git release tag (`v0.0.1`). It contains the committed source files. Run the verification command above before creating the release tag.
+Zenodo releases use a source ZIP of the corresponding Git release tag. It contains the committed source files. Run the verification command above before creating the release tag.

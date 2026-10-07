@@ -4,8 +4,8 @@
   "revision": "7906b595899b0823922baf03a942b7126b52e759",
   "package": "Foundation",
   "upstream_toolchain": "leanprover/lean4:v4.34.0",
-  "target_toolchain": "leanprover/lean4:v4.34.0",
-  "target_mathlib_revision": "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d",
+  "target_toolchain": "leanprover/lean4:v4.34.1",
+  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -608,10 +608,10 @@
     "Foundation/Vorspiel/Tactic/Primrec/Init.lean": "e207518333476d0e4d30672c484b46cf9ba0d9abb58dad429e7a108272981727",
     "LICENSE": "37823cdb626011c7f658442954b53cfca18c34c589c5326d4fe307f1158b1145",
     "patches.diff": "6512c99a46acd73df705b118170abd66474b4f074059e9d153fefc44e456609b",
-    "lakefile.toml": "ecdeda5b84351265881a15d7417317f1b4b4f3ff9518d30519c545330ac34e26",
-    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632"
+    "lakefile.toml": "73b45af9d144fe7cb169973f9294ef614a64c2e9c34ca43ba5914e3fa99639f5",
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
   },
-  "port_notes": "Unchanged selected first-order/arithmetic proof modules. Documentation and Forgive tooling dependencies omitted; mathlib version aligned in the local package configuration.",
+  "port_notes": "Unchanged selected first-order/arithmetic proof modules. Documentation and Forgive tooling dependencies omitted; mathlib version aligned in the local package configuration. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
     "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."

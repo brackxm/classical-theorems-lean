@@ -4,8 +4,8 @@
   "revision": "4d5569131940815f47a9ccf3e90a4c5043c56127",
   "package": "MovingSofa",
   "upstream_toolchain": "leanprover/lean4:v4.35.0-rc1",
-  "target_toolchain": "leanprover/lean4:v4.34.0",
-  "target_mathlib_revision": "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d",
+  "target_toolchain": "leanprover/lean4:v4.34.1",
+  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -192,10 +192,10 @@
     "MovingSofa/Geometry/Frame.lean": "5e2ed2a7bb2bd1f21e81342a6c5165df8f83fa818fbc509d1a0fc4a14668f76b",
     "MovingSofa/Geometry/Plane.lean": "6a86e5e428f119a944dfab69935d27bf87fa8d0a0ad061f335c98e2972e37cc7",
     "patches.diff": "15e2145cebf5fffdec5968f33ff69fb367f720ce50ae71ebc6c61c387c969612",
-    "lakefile.toml": "28564ed201c19eb58ca3bff2edefc3e197c1319975b44122e81a6f9e7effdb9e",
-    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632"
+    "lakefile.toml": "3fc0d370e456de5f1b14dc3433fc997717a88f4cda86cc63a799bbbee6f79934",
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
   },
-  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement.",
+  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
     "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."

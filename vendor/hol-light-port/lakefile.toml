@@ -1,3 +1,4 @@
+# Updated for Lean 4.34.1 on 2026-10-07.
 name = "HOLLightPort"
 version = "0.1.0"
 defaultTargets = ["HOLLightPort"]
@@ -5,7 +6,7 @@ defaultTargets = ["HOLLightPort"]
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
-rev = "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d"
+rev = "d13f23b723b8a846827a245b89c10fc7d3f11612"
 
 [[lean_lib]]
 name = "HOLLightPort"

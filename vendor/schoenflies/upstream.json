@@ -4,8 +4,8 @@
   "revision": "05a43d29cde026618777db3d4e4316204ccca237",
   "package": "schoenflies-lean",
   "upstream_toolchain": "leanprover/lean4:v4.32.2",
-  "target_toolchain": "leanprover/lean4:v4.34.0",
-  "target_mathlib_revision": "1e043bcd56469cb8cf2bdcddfd3c943dd691ad6d",
+  "target_toolchain": "leanprover/lean4:v4.34.1",
+  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -553,10 +553,10 @@
     "Schoenflies/UniformBound.lean": "ef5cfd476900bb4fd82672d5b57ea719e28b6c1953623cca48e33f625a82f64d",
     "Schoenflies/Windows.lean": "cb38d1c7f04e49b0c506f9243ce83089d4081d3ea269253581f42d639ce4dcd7",
     "formalization.yaml": "e4a00e6974c896df352427d517d0a31d255dffb50a5dbcaa760244abdb44147b",
-    "lakefile.toml": "bdb62dfb814c98508af1f1b5a18880dcc97876acfd40bbfb1cd74ca686fa827b",
-    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632"
+    "lakefile.toml": "d650bd4fa137908533270b587125c3de08104869fa55e29dacdec110ff9df390",
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
   },
-  "port_notes": "Selected 128-module import closure for JordanSchoenflies; Comparator challenge and unneeded modules excluded. Port updates an interval unfolding and two domain-restriction API sites, and renames the private-to-this-development Graph.IsBridge interface to avoid a collision with pinned mathlib. All source headers and the Apache-2.0 license are retained. The headline theorem passes the transitive standard-axiom audit.",
+  "port_notes": "Selected 128-module import closure for JordanSchoenflies; Comparator challenge and unneeded modules excluded. Port updates an interval unfolding and two domain-restriction API sites, and renames the private-to-this-development Graph.IsBridge interface to avoid a collision with pinned mathlib. All source headers and the Apache-2.0 license are retained. The headline theorem passes the transitive standard-axiom audit. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
   "upstream_mathlib_revision": "905b95818eb32af7874a58b427f50c1711a5e96c",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
