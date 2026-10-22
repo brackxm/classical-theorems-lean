@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.FiniteTransfer
 import Schoenflies.RealizeSubdivHomeo
@@ -64,14 +65,14 @@ theorem connected_of_isPreconnected_pointSet [G.Finite]
       · have hvC : v ∈ G.component x := mem_component_of_isLink huC huv
         exact Or.inl (Or.inr (Set.mem_iUnion₂_of_mem
           (show e ∈ E(A) by
-            rw [edgeSet_eq_setOf_exists_isLink]
+            rw [edgeSet_eq_setOfPred_exists_isLink]
             exact ⟨u, v, huv, huC, hvC⟩) hze))
       · have hvC : v ∉ G.component x := by
           intro hvC
           exact huC (mem_component_of_isLink hvC huv.symm)
         exact Or.inr (Or.inr (Set.mem_iUnion₂_of_mem
           (show e ∈ E(B) by
-            rw [edgeSet_eq_setOf_exists_isLink]
+            rw [edgeSet_eq_setOfPred_exists_isLink]
             exact ⟨u, v, huv, ⟨huv.left_mem, huC⟩, ⟨huv.right_mem, hvC⟩⟩) hze))
   have hAB : Disjoint (pointSet A drawing) (pointSet B drawing) := by
     rw [Set.disjoint_left]
@@ -79,13 +80,13 @@ theorem connected_of_isPreconnected_pointSet [G.Finite]
     rcases hzA with hzAV | hzAE <;> rcases hzB with hzBV | hzBE
     · exact hzBV.2 hzAV
     · obtain ⟨e, heB, hze⟩ := Set.mem_iUnion₂.1 hzBE
-      rw [edgeSet_eq_setOf_exists_isLink] at heB
+      rw [edgeSet_eq_setOfPred_exists_isLink] at heB
       obtain ⟨u, v, huv, huB, hvB⟩ := heB
       have hzinc := hdraw.vertex_mem_edgeArc huv (component_subset_vertexSet hzAV) hze
       rcases hzinc with rfl | rfl
       exacts [huB.2 hzAV, hvB.2 hzAV]
     · obtain ⟨e, heA, hze⟩ := Set.mem_iUnion₂.1 hzAE
-      rw [edgeSet_eq_setOf_exists_isLink] at heA
+      rw [edgeSet_eq_setOfPred_exists_isLink] at heA
       obtain ⟨u, v, huv, huA, hvA⟩ := heA
       have hzinc := hdraw.vertex_mem_edgeArc huv hzBV.1 hze
       rcases hzinc with rfl | rfl
@@ -97,7 +98,7 @@ theorem connected_of_isPreconnected_pointSet [G.Finite]
       have hef : e ≠ f := by
         intro hef
         subst f
-        rw [edgeSet_eq_setOf_exists_isLink] at heA hfB
+        rw [edgeSet_eq_setOfPred_exists_isLink] at heA hfB
         obtain ⟨u, v, huv, huA, -⟩ := heA
         obtain ⟨u', v', huv', huB, hvB⟩ := hfB
         rcases huv.left_eq_or_eq huv' with h | h
@@ -105,7 +106,7 @@ theorem connected_of_isPreconnected_pointSet [G.Finite]
         · exact hvB.2 (h ▸ huA)
       obtain ⟨hzV, ⟨u, heu⟩, ⟨v, hfv⟩⟩ :=
         hdraw.edge_inter heG hfG hef hzeA hzfB
-      rw [edgeSet_eq_setOf_exists_isLink] at heA hfB
+      rw [edgeSet_eq_setOfPred_exists_isLink] at heA hfB
       obtain ⟨a, b, hab, haA, hbA⟩ := heA
       obtain ⟨c, d, hcd, hcB, hdB⟩ := hfB
       rcases heu.left_eq_or_eq hab with rfl | rfl <;>
@@ -135,7 +136,7 @@ def traceGraph (G : Graph Plane β) (drawing : β → ℝ → Plane) (A : Set Pl
 @[simp] theorem traceGraph_isLink (A : Set Plane) :
     (traceGraph G drawing A).IsLink e x y ↔
       edgeArc drawing e ⊆ A ∧ G.IsLink e x y ∧ x ∈ A ∧ y ∈ A := by
-  simp only [traceGraph, induce_isLink, restrict_isLink, Set.mem_setOf_eq,
+  simp only [traceGraph, induce_isLink, restrict_isLink, Set.mem_ofPred_eq,
     Set.mem_inter_iff]
   constructor
   · rintro ⟨⟨hsub, hlink⟩, ⟨-, hxA⟩, ⟨-, hyA⟩⟩
@@ -164,7 +165,7 @@ theorem pointSet_traceGraph_subset (A : Set Plane) :
   rintro z (hz | hz)
   · exact hz.2
   · obtain ⟨e, he, hze⟩ := Set.mem_iUnion₂.1 hz
-    rw [edgeSet_eq_setOf_exists_isLink] at he
+    rw [edgeSet_eq_setOfPred_exists_isLink] at he
     obtain ⟨x, y, hxy⟩ := he
     exact (traceGraph_isLink A).1 hxy |>.1 hze
 
@@ -185,7 +186,7 @@ theorem pointSet_traceGraph_eq (hdraw : IsDrawing G drawing) (A : Set Plane)
         habsorb he ⟨z, ⟨hze, hzA, hzVG⟩⟩
       exact Or.inr (Set.mem_iUnion₂_of_mem
         (show e ∈ E(traceGraph G drawing A) by
-          rw [edgeSet_eq_setOf_exists_isLink]
+          rw [edgeSet_eq_setOfPred_exists_isLink]
           obtain ⟨x, y, hxy⟩ := G.exists_isLink_of_mem_edgeSet he
           have harc := hdraw.edge_isArcBetween hxy
           exact ⟨x, y, (traceGraph_isLink A).2
@@ -1083,7 +1084,7 @@ theorem outerSet_realize {d : S.SubdivData} {R : S.Realization}
     have hvertex : d.realizePos R t '' V(d.outer) =
         insert (R.drawing d.edge t) (R.pos '' V(S.outerGraph)) := by
       rw [CellStructure.SubdivData.outer, subdivGraph_vertexSet]
-      simp only [d.outer_isLink he, and_true, Set.setOf_eq_eq_singleton,
+      simp only [d.outer_isLink he, and_true, Set.ofPred_eq_eq_singleton,
         Set.image_union, Set.image_singleton, d.realizePos_newVertex]
       rw [Set.union_comm]
       congr 1

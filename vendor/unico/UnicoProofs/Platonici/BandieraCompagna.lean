@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.PerturbazioneFinita
@@ -41,7 +42,7 @@ theorem exists_vertex_notMem_of_ne_toSet (P : ConvexPolytope n) {f : Set (E n)}
     (hf : P.IsFace f) (hne : f ≠ P.toSet) :
     ∃ w ∈ P.vertices, w ∉ f := by
   by_contra hall
-  push_neg at hall
+  push Not at hall
   have hconv : Convex ℝ f := hf.1.convex (convex_convexHull ℝ _)
   have hsub : P.toSet ⊆ f := by
     show convexHull ℝ ((P.vertices : Set (E n))) ⊆ f

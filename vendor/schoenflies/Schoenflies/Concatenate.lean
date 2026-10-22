@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.Curve
 
@@ -84,11 +85,11 @@ noncomputable def concatenate (f g : ℝ → Plane) : ℝ → Plane :=
 variable {f g : ℝ → Plane}
 
 theorem concatenate_of_le {t : ℝ} (ht : t ≤ 1 / 2) : concatenate f g t = f (2 * t) :=
-  if_pos ht
+  ite_eq_left ht
 
 theorem concatenate_of_not_le {t : ℝ} (ht : ¬t ≤ 1 / 2) :
     concatenate f g t = g (2 * t - 1) :=
-  if_neg ht
+  ite_eq_right ht
 
 theorem concatenate_zero : concatenate f g 0 = f 0 := by
   rw [concatenate_of_le (by norm_num)]

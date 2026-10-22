@@ -295,3 +295,128 @@
 +import UnicoProofs.Feuerbach.Main
 +import UnicoProofs.Platonici.TeoremaPlatonici
 +import UnicoProofs.Morley
+--- upstream/UnicoProofs/Platonici/BandieraCompagna.lean
++++ local/UnicoProofs/Platonici/BandieraCompagna.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -44 +45 @@
+-  push_neg at hall
++  push Not at hall
+--- upstream/UnicoProofs/Platonici/Camminata.lean
++++ local/UnicoProofs/Platonici/Camminata.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -45 +46 @@
+-    push_neg at hnotmax
++    push Not at hnotmax
+--- upstream/UnicoProofs/Platonici/ConoVertice.lean
++++ local/UnicoProofs/Platonici/ConoVertice.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -122 +123 @@
+-    push_neg at hneg
++    push Not at hneg
+@@ -315 +316 @@
+-    push_neg at hneg
++    push Not at hneg
+@@ -325 +326 @@
+-    push_neg at hneg
++    push Not at hneg
+--- upstream/UnicoProofs/Platonici/Diamante.lean
++++ local/UnicoProofs/Platonici/Diamante.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -80 +81 @@
+-  push_neg at hall
++  push Not at hall
+@@ -148 +149 @@
+-      push_neg at hle
++      push Not at hle
+@@ -155 +156 @@
+-      push_neg at hle
++      push Not at hle
+@@ -347 +348 @@
+-  push_neg at hcon
++  push Not at hcon
+--- upstream/UnicoProofs/Platonici/Diamante2D.lean
++++ local/UnicoProofs/Platonici/Diamante2D.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -33 +34 @@
+-  push_neg at hall
++  push Not at hall
+--- upstream/UnicoProofs/Platonici/DimStretta.lean
++++ local/UnicoProofs/Platonici/DimStretta.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -39 +40 @@
+-    push_neg at hall
++    push Not at hall
+--- upstream/UnicoProofs/Platonici/DueFunzionali.lean
++++ local/UnicoProofs/Platonici/DueFunzionali.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -40 +41 @@
+-    push_neg at hall
++    push Not at hall
+@@ -53 +54 @@
+-    push_neg at hall
++    push Not at hall
+--- upstream/UnicoProofs/Platonici/PerturbazioneFinita.lean
++++ local/UnicoProofs/Platonici/PerturbazioneFinita.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -104 +105 @@
+-  · push_neg at hA
++  · push Not at hA
+@@ -159 +160 @@
+-        simp only [ContinuousLinearMap.neg_apply]
++        simp only [neg_apply]
+@@ -163 +164 @@
+-      simp only [ContinuousLinearMap.neg_apply] at this
++      simp only [neg_apply] at this
+@@ -177,2 +178,2 @@
+-      simp [hLdef, ContinuousLinearMap.add_apply,
+-        ContinuousLinearMap.smul_apply, smul_eq_mul]
++      simp [hLdef, add_apply,
++        smul_apply, smul_eq_mul]
+--- upstream/UnicoProofs/Platonici/ScalaBandiere.lean
++++ local/UnicoProofs/Platonici/ScalaBandiere.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -113 +114 @@
+-        simp only [if_pos rfl]
++        simp only [ite_eq_left rfl]
+@@ -116 +117 @@
+-        simp only [if_neg hkm]
++        simp only [ite_eq_right hkm]
+@@ -124 +125 @@
+-        simp only [if_pos rfl, if_neg hjm]
++        simp only [ite_eq_left rfl, ite_eq_right hjm]
+@@ -140 +141 @@
+-        simp only [if_neg hkm, if_neg hjm]
++        simp only [ite_eq_right hkm, ite_eq_right hjm]
+--- upstream/UnicoProofs/Platonici/SecondaFaccetta.lean
++++ local/UnicoProofs/Platonici/SecondaFaccetta.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -64 +65 @@
+-    push_neg at hall
++    push Not at hall
+@@ -161 +162 @@
+-      · push_neg at hside
++      · push Not at hside
+--- upstream/UnicoProofs/Platonici/SecondoSpigolo.lean
++++ local/UnicoProofs/Platonici/SecondoSpigolo.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -152 +153 @@
+-        push_neg at hside
++        push Not at hside
+--- upstream/UnicoProofs/Platonici/SottoPolitopo.lean
++++ local/UnicoProofs/Platonici/SottoPolitopo.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -44 +45 @@
+-    simp only [Finset.coe_filter, Set.mem_setOf_eq, Set.mem_inter_iff]
++    simp only [Finset.coe_filter, Set.mem_ofPred_eq, Set.mem_inter_iff]

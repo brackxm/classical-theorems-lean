@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.Plane
 
@@ -177,7 +178,7 @@ theorem smul_mem_arcCCW (hr : 0 < r) : r • d ∈ arcCCW u w ↔ d ∈ arcCCW u
   have key : ∀ x : ℝ, 0 < r * x ↔ 0 < x := by
     intro x
     constructor <;> intro hx <;> nlinarith
-  simp only [arcCCW, mem_setOf_eq, det_smul_left, det_smul_right, key]
+  simp only [arcCCW, mem_ofPred_eq, det_smul_left, det_smul_right, key]
 
 theorem dir_mem_arcCCW_iff (hd : d ≠ 0) : dir d ∈ arcCCW u w ↔ d ∈ arcCCW u w := by
   obtain ⟨c, hc, hcd⟩ := dir_eq_smul hd
@@ -432,7 +433,7 @@ theorem isOpen_arcCCW (u w : Plane) : IsOpen (arcCCW u w) := by
   by_cases h : 0 < det w u
   · have : arcCCW u w = {d : Plane | 0 < det u d} ∪ {d : Plane | 0 < det d w} := by
       ext d
-      simp only [arcCCW, mem_setOf_eq, mem_union]
+      simp only [arcCCW, mem_ofPred_eq, mem_union]
       constructor
       · rintro (⟨h1, _⟩ | ⟨h2, _⟩ | ⟨_, h1⟩) <;> tauto
       · rintro (hx | hx)
@@ -442,7 +443,7 @@ theorem isOpen_arcCCW (u w : Plane) : IsOpen (arcCCW u w) := by
     exact h1.union h2
   · have : arcCCW u w = {d : Plane | 0 < det u d} ∩ {d : Plane | 0 < det d w} := by
       ext d
-      simp only [arcCCW, mem_setOf_eq, mem_inter_iff]
+      simp only [arcCCW, mem_ofPred_eq, mem_inter_iff]
       constructor
       · rintro (hx | ⟨_, hx⟩ | ⟨hx, _⟩) <;> [exact hx; exact absurd hx h; exact absurd hx h]
       · exact Or.inl

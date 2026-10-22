@@ -146,7 +146,9 @@
   },
   "verification": "verified",
   "modified_files": [
-    "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean"
+    "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean",
+    "MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean",
+    "MovingSofa/ForMathlib/Order/IntervalPartition.lean"
   ],
   "local_entry_points": [],
   "local_sha256": {
@@ -178,7 +180,7 @@
     "MovingSofa/Curve/StieltjesChainRule.lean": "13f20eff96711bb8b5bdca536c9d4191f3bebbf9a18ad5ab1229218affe96508",
     "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean": "5634fd589f351cc2fce257f2c30912a1a6ad83d46f99d39979e5d6a38c623d54",
     "MovingSofa/ForMathlib/Analysis/InnerProductSpace/Linear.lean": "95af8f703956eb16c2cded78889ec437960bd4d6267cd58344092c7b3dc2de15",
-    "MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean": "1c2a4fe2be00ceefb83fc0bff1f0d528de884b6a2e97ddc7fcd50df6000f8889",
+    "MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean": "709d0b9e9156daed263e92843841be4edbca398b1e9256d359f1bf6cf65f162d",
     "MovingSofa/ForMathlib/Analysis/SpecialFunctions/Arctan.lean": "357f6b792f65bdf90790997646927471400433acf975894e74da639453d588ef",
     "MovingSofa/ForMathlib/BoundedVariation.lean": "5fce3ca4e2dc42e7115ab9cf1d8807c244fc4cc55cd215714099791cede2180b",
     "MovingSofa/ForMathlib/MeasureTheory/Hausdorff/Arclength.lean": "d0128b59365ae98218c14b042c9e4e461c60c608086c11214c3cc8b139c43c6a",
@@ -186,20 +188,20 @@
     "MovingSofa/ForMathlib/MeasureTheory/StieltjesDensity.lean": "07e22356d164f07e2c42ce9f70c2aba1491ef4333a5f8fbe7e4c1530581627af",
     "MovingSofa/ForMathlib/MeasureTheory/StieltjesTransport.lean": "c73f8f3fa73991bff0f2c8116b4e95fbb673b3dbc45d1ff49abb71fad274d077",
     "MovingSofa/ForMathlib/MeasureTheory/VectorMeasure/WithDensity.lean": "1b0541ab50c9d8e7f3f5452f23b639bef1a2bc0ac92e58d312418524eb740ad5",
-    "MovingSofa/ForMathlib/Order/IntervalPartition.lean": "55fe286a87ab7bf8c2381be113347d31c64b97e4d3893541d3afdca574f99e3e",
+    "MovingSofa/ForMathlib/Order/IntervalPartition.lean": "c11c6157e53672ce415d97cd6a37d0332f5280950ef8f05c9d52894fc0af2183",
     "MovingSofa/ForMathlib/Topology/Angle.lean": "4c808fb36bc1701450d802a6c1c8b66d2471f9c6d6d1bf999aa1468d27282060",
     "MovingSofa/ForMathlib/Topology/Order/Concatenation.lean": "3c858b31277c2204b746060bb9762f787b2cac3854b5d4127e8b69484215191f",
     "MovingSofa/ForMathlib/Topology/Order/Interval.lean": "662960c9157c43624ae8911b39f46f6e4dd5e8da506610d0306f412bc442be81",
     "MovingSofa/Geometry/Basic.lean": "8a81b7595dfe18aa32eb9f1dfc0dc6927ca921377600306674c3b16651778dda",
     "MovingSofa/Geometry/Frame.lean": "5e2ed2a7bb2bd1f21e81342a6c5165df8f83fa818fbc509d1a0fc4a14668f76b",
     "MovingSofa/Geometry/Plane.lean": "6a86e5e428f119a944dfab69935d27bf87fa8d0a0ad061f335c98e2972e37cc7",
-    "patches.diff": "6f3a2c2b372fccf6f0ee9e2498f9b8d53774ac1e232f16dd21aba3d7ed1f4a37",
+    "patches.diff": "c04b196773ca8238b5a9e1a99031b335ba50caf0842c1b21a7972c4209a67694",
     "lakefile.toml": "27a0173c3a248a01bb27454a45c2bc03e28ab263c12f3776c9cd53eb544b8065",
     "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
   },
-  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22. Updated the disk-integrability rewrite to supply null measurability for mathlib 4.35.0; theorem statements are unchanged.",
+  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22. Updated the disk-integrability rewrite to supply null measurability for mathlib 4.35.0; theorem statements are unchanged. Replaced deprecated Lean/mathlib APIs on 2026-10-22; theorem statements, attribution and licenses are unchanged.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
-    "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."
+    "notice_update": "Local adaptation and modification notices use the current library name. Theorem statements, copyright notices and licenses are preserved; local proof and API adaptations are recorded in patches.diff."
   }
 }

@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.CombinatorialInvariance
 import Schoenflies.Graph.PathGraph
@@ -375,14 +376,14 @@ theorem outer_le_skeleton : d.outer ≤ d.skeleton := subdivGraph_mono S.outerGr
 
 @[simp] theorem skeleton_vertexSet : V(d.skeleton) = insert d.newVertex V(S.skel) := by
   ext z
-  simp only [skeleton, subdivGraph_vertexSet, Set.mem_union, Set.mem_setOf_eq,
+  simp only [skeleton, subdivGraph_vertexSet, Set.mem_union, Set.mem_ofPred_eq,
     Set.mem_insert_iff, d.isLink, and_true]
   tauto
 
 @[simp] theorem skeleton_edgeSet :
     E(d.skeleton) = insert d.newEdge₁ (insert d.newEdge₂ (E(S.skel) \ {d.edge})) := by
   ext f
-  simp only [skeleton, subdivGraph_edgeSet, Set.mem_union, Set.mem_setOf_eq,
+  simp only [skeleton, subdivGraph_edgeSet, Set.mem_union, Set.mem_ofPred_eq,
     Set.mem_insert_iff, d.isLink, and_true]
   tauto
 
@@ -405,7 +406,7 @@ theorem outer_isLink (he : d.edge ∈ E(S.outerGraph)) :
 theorem outer_edgeSet_of_mem (he : d.edge ∈ E(S.outerGraph)) :
     E(d.outer) = insert d.newEdge₁ (insert d.newEdge₂ (E(S.outerGraph) \ {d.edge})) := by
   ext f
-  simp only [outer, subdivGraph_edgeSet, Set.mem_union, Set.mem_setOf_eq,
+  simp only [outer, subdivGraph_edgeSet, Set.mem_union, Set.mem_ofPred_eq,
     Set.mem_insert_iff, d.outer_isLink he, and_true]
   tauto
 
@@ -1035,10 +1036,10 @@ subdivided edge as parent; every surviving cell is its own parent. -/
 noncomputable def parent : γ → γ := fun σ => if σ ∈ d.newCells then d.edge else σ
 
 theorem parent_of_mem_newCells {σ : γ} (h : σ ∈ d.newCells) : d.parent σ = d.edge := by
-  rw [parent]; exact if_pos h
+  rw [parent]; exact ite_eq_left h
 
 theorem parent_of_notMem_newCells {σ : γ} (h : σ ∉ d.newCells) : d.parent σ = σ := by
-  rw [parent]; exact if_neg h
+  rw [parent]; exact ite_eq_right h
 
 theorem parent_of_mem_cells {σ : γ} (h : σ ∈ S.cells) : d.parent σ = σ :=
   d.parent_of_notMem_newCells (notMem_newCells_of_mem_cells h)
@@ -1361,10 +1362,10 @@ endpoints, which the split does not create — is its own parent. -/
 noncomputable def parent : γ → γ := fun σ => if σ ∈ d.newCells then d.face else σ
 
 theorem parent_of_mem_newCells {σ : γ} (h : σ ∈ d.newCells) : d.parent σ = d.face := by
-  rw [parent]; exact if_pos h
+  rw [parent]; exact ite_eq_left h
 
 theorem parent_of_notMem_newCells {σ : γ} (h : σ ∉ d.newCells) : d.parent σ = σ := by
-  rw [parent]; exact if_neg h
+  rw [parent]; exact ite_eq_right h
 
 theorem parent_of_mem_cells {σ : γ} (h : σ ∈ S.cells) : d.parent σ = σ :=
   d.parent_of_notMem_newCells (notMem_newCells_of_mem_cells h)
@@ -1689,11 +1690,11 @@ theorem isCellDecomposition (hS : S.CombInvariants) (href : d.IsRefinement R R')
     intro τ hτ
     rw [subdivideEdge_cells] at hτ
     ext z
-    simp only [Set.mem_iUnion, Set.mem_setOf_eq, exists_prop]
+    simp only [Set.mem_iUnion, Set.mem_ofPred_eq, exists_prop]
     rcases hτ with ⟨hτc, hτe⟩ | hτn
     · -- a surviving cell: the index set gains the new cells exactly when it had `e`
       rw [href.cell_eq hτc hτe, h.closure_eq hτc]
-      simp only [Set.mem_iUnion, Set.mem_setOf_eq, exists_prop]
+      simp only [Set.mem_iUnion, Set.mem_ofPred_eq, exists_prop]
       constructor
       · rintro ⟨σ, ⟨hσc, hσsub⟩, hz⟩
         by_cases hσe : σ = d.edge

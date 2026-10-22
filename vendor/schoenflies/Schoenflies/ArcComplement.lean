@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.ArcComplementPrep
 import Schoenflies.CombinatorialInvariance
@@ -154,7 +155,7 @@ theorem pointSet_segGraph (S : Set Piece) :
     Graph.pointSet (segGraph S) segmentDrawing = ⋃ P ∈ S, P.seg := by
   ext z
   simp only [Graph.pointSet, mem_union, mem_iUnion, exists_prop, segGraph_vertexSet,
-    mem_setOf_eq, segGraph_edgeSet, edgeArc_segmentDrawing]
+    mem_ofPred_eq, segGraph_edgeSet, edgeArc_segmentDrawing]
   constructor
   · rintro (⟨P, hP, hzP⟩ | ⟨P, hP, hzP⟩)
     · refine ⟨P, hP, ?_⟩
@@ -453,7 +454,7 @@ theorem isPlaneChain_familyChain {n : ℕ} (h2c : SquaresTwoConnected) (hr : 0 <
     intro z hz hz'
     obtain ⟨j, hj, hj', hzj⟩ := exists_mem_frontier_of_mem_pointSet_familyChain hz
     obtain ⟨k, hk, hk', hzk⟩ := exists_mem_frontier_of_mem_pointSet_familyChain hz'
-    rw [Plane.frontier_closedSquare, mem_setOf_eq] at hzj hzk
+    rw [Plane.frontier_closedSquare, mem_ofPred_eq] at hzj hzk
     have htri := Plane.supDist_triangle (c j) z (c k)
     rw [Plane.supDist_comm (c j) z] at htri
     exact absurd (hfar p q hp hq hpq j hj hj' k hk hk') (by rw [hzj, hzk] at htri; linarith)
@@ -525,7 +526,7 @@ theorem outerOnPairs_familyChain {n : ℕ} {R : ℝ} {x : Plane}
         z ∈ Plane.closedSquare (c (p * m)) R := by
       intro i hi hi' hzi
       obtain ⟨j, hj, hj', hzj⟩ := exists_mem_frontier_of_mem_pointSet_familyChain hzi
-      rw [Plane.frontier_closedSquare, mem_setOf_eq] at hzj
+      rw [Plane.frontier_closedSquare, mem_ofPred_eq] at hzj
       have hjlo : p * m ≤ j := le_trans (Nat.mul_le_mul_right _ hi) hj
       have hjhi : j ≤ p * m + m + m := by
         have : i * m ≤ (p + 1) * m := Nat.mul_le_mul_right _ hi'

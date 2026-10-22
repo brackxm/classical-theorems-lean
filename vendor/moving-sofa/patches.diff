@@ -67,3 +67,17 @@
 @@ -91 +93 @@
 -  rw [integrableOn_indicator_iff measurableSet_Iio, Set.Iio_inter_Ioi]
 +  rw [integrableOn_indicator_iff measurableSet_Iio.nullMeasurableSet, Set.Iio_inter_Ioi]
+--- upstream/MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean
++++ local/MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -2 +3 @@
+-import Mathlib.Topology.Separation.Lemmas
++import Mathlib.Topology.Separation.CompletelyRegular
+--- upstream/MovingSofa/ForMathlib/Order/IntervalPartition.lean
++++ local/MovingSofa/ForMathlib/Order/IntervalPartition.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+@@ -3 +4 @@
+-import Mathlib.Data.Fin.SuccPredOrder
++import Mathlib.Order.SuccPred.Fin

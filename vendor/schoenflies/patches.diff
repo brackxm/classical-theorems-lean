@@ -245,3 +245,1019 @@
 @@ -1 +1 @@
 -leanprover/lean4:v4.32.2
 +leanprover/lean4:v4.34.0
+--- upstream/Schoenflies/Accessible.lean
++++ local/Schoenflies/Accessible.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -116 +117 @@
+-  rw [accessCone, setOf_and]
++  rw [accessCone, ofPred_and]
+--- upstream/Schoenflies/ArcCollars.lean
++++ local/Schoenflies/ArcCollars.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -1264 +1265 @@
+-  · rw [Set.mem_setOf_eq, hsub]
++  · rw [Set.mem_ofPred_eq, hsub]
+@@ -1289 +1290 @@
+-  · rw [Set.mem_setOf_eq, hsub]
++  · rw [Set.mem_ofPred_eq, hsub]
+--- upstream/Schoenflies/ArcComplement.lean
++++ local/Schoenflies/ArcComplement.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -157 +158 @@
+-    mem_setOf_eq, segGraph_edgeSet, edgeArc_segmentDrawing]
++    mem_ofPred_eq, segGraph_edgeSet, edgeArc_segmentDrawing]
+@@ -456 +457 @@
+-    rw [Plane.frontier_closedSquare, mem_setOf_eq] at hzj hzk
++    rw [Plane.frontier_closedSquare, mem_ofPred_eq] at hzj hzk
+@@ -528 +529 @@
+-      rw [Plane.frontier_closedSquare, mem_setOf_eq] at hzj
++      rw [Plane.frontier_closedSquare, mem_ofPred_eq] at hzj
+--- upstream/Schoenflies/ArcComplementPrep.lean
++++ local/Schoenflies/ArcComplementPrep.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -444 +445 @@
+-  simp only [mem_compl_iff, closedSquare, mem_setOf_eq, supDist_zero]
++  simp only [mem_compl_iff, closedSquare, mem_ofPred_eq, supDist_zero]
+@@ -468 +469 @@
+-  simp only [mem_compl_iff, mem_setOf_eq, mem_union, openSquare, closedSquare, not_le]
++  simp only [mem_compl_iff, mem_ofPred_eq, mem_union, openSquare, closedSquare, not_le]
+--- upstream/Schoenflies/ArcMonotone.lean
++++ local/Schoenflies/ArcMonotone.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -89 +90 @@
+-  rw [arcParam, dif_pos h]
++  rw [arcParam, dite_eq_left h]
+--- upstream/Schoenflies/BoundaryAnchors.lean
++++ local/Schoenflies/BoundaryAnchors.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -122 +123 @@
+-        rw [Graph.edgeSet_eq_setOf_exists_isLink]
++        rw [Graph.edgeSet_eq_setOfPred_exists_isLink]
+--- upstream/Schoenflies/BoundaryCycles.lean
++++ local/Schoenflies/BoundaryCycles.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -151 +152 @@
+-  simp only [Set.mem_union, Set.mem_setOf_eq, Graph.mem_coveredVertices_iff]
++  simp only [Set.mem_union, Set.mem_ofPred_eq, Graph.mem_coveredVertices_iff]
+--- upstream/Schoenflies/Bounded.lean
++++ local/Schoenflies/Bounded.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -41 +42 @@
+-  simp only [beyondSquare, closedSquare, mem_setOf_eq, mem_compl_iff, supDist_zero, supNorm,
++  simp only [beyondSquare, closedSquare, mem_ofPred_eq, mem_compl_iff, supDist_zero, supNorm,
+--- upstream/Schoenflies/CommonSubdivision.lean
++++ local/Schoenflies/CommonSubdivision.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -67 +68 @@
+-            rw [edgeSet_eq_setOf_exists_isLink]
++            rw [edgeSet_eq_setOfPred_exists_isLink]
+@@ -74 +75 @@
+-            rw [edgeSet_eq_setOf_exists_isLink]
++            rw [edgeSet_eq_setOfPred_exists_isLink]
+@@ -82 +83 @@
+-      rw [edgeSet_eq_setOf_exists_isLink] at heB
++      rw [edgeSet_eq_setOfPred_exists_isLink] at heB
+@@ -88 +89 @@
+-      rw [edgeSet_eq_setOf_exists_isLink] at heA
++      rw [edgeSet_eq_setOfPred_exists_isLink] at heA
+@@ -100 +101 @@
+-        rw [edgeSet_eq_setOf_exists_isLink] at heA hfB
++        rw [edgeSet_eq_setOfPred_exists_isLink] at heA hfB
+@@ -108 +109 @@
+-      rw [edgeSet_eq_setOf_exists_isLink] at heA hfB
++      rw [edgeSet_eq_setOfPred_exists_isLink] at heA hfB
+@@ -138 +139 @@
+-  simp only [traceGraph, induce_isLink, restrict_isLink, Set.mem_setOf_eq,
++  simp only [traceGraph, induce_isLink, restrict_isLink, Set.mem_ofPred_eq,
+@@ -167 +168 @@
+-    rw [edgeSet_eq_setOf_exists_isLink] at he
++    rw [edgeSet_eq_setOfPred_exists_isLink] at he
+@@ -188 +189 @@
+-          rw [edgeSet_eq_setOf_exists_isLink]
++          rw [edgeSet_eq_setOfPred_exists_isLink]
+@@ -1086 +1087 @@
+-      simp only [d.outer_isLink he, and_true, Set.setOf_eq_eq_singleton,
++      simp only [d.outer_isLink he, and_true, Set.ofPred_eq_eq_singleton,
+--- upstream/Schoenflies/Concatenate.lean
++++ local/Schoenflies/Concatenate.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -87 +88 @@
+-  if_pos ht
++  ite_eq_left ht
+@@ -91 +92 @@
+-  if_neg ht
++  ite_eq_right ht
+--- upstream/Schoenflies/Direction.lean
++++ local/Schoenflies/Direction.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -180 +181 @@
+-  simp only [arcCCW, mem_setOf_eq, det_smul_left, det_smul_right, key]
++  simp only [arcCCW, mem_ofPred_eq, det_smul_left, det_smul_right, key]
+@@ -435 +436 @@
+-      simp only [arcCCW, mem_setOf_eq, mem_union]
++      simp only [arcCCW, mem_ofPred_eq, mem_union]
+@@ -445 +446 @@
+-      simp only [arcCCW, mem_setOf_eq, mem_inter_iff]
++      simp only [arcCCW, mem_ofPred_eq, mem_inter_iff]
+--- upstream/Schoenflies/Endgame.lean
++++ local/Schoenflies/Endgame.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -116,3 +117,3 @@
+-    ⟨?_, ?_, ?_, ?_, ?_, ?_⟩, fun z hz => dif_pos hz⟩
+-  · exact fun z hz => by simp only [dif_pos hz]; exact (e ⟨z, hz⟩).2
+-  · exact fun w hw => by simp only [dif_pos hw]; exact (e.symm ⟨w, hw⟩).2
++    ⟨?_, ?_, ?_, ?_, ?_, ?_⟩, fun z hz => dite_eq_left hz⟩
++  · exact fun z hz => by simp only [dite_eq_left hz]; exact (e ⟨z, hz⟩).2
++  · exact fun w hw => by simp only [dite_eq_left hw]; exact (e.symm ⟨w, hw⟩).2
+@@ -123 +124 @@
+-      simp only [Set.domRestrict_apply, dif_pos z.2]
++      simp only [Set.domRestrict_apply, dite_eq_left z.2]
+@@ -130 +131 @@
+-      simp only [Set.domRestrict_apply, dif_pos w.2]
++      simp only [Set.domRestrict_apply, dite_eq_left w.2]
+@@ -134 +135 @@
+-    simp only [dif_pos hz, dif_pos (e ⟨z, hz⟩).2]
++    simp only [dite_eq_left hz, dite_eq_left (e ⟨z, hz⟩).2]
+@@ -137 +138 @@
+-    simp only [dif_pos hw, dif_pos (e.symm ⟨w, hw⟩).2]
++    simp only [dite_eq_left hw, dite_eq_left (e.symm ⟨w, hw⟩).2]
+@@ -200 +201 @@
+-  classical exact if_pos hz
++  classical exact ite_eq_left hz
+@@ -204 +205 @@
+-  classical exact if_neg hz
++  classical exact ite_eq_right hz
+--- upstream/Schoenflies/FiniteTransferTargetMesh.lean
++++ local/Schoenflies/FiniteTransferTargetMesh.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -115 +116 @@
+-      rw [dif_pos he, dif_pos hg] at heg
++      rw [dite_eq_left he, dite_eq_left hg] at heg
+@@ -120 +121 @@
+-    rw [dif_pos he]
++    rw [dite_eq_left he]
+--- upstream/Schoenflies/GeneratedStructure.lean
++++ local/Schoenflies/GeneratedStructure.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -378 +379 @@
+-  simp only [skeleton, subdivGraph_vertexSet, Set.mem_union, Set.mem_setOf_eq,
++  simp only [skeleton, subdivGraph_vertexSet, Set.mem_union, Set.mem_ofPred_eq,
+@@ -385 +386 @@
+-  simp only [skeleton, subdivGraph_edgeSet, Set.mem_union, Set.mem_setOf_eq,
++  simp only [skeleton, subdivGraph_edgeSet, Set.mem_union, Set.mem_ofPred_eq,
+@@ -408 +409 @@
+-  simp only [outer, subdivGraph_edgeSet, Set.mem_union, Set.mem_setOf_eq,
++  simp only [outer, subdivGraph_edgeSet, Set.mem_union, Set.mem_ofPred_eq,
+@@ -1038 +1039 @@
+-  rw [parent]; exact if_pos h
++  rw [parent]; exact ite_eq_left h
+@@ -1041 +1042 @@
+-  rw [parent]; exact if_neg h
++  rw [parent]; exact ite_eq_right h
+@@ -1364 +1365 @@
+-  rw [parent]; exact if_pos h
++  rw [parent]; exact ite_eq_left h
+@@ -1367 +1368 @@
+-  rw [parent]; exact if_neg h
++  rw [parent]; exact ite_eq_right h
+@@ -1692 +1693 @@
+-    simp only [Set.mem_iUnion, Set.mem_setOf_eq, exists_prop]
++    simp only [Set.mem_iUnion, Set.mem_ofPred_eq, exists_prop]
+@@ -1696 +1697 @@
+-      simp only [Set.mem_iUnion, Set.mem_setOf_eq, exists_prop]
++      simp only [Set.mem_iUnion, Set.mem_ofPred_eq, exists_prop]
+--- upstream/Schoenflies/Graph/Degree.lean
++++ local/Schoenflies/Graph/Degree.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -234 +235 @@
+-      simp only [Set.mem_setOf_eq, Set.mem_singleton_iff]
++      simp only [Set.mem_ofPred_eq, Set.mem_singleton_iff]
+@@ -238 +239 @@
+-      simp only [Set.mem_setOf_eq, Set.mem_singleton_iff]
++      simp only [Set.mem_ofPred_eq, Set.mem_singleton_iff]
+@@ -245 +246 @@
+-      simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
++      simp only [Set.mem_ofPred_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+@@ -250 +251 @@
+-      simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
++      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
+@@ -267 +268 @@
+-  simp only [Finset.coe_filter, Set.mem_setOf_eq]
++  simp only [Finset.coe_filter, Set.mem_ofPred_eq]
+--- upstream/Schoenflies/Graph/K33Land.lean
++++ local/Schoenflies/Graph/K33Land.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -157 +158 @@
+-    rw [hwdef]; exact if_pos hj
++    rw [hwdef]; exact ite_eq_left hj
+@@ -160 +161 @@
+-    rw [hwdef]; exact if_neg hj
++    rw [hwdef]; exact ite_eq_right hj
+--- upstream/Schoenflies/Graph/OuterFace.lean
++++ local/Schoenflies/Graph/OuterFace.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -93 +94 @@
+-  simp only [Schoenflies.Plane.closedSquare, mem_setOf_eq, Schoenflies.Plane.supDist_zero,
++  simp only [Schoenflies.Plane.closedSquare, mem_ofPred_eq, Schoenflies.Plane.supDist_zero,
+--- upstream/Schoenflies/Graph/PathGraph.lean
++++ local/Schoenflies/Graph/PathGraph.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -248 +249 @@
+-  simp only [pathGraphOf, induce_isLink, restrict_isLink, mem_setOf_eq]
++  simp only [pathGraphOf, induce_isLink, restrict_isLink, mem_ofPred_eq]
+@@ -261,2 +262,2 @@
+-  rw [edgeSet_eq_setOf_exists_isLink]
+-  simp only [pathGraphOf_isLink, mem_setOf_eq]
++  rw [edgeSet_eq_setOfPred_exists_isLink]
++  simp only [pathGraphOf_isLink, mem_ofPred_eq]
+--- upstream/Schoenflies/Graph/Tree.lean
++++ local/Schoenflies/Graph/Tree.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -244 +245 @@
+-    simp only [edgeSet_deleteVerts, Set.mem_setOf_eq]
++    simp only [edgeSet_deleteVerts, Set.mem_ofPred_eq]
+@@ -252 +253 @@
+-  simp only [edgeSet_deleteVerts, Set.mem_setOf_eq, Set.mem_sdiff, mem_incidenceSet,
++  simp only [edgeSet_deleteVerts, Set.mem_ofPred_eq, Set.mem_sdiff, mem_incidenceSet,
+--- upstream/Schoenflies/GridAttach.lean
++++ local/Schoenflies/GridAttach.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -187 +188 @@
+-    simp only [pieceListGraph_vertexSet, overlayGraph_vertexSet, endSet, mem_setOf_eq]
++    simp only [pieceListGraph_vertexSet, overlayGraph_vertexSet, endSet, mem_ofPred_eq]
+@@ -349 +350 @@
+-      simp only [Graph.walkVertices, mem_insert_iff, Graph.coveredVertices, mem_setOf_eq]
++      simp only [Graph.walkVertices, mem_insert_iff, Graph.coveredVertices, mem_ofPred_eq]
+@@ -354 +355 @@
+-      simp only [Graph.walkVertices, mem_insert_iff, Graph.coveredVertices, mem_setOf_eq] at hx
++      simp only [Graph.walkVertices, mem_insert_iff, Graph.coveredVertices, mem_ofPred_eq] at hx
+--- upstream/Schoenflies/InitialPair.lean
++++ local/Schoenflies/InitialPair.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -170,2 +171,2 @@
+-  · intro p hp; simp only [dif_pos hp]; exact (h ⟨p, hp⟩).2
+-  · intro q hq; simp only [dif_pos hq]; exact (h.symm ⟨q, hq⟩).2
++  · intro p hp; simp only [dite_eq_left hp]; exact (h ⟨p, hp⟩).2
++  · intro q hq; simp only [dite_eq_left hq]; exact (h.symm ⟨q, hq⟩).2
+@@ -174 +175 @@
+-    simp only [dif_pos hp, dif_pos hmem]
++    simp only [dite_eq_left hp, dite_eq_left hmem]
+@@ -179 +180 @@
+-    simp only [dif_pos hq, dif_pos hmem]
++    simp only [dite_eq_left hq, dite_eq_left hmem]
+@@ -1448 +1449 @@
+-  simp only [skelMap, if_pos hx]
++  simp only [skelMap, ite_eq_left hx]
+@@ -1451 +1452 @@
+-  simp only [skelInv, if_pos hy]
++  simp only [skelInv, ite_eq_left hy]
+@@ -1462 +1463 @@
+-  · simp only [skelMap, if_neg hmem, d.injOn_cross.leftInvOn_invFunOn ht]
++  · simp only [skelMap, ite_eq_right hmem, d.injOn_cross.leftInvOn_invFunOn ht]
+@@ -1490 +1491 @@
+-  · simp only [skelInv, if_neg hmem, d.injOn_tgtChord.leftInvOn_invFunOn ht]
++  · simp only [skelInv, ite_eq_right hmem, d.injOn_tgtChord.leftInvOn_invFunOn ht]
+--- upstream/Schoenflies/InitialPairFixed.lean
++++ local/Schoenflies/InitialPairFixed.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -310 +311 @@
+-  simp only [CellStructure.pathCells, Set.mem_union, Set.mem_setOf_eq,
++  simp only [CellStructure.pathCells, Set.mem_union, Set.mem_ofPred_eq,
+--- upstream/Schoenflies/Inversion.lean
++++ local/Schoenflies/Inversion.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -175,2 +176,2 @@
+-  continuous_toFun := ((continuousOn_invert a).restrict).subtype_mk _
+-  continuous_invFun := ((continuousOn_invert a).restrict).subtype_mk _
++  continuous_toFun := ((continuousOn_invert a).domRestrict).subtype_mk _
++  continuous_invFun := ((continuousOn_invert a).domRestrict).subtype_mk _
+--- upstream/Schoenflies/LimitMap.lean
++++ local/Schoenflies/LimitMap.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -480 +481 @@
+-  rw [F, dif_pos (L.exists_eq_singleton_iInter_tgtStar hx)]
++  rw [F, dite_eq_left (L.exists_eq_singleton_iInter_tgtStar hx)]
+@@ -866 +867 @@
+-  rw [inv, dif_pos h]
++  rw [inv, dite_eq_left h]
+--- upstream/Schoenflies/LocallyPolygonal.lean
++++ local/Schoenflies/LocallyPolygonal.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -188 +189 @@
+-  simp only [openSquare, mem_setOf_eq, supDist, supNorm, sub_apply, max_lt_iff,
++  simp only [openSquare, mem_ofPred_eq, supDist, supNorm, sub_apply, max_lt_iff,
+@@ -249 +250 @@
+-      simp only [sideGap, cond_false] at hs; linarith [hlt.1])
++      simp only [sideGap, Bool.cond_false] at hs; linarith [hlt.1])
+@@ -251 +252 @@
+-      simp only [sideGap, cond_true] at hs; linarith [hlt.2])
++      simp only [sideGap, Bool.cond_true] at hs; linarith [hlt.2])
+@@ -257 +258 @@
+-  · simp only [sideGap, cond_false] at h
++  · simp only [sideGap, Bool.cond_false] at h
+@@ -259 +260 @@
+-  · simp only [sideGap, cond_true] at h
++  · simp only [sideGap, Bool.cond_true] at h
+@@ -349 +350 @@
+-      simp only [closedSquare, mem_setOf_eq, not_le] at this
++      simp only [closedSquare, mem_ofPred_eq, not_le] at this
+@@ -391 +392 @@
+-      simp only [closedSquare, mem_setOf_eq, not_le] at this
++      simp only [closedSquare, mem_ofPred_eq, not_le] at this
+--- upstream/Schoenflies/MatchedSplit.lean
++++ local/Schoenflies/MatchedSplit.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -322 +323 @@
+-  simp only [splitMap, if_pos hx]
++  simp only [splitMap, ite_eq_left hx]
+@@ -330 +331 @@
+-  simp only [splitInvMap, if_pos hy]
++  simp only [splitInvMap, ite_eq_left hy]
+@@ -335 +336 @@
+-  simp only [splitInvMap, if_neg hy]
++  simp only [splitInvMap, ite_eq_right hy]
+@@ -348 +349 @@
+-  · rw [splitMap, if_pos hs]
++  · rw [splitMap, ite_eq_left hs]
+@@ -354 +355 @@
+-  · rw [splitMap, if_neg hs]
++  · rw [splitMap, ite_eq_right hs]
+@@ -365 +366 @@
+-  · rw [splitInvMap, if_pos hs]
++  · rw [splitInvMap, ite_eq_left hs]
+@@ -373 +374 @@
+-  · rw [splitInvMap, if_neg hs]
++  · rw [splitInvMap, ite_eq_right hs]
+--- upstream/Schoenflies/ModelCurve.lean
++++ local/Schoenflies/ModelCurve.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -170 +171 @@
+-  simp only [modelCurve, mem_setOf_eq, mem_union, mem_sideTop, mem_sideLeft, mem_sideBottom,
++  simp only [modelCurve, mem_ofPred_eq, mem_union, mem_sideTop, mem_sideLeft, mem_sideBottom,
+@@ -376 +377 @@
+-  simp only [modelCurve, mem_setOf_eq, mem_sdiff, mem_closedSquare_zero_one,
++  simp only [modelCurve, mem_ofPred_eq, mem_sdiff, mem_closedSquare_zero_one,
+@@ -429,2 +430,2 @@
+-  have hqc : Continuous q := (hf.continuousOn.restrict).subtype_mk _
+-  have hq'c : Continuous q' := (hg.continuousOn.restrict).subtype_mk _
++  have hqc : Continuous q := (hf.continuousOn.domRestrict).subtype_mk _
++  have hq'c : Continuous q' := (hg.continuousOn.domRestrict).subtype_mk _
+--- upstream/Schoenflies/OuterChain.lean
++++ local/Schoenflies/OuterChain.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -312 +313 @@
+-    rw [hcyc.cycleGraph_edgeSet, Set.mem_setOf_eq, List.mem_append]
++    rw [hcyc.cycleGraph_edgeSet, Set.mem_ofPred_eq, List.mem_append]
+@@ -318 +319 @@
+-    rw [hcyc.cycleGraph_edgeSet, Set.mem_setOf_eq] at hmem
++    rw [hcyc.cycleGraph_edgeSet, Set.mem_ofPred_eq] at hmem
+--- upstream/Schoenflies/OverlayGraph.lean
++++ local/Schoenflies/OverlayGraph.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -91 +92 @@
+-  exact if_pos h
++  exact ite_eq_left h
+@@ -96 +97 @@
+-  exact if_neg h
++  exact ite_eq_right h
+@@ -250 +251 @@
+-    simp only [mem_setOf_eq]
++    simp only [mem_ofPred_eq]
+@@ -350 +351 @@
+-    endSet, mem_setOf_eq, overlayGraph_mem_edgeSet, edgeArc_segmentDrawing, cover]
++    endSet, mem_ofPred_eq, overlayGraph_mem_edgeSet, edgeArc_segmentDrawing, cover]
+--- upstream/Schoenflies/Parity.lean
++++ local/Schoenflies/Parity.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -380,2 +381,2 @@
+-      · rw [if_pos ⟨h1, h2, hD⟩, if_neg (by rintro ⟨g, -, -⟩; linarith),
+-          if_pos ⟨h1, by linarith, hD⟩]
++      · rw [ite_eq_left ⟨h1, h2, hD⟩, ite_eq_right (by rintro ⟨g, -, -⟩; linarith),
++          ite_eq_left ⟨h1, by linarith, hD⟩]
+@@ -384,4 +385,4 @@
+-        · rw [if_neg (by rintro ⟨-, g, -⟩; linarith), if_pos ⟨h2, h3, hD⟩,
+-            if_pos ⟨h1, h3, hD⟩]
+-        · rw [if_neg (by rintro ⟨-, g, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith),
+-            if_neg (by rintro ⟨-, g, -⟩; linarith)]
++        · rw [ite_eq_right (by rintro ⟨-, g, -⟩; linarith), ite_eq_left ⟨h2, h3, hD⟩,
++            ite_eq_left ⟨h1, h3, hD⟩]
++        · rw [ite_eq_right (by rintro ⟨-, g, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++            ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -389,4 +390,4 @@
+-      rw [if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨g, -, -⟩; linarith),
+-        if_neg (by rintro ⟨g, -, -⟩; linarith)]
+-  · rw [if_neg (by rintro ⟨-, -, g⟩; exact hD g), if_neg (by rintro ⟨-, -, g⟩; exact hD g),
+-      if_neg (by rintro ⟨-, -, g⟩; exact hD g)]
++      rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨g, -, -⟩; linarith),
++        ite_eq_right (by rintro ⟨g, -, -⟩; linarith)]
++  · rw [ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g), ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g),
++      ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g)]
+@@ -693,2 +694,2 @@
+-      · rw [if_pos ⟨hA, by linarith, hD⟩, if_pos ⟨by linarith, hB, e.1 hD⟩,
+-          if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith)]
++      · rw [ite_eq_left ⟨hA, by linarith, hD⟩, ite_eq_left ⟨by linarith, hB, e.1 hD⟩,
++          ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -696,3 +697,3 @@
+-      · rw [if_neg (by rintro ⟨-, -, g⟩; exact hD g),
+-          if_neg (by rintro ⟨-, -, g⟩; exact hD (e.2 g)),
+-          if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith)]
++      · rw [ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g),
++          ite_eq_right (by rintro ⟨-, -, g⟩; exact hD (e.2 g)),
++          ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -704,2 +705,2 @@
+-        · rw [if_pos ⟨hA, hB2, hD⟩, if_neg (by rintro ⟨-, g, -⟩; linarith),
+-            if_neg (by rintro ⟨g, -, -⟩; linarith), if_pos ⟨hB2, hB, e.1 hD⟩]
++        · rw [ite_eq_left ⟨hA, hB2, hD⟩, ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++            ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_left ⟨hB2, hB, e.1 hD⟩]
+@@ -707,4 +708,4 @@
+-        · rw [if_neg (by rintro ⟨-, -, g⟩; exact hD g),
+-            if_neg (by rintro ⟨-, g, -⟩; linarith),
+-            if_neg (by rintro ⟨g, -, -⟩; linarith),
+-            if_neg (by rintro ⟨-, -, g⟩; exact hD (e.2 g))]
++        · rw [ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g),
++            ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++            ite_eq_right (by rintro ⟨g, -, -⟩; linarith),
++            ite_eq_right (by rintro ⟨-, -, g⟩; exact hD (e.2 g))]
+@@ -712,2 +713,2 @@
+-        rw [if_neg (by rintro ⟨-, g, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith),
+-          if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨g, -, -⟩; linarith)]
++        rw [ite_eq_right (by rintro ⟨-, g, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++          ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨g, -, -⟩; linarith)]
+@@ -720,2 +721,2 @@
+-        · rw [if_neg (by rintro ⟨g, -, -⟩; linarith), if_pos ⟨hA2, hB, e.2 hD⟩,
+-            if_pos ⟨hA, hA2, hD⟩, if_neg (by rintro ⟨-, g, -⟩; linarith)]
++        · rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_left ⟨hA2, hB, e.2 hD⟩,
++            ite_eq_left ⟨hA, hA2, hD⟩, ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -723,4 +724,4 @@
+-        · rw [if_neg (by rintro ⟨g, -, -⟩; linarith),
+-            if_neg (by rintro ⟨-, -, g⟩; exact hD (e.1 g)),
+-            if_neg (by rintro ⟨-, -, g⟩; exact hD g),
+-            if_neg (by rintro ⟨-, g, -⟩; linarith)]
++        · rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith),
++            ite_eq_right (by rintro ⟨-, -, g⟩; exact hD (e.1 g)),
++            ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g),
++            ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -730,2 +731,2 @@
+-        · rw [if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith),
+-            if_pos ⟨hA, hA2, hD⟩, if_pos ⟨by linarith, hB, e.1 hD⟩]
++        · rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++            ite_eq_left ⟨hA, hA2, hD⟩, ite_eq_left ⟨by linarith, hB, e.1 hD⟩]
+@@ -733,3 +734,3 @@
+-        · rw [if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith),
+-            if_neg (by rintro ⟨-, -, g⟩; exact hD g),
+-            if_neg (by rintro ⟨-, -, g⟩; exact hD (e.2 g))]
++        · rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith),
++            ite_eq_right (by rintro ⟨-, -, g⟩; exact hD g),
++            ite_eq_right (by rintro ⟨-, -, g⟩; exact hD (e.2 g))]
+@@ -737,2 +738,2 @@
+-      rw [if_neg (by rintro ⟨g, -, -⟩; linarith), if_neg (by rintro ⟨g, -, -⟩; linarith),
+-        if_neg (by rintro ⟨-, g, -⟩; linarith), if_neg (by rintro ⟨-, g, -⟩; linarith)]
++      rw [ite_eq_right (by rintro ⟨g, -, -⟩; linarith), ite_eq_right (by rintro ⟨g, -, -⟩; linarith),
++        ite_eq_right (by rintro ⟨-, g, -⟩; linarith), ite_eq_right (by rintro ⟨-, g, -⟩; linarith)]
+@@ -885 +886 @@
+-  refine if_neg ?_
++  refine ite_eq_right ?_
+@@ -1002 +1003 @@
+-    rw [mark, mark, if_pos hm1, if_neg hm2, add_zero]
++    rw [mark, mark, ite_eq_left hm1, ite_eq_right hm2, add_zero]
+--- upstream/Schoenflies/ParitySplitting.lean
++++ local/Schoenflies/ParitySplitting.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -125 +126 @@
+-  · rw [mark, mark, if_neg (not_crosses_of_level h.symm q), if_neg (not_crosses_of_level h q)]
++  · rw [mark, mark, ite_eq_right (not_crosses_of_level h.symm q), ite_eq_right (not_crosses_of_level h q)]
+--- upstream/Schoenflies/PolyArcRealize.lean
++++ local/Schoenflies/PolyArcRealize.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -125 +126 @@
+-  · rw [if_pos hk, if_pos hl] at hkl
++  · rw [ite_eq_left hk, ite_eq_left hl] at hkl
+@@ -129 +130 @@
+-    rw [if_pos hk, if_neg hl] at hkl
++    rw [ite_eq_left hk, ite_eq_right hl] at hkl
+@@ -135 +136 @@
+-    rw [if_neg hk, if_pos hl] at hkl
++    rw [ite_eq_right hk, ite_eq_left hl] at hkl
+@@ -140 +141 @@
+-  · rw [if_neg hk, if_neg hl] at hkl
++  · rw [ite_eq_right hk, ite_eq_right hl] at hkl
+@@ -159,3 +160,3 @@
+-theorem skipIdx_of_le (h : k ≤ i) : skipIdx i k = k := if_pos h
+-
+-theorem skipIdx_of_lt (h : i < k) : skipIdx i k = k + 1 := if_neg (by omega)
++theorem skipIdx_of_le (h : k ≤ i) : skipIdx i k = k := ite_eq_left h
++
++theorem skipIdx_of_lt (h : i < k) : skipIdx i k = k + 1 := ite_eq_right (by omega)
+@@ -575,2 +576,2 @@
+-    intro k hk; rw [hvf]; simp only [dif_pos hk, htp]
+-  have hvfn : vf n = b := by rw [hvf]; simp only [dif_neg (lt_irrefl n)]
++    intro k hk; rw [hvf]; simp only [dite_eq_left hk, htp]
++  have hvfn : vf n = b := by rw [hvf]; simp only [dite_eq_right (lt_irrefl n)]
+@@ -582 +583 @@
+-        dif_pos (show (⟨k, hk⟩ : Fin n).val + 1 < n from hk1)]
++        dite_eq_left (show (⟨k, hk⟩ : Fin n).val + 1 < n from hk1)]
+@@ -586 +587 @@
+-        dif_neg (show ¬ ((⟨k, hk⟩ : Fin n).val + 1 < n) from hk1), hf1]
++        dite_eq_right (show ¬ ((⟨k, hk⟩ : Fin n).val + 1 < n) from hk1), hf1]
+--- upstream/Schoenflies/PolyLocal.lean
++++ local/Schoenflies/PolyLocal.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -280 +281 @@
+-      simp only [closedSquare, mem_setOf_eq, not_le] at this
++      simp only [closedSquare, mem_ofPred_eq, not_le] at this
+@@ -301 +302 @@
+-      simp only [closedSquare, mem_setOf_eq, not_le] at this
++      simp only [closedSquare, mem_ofPred_eq, not_le] at this
+--- upstream/Schoenflies/PrePolygonArc.lean
++++ local/Schoenflies/PrePolygonArc.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -626 +627 @@
+-  rw [insVertex, if_pos (by rw [hval]; exact hlt), hval, ZMod.natCast_rightInverse j]
++  rw [insVertex, ite_eq_left (by rw [hval]; exact hlt), hval, ZMod.natCast_rightInverse j]
+@@ -632 +633 @@
+-  rw [insVertex, if_neg (by rw [val_neg_one' (m := m)]; omega)]
++  rw [insVertex, ite_eq_right (by rw [val_neg_one' (m := m)]; omega)]
+@@ -691 +692 @@
+-    · rw [if_pos hli, if_pos hlj] at hij
++    · rw [ite_eq_left hli, ite_eq_left hlj] at hij
+@@ -694 +695 @@
+-    · rw [if_pos hli, if_neg hlj] at hij
++    · rw [ite_eq_left hli, ite_eq_right hlj] at hij
+@@ -696 +697 @@
+-    · rw [if_neg hli, if_pos hlj] at hij
++    · rw [ite_eq_right hli, ite_eq_left hlj] at hij
+--- upstream/Schoenflies/QuantitativeForwardStages.lean
++++ local/Schoenflies/QuantitativeForwardStages.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -37,2 +38,2 @@
+-  simp only [Set.mem_inter_iff, Set.mem_setOf_eq] at hclosed
+-  simp only [Set.mem_inter_iff, Set.mem_setOf_eq, not_and_or, not_lt] at hopen
++  simp only [Set.mem_inter_iff, Set.mem_ofPred_eq] at hclosed
++  simp only [Set.mem_inter_iff, Set.mem_ofPred_eq, not_and_or, not_lt] at hopen
+--- upstream/Schoenflies/Realization.lean
++++ local/Schoenflies/Realization.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -1087 +1088 @@
+-      have hnx0 : nx ⟨0, hn0⟩ = 1 := by rw [hnx, parNext, dif_neg hcond]
++      have hnx0 : nx ⟨0, hn0⟩ = 1 := by rw [hnx, parNext, dite_eq_right hcond]
+@@ -1097 +1098 @@
+-    · have hval : (j + 1).val = j.val + 1 := by rw [zmod_val_succ (by omega) j, if_pos hj]
++    · have hval : (j + 1).val = j.val + 1 := by rw [zmod_val_succ (by omega) j, ite_eq_left hj]
+@@ -1101 +1102 @@
+-      rw [hnx, parNext, dif_pos (show (⟨j.val, hjlt⟩ : Fin n).val + 1 < n from hj)]
++      rw [hnx, parNext, dite_eq_left (show (⟨j.val, hjlt⟩ : Fin n).val + 1 < n from hj)]
+@@ -1103 +1104 @@
+-    · have hval : (j + 1).val = 0 := by rw [zmod_val_succ (by omega) j, if_neg hj]
++    · have hval : (j + 1).val = 0 := by rw [zmod_val_succ (by omega) j, ite_eq_right hj]
+@@ -1107 +1108 @@
+-      rw [htp0, hnx, parNext, dif_neg (show ¬ ((⟨j.val, hjlt⟩ : Fin n).val + 1 < n) from hj)]
++      rw [htp0, hnx, parNext, dite_eq_right (show ¬ ((⟨j.val, hjlt⟩ : Fin n).val + 1 < n) from hj)]
+@@ -1144 +1145 @@
+-        rw [zmod_val_succ (by omega) 1, hone, if_neg (by omega), ZMod.val_zero]
++        rw [zmod_val_succ (by omega) 1, hone, ite_eq_right (by omega), ZMod.val_zero]
+--- upstream/Schoenflies/RealizeSplit.lean
++++ local/Schoenflies/RealizeSplit.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -504 +505 @@
+-  simp only [splitPos, if_pos hz]
++  simp only [splitPos, ite_eq_left hz]
+@@ -508 +509 @@
+-  simp only [splitPos, if_neg hz]
++  simp only [splitPos, ite_eq_right hz]
+@@ -519 +520 @@
+-  simp only [splitDrawing, if_pos hf]
++  simp only [splitDrawing, ite_eq_left hf]
+@@ -524 +525 @@
+-  simp only [splitDrawing, if_neg (Set.disjoint_left.1 d.disjoint_edgeSet hf)]
++  simp only [splitDrawing, ite_eq_right (Set.disjoint_left.1 d.disjoint_edgeSet hf)]
+@@ -530 +531 @@
+-  rw [if_pos rfl]
++  rw [ite_eq_left rfl]
+@@ -536 +537 @@
+-  rw [if_neg (Ne.symm d.face_ne), if_pos rfl]
++  rw [ite_eq_right (Ne.symm d.face_ne), ite_eq_left rfl]
+@@ -549 +550 @@
+-  rw [if_neg h₁, if_neg h₂, if_neg h₃, if_neg h₄]
++  rw [ite_eq_right h₁, ite_eq_right h₂, ite_eq_right h₃, ite_eq_right h₄]
+@@ -560 +561 @@
+-    rw [if_neg h₁, if_neg h₂, if_pos (show z ∈ V(d.ear) ∧ z ∉ V(S.skel) from ⟨hz, hz'⟩)]
++    rw [ite_eq_right h₁, ite_eq_right h₂, ite_eq_left (show z ∈ V(d.ear) ∧ z ∉ V(S.skel) from ⟨hz, hz'⟩)]
+@@ -570 +571 @@
+-  rw [if_neg h₁, if_neg h₂, if_neg h₃, if_pos hf]
++  rw [ite_eq_right h₁, ite_eq_right h₂, ite_eq_right h₃, ite_eq_left hf]
+--- upstream/Schoenflies/RealizeSubdiv.lean
++++ local/Schoenflies/RealizeSubdiv.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -312 +313 @@
+-  · have hL : d.leftParam R = 0 := if_pos h0.symm
++  · have hL : d.leftParam R = 0 := ite_eq_left h0.symm
+@@ -320 +321 @@
+-    have hL : d.leftParam R = 1 := if_neg hne
++    have hL : d.leftParam R = 1 := ite_eq_right hne
+@@ -461,3 +462,3 @@
+-  if_pos rfl
+-
+-theorem realizePos_of_ne {z : γ} (h : z ≠ d.newVertex) : d.realizePos R t z = R.pos z := if_neg h
++  ite_eq_left rfl
++
++theorem realizePos_of_ne {z : γ} (h : z ≠ d.newVertex) : d.realizePos R t z = R.pos z := ite_eq_right h
+@@ -472 +473 @@
+-    d.realizeDrawing R t d.newEdge₁ = subarc (R.drawing d.edge) (d.leftParam R) t := if_pos rfl
++    d.realizeDrawing R t d.newEdge₁ = subarc (R.drawing d.edge) (d.leftParam R) t := ite_eq_left rfl
+@@ -476 +477 @@
+-  rw [realizeDrawing, if_neg d.newEdge_ne.symm, if_pos rfl]
++  rw [realizeDrawing, ite_eq_right d.newEdge_ne.symm, ite_eq_left rfl]
+@@ -479 +480 @@
+-    d.realizeDrawing R t f = R.drawing f := by rw [realizeDrawing, if_neg h₁, if_neg h₂]
++    d.realizeDrawing R t f = R.drawing f := by rw [realizeDrawing, ite_eq_right h₁, ite_eq_right h₂]
+@@ -486 +487 @@
+-  if_pos rfl
++  ite_eq_left rfl
+@@ -490 +491 @@
+-  rw [realizeCell, if_neg d.newVertex_ne₁.symm, if_pos rfl]
++  rw [realizeCell, ite_eq_right d.newVertex_ne₁.symm, ite_eq_left rfl]
+@@ -494 +495 @@
+-  rw [realizeCell, if_neg d.newVertex_ne₂.symm, if_neg d.newEdge_ne.symm, if_pos rfl]
++  rw [realizeCell, ite_eq_right d.newVertex_ne₂.symm, ite_eq_right d.newEdge_ne.symm, ite_eq_left rfl]
+@@ -497,2 +498,2 @@
+-  rw [realizeCell, if_neg (d.ne_newVertex_of_mem_cells h), if_neg (d.ne_newEdge₁_of_mem_cells h),
+-    if_neg (d.ne_newEdge₂_of_mem_cells h)]
++  rw [realizeCell, ite_eq_right (d.ne_newVertex_of_mem_cells h), ite_eq_right (d.ne_newEdge₁_of_mem_cells h),
++    ite_eq_right (d.ne_newEdge₂_of_mem_cells h)]
+--- upstream/Schoenflies/RefinementStars.lean
++++ local/Schoenflies/RefinementStars.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -135 +136 @@
+-  rw [carrier, dif_pos h]
++  rw [carrier, dite_eq_left h]
+--- upstream/Schoenflies/SimpleArc.lean
++++ local/Schoenflies/SimpleArc.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -149 +150 @@
+-        rw [if_pos rfl, segment_same]
++        rw [ite_eq_left rfl, segment_same]
+@@ -156 +157 @@
+-      · rw [if_neg huv, cover_cons]
++      · rw [ite_eq_right huv, cover_cons]
+@@ -287 +288 @@
+-    simp only [hS, hT, mem_iUnion, mem_setOf_eq, exists_prop] at hzS hzT
++    simp only [hS, hT, mem_iUnion, mem_ofPred_eq, exists_prop] at hzS hzT
+@@ -318 +319 @@
+-  simp only [hS, mem_iUnion, mem_setOf_eq, exists_prop] at hbS
++  simp only [hS, mem_iUnion, mem_ofPred_eq, exists_prop] at hbS
+--- upstream/Schoenflies/SkeletonAccess.lean
++++ local/Schoenflies/SkeletonAccess.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -651,2 +652,2 @@
+-    simp only [Plane.openSquare, mem_setOf_eq] at hw
+-    simp only [Plane.closedSquare, mem_setOf_eq]
++    simp only [Plane.openSquare, mem_ofPred_eq] at hw
++    simp only [Plane.closedSquare, mem_ofPred_eq]
+--- upstream/Schoenflies/SkeletonLocal.lean
++++ local/Schoenflies/SkeletonLocal.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -216 +217 @@
+-      exact le_trans (min_le_left _ _) (le_of_eq (if_neg h1))
++      exact le_trans (min_le_left _ _) (le_of_eq (ite_eq_right h1))
+@@ -218 +219 @@
+-      exact le_trans (min_le_right _ _) (le_of_eq (if_neg h2))
++      exact le_trans (min_le_right _ _) (le_of_eq (ite_eq_right h2))
+@@ -456 +457 @@
+-  simp only [Set.mem_sdiff, mem_ball, Plane.mem_cone_iff, mem_setOf_eq, sub_ne_zero]
++  simp only [Set.mem_sdiff, mem_ball, Plane.mem_cone_iff, mem_ofPred_eq, sub_ne_zero]
+--- upstream/Schoenflies/SkeletonSectors.lean
++++ local/Schoenflies/SkeletonSectors.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -181 +182 @@
+-  simp only [arcCCW, mem_setOf_eq]
++  simp only [arcCCW, mem_ofPred_eq]
+@@ -187 +188 @@
+-  simp only [arcCCW, mem_setOf_eq, det_self, h]
++  simp only [arcCCW, mem_ofPred_eq, det_self, h]
+@@ -193 +194 @@
+-  simp only [arcCCW, mem_setOf_eq, det_self, h]
++  simp only [arcCCW, mem_ofPred_eq, det_self, h]
+@@ -203 +204 @@
+-  simp only [arcCCW, mem_setOf_eq] at h ⊢
++  simp only [arcCCW, mem_ofPred_eq] at h ⊢
+@@ -271 +272 @@
+-  simp only [arcCCW, mem_setOf_eq] at h₁ h₂ ⊢
++  simp only [arcCCW, mem_ofPred_eq] at h₁ h₂ ⊢
+@@ -281 +282 @@
+-  simp only [arcCCW, mem_setOf_eq] at h₁ h₂ ⊢
++  simp only [arcCCW, mem_ofPred_eq] at h₁ h₂ ⊢
+@@ -404 +405 @@
+-  simp only [arcCCW, mem_setOf_eq]
++  simp only [arcCCW, mem_ofPred_eq]
+@@ -449 +450 @@
+-  simp only [arcCCW, mem_setOf_eq, e1, e2]
++  simp only [arcCCW, mem_ofPred_eq, e1, e2]
+@@ -464 +465 @@
+-    · simp only [mem_setOf_eq, det_smul_right, det_perp_self, hu.norm, one_pow, mul_one]
++    · simp only [mem_ofPred_eq, det_smul_right, det_perp_self, hu.norm, one_pow, mul_one]
+@@ -561,2 +562,2 @@
+-    rw [harc, mem_setOf_eq, not_lt] at h
+-    rw [harc', mem_setOf_eq, hwd]
++    rw [harc, mem_ofPred_eq, not_lt] at h
++    rw [harc', mem_ofPred_eq, hwd]
+@@ -984 +985 @@
+-  set φ : ↥(I : Set ℝ) → Plane := Set.restrict I (drawing e) with hφdef
++  set φ : ↥(I : Set ℝ) → Plane := Set.domRestrict I (drawing e) with hφdef
+@@ -986,2 +987,2 @@
+-  have hcm : IsClosedMap φ := (hcont.restrict).isClosedMap
+-  have hrange : Set.range φ = edgeArc drawing e := Set.range_restrict _ _
++  have hcm : IsClosedMap φ := (hcont.domRestrict).isClosedMap
++  have hrange : Set.range φ = edgeArc drawing e := Set.range_domRestrict _ _
+--- upstream/Schoenflies/SourceAttachment.lean
++++ local/Schoenflies/SourceAttachment.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -315 +316 @@
+-  simp only [endSet, Set.mem_setOf_eq] at hx
++  simp only [endSet, Set.mem_ofPred_eq] at hx
+@@ -633 +634 @@
+-  rw [drawing, if_neg]
++  rw [drawing, ite_eq_right]
+@@ -1074 +1075 @@
+-    simp only [endSet, Set.mem_setOf_eq] at hx
++    simp only [endSet, Set.mem_ofPred_eq] at hx
+--- upstream/Schoenflies/SourceJoining.lean
++++ local/Schoenflies/SourceJoining.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -95 +96 @@
+-          · rw [if_pos huv]
++          · rw [ite_eq_left huv]
+@@ -98 +99 @@
+-          · rw [if_neg huv]
++          · rw [ite_eq_right huv]
+@@ -302 +303 @@
+-  rw [drawing, if_neg]
++  rw [drawing, ite_eq_right]
+--- upstream/Schoenflies/SourceOverlay.lean
++++ local/Schoenflies/SourceOverlay.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -317 +318 @@
+-  simp only [endSet, Set.mem_setOf_eq] at hx
++  simp only [endSet, Set.mem_ofPred_eq] at hx
+@@ -481 +482 @@
+-  simp only [Set.mem_inter_iff, Set.mem_setOf_eq, gridPt]
++  simp only [Set.mem_inter_iff, Set.mem_ofPred_eq, gridPt]
+@@ -671 +672 @@
+-  rw [drawing, if_neg]
++  rw [drawing, ite_eq_right]
+--- upstream/Schoenflies/Square.lean
++++ local/Schoenflies/Square.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -119 +120 @@
+-  simp only [mem_setOf_eq] at *
++  simp only [mem_ofPred_eq] at *
+@@ -126 +127 @@
+-  simp only [mem_setOf_eq] at *
++  simp only [mem_ofPred_eq] at *
+@@ -133 +134 @@
+-  simp only [mem_setOf_eq] at *
++  simp only [mem_ofPred_eq] at *
+@@ -143 +144 @@
+-  simp only [mem_setOf_eq] at *
++  simp only [mem_ofPred_eq] at *
+@@ -170 +171 @@
+-  simp only [closedSquare, supDist, supNorm, sub_apply, mem_setOf_eq, mem_inter_iff,
++  simp only [closedSquare, supDist, supNorm, sub_apply, mem_ofPred_eq, mem_inter_iff,
+@@ -181 +182 @@
+-  simp only [openSquare, supDist, supNorm, sub_apply, mem_setOf_eq, mem_inter_iff,
++  simp only [openSquare, supDist, supNorm, sub_apply, mem_ofPred_eq, mem_inter_iff,
+@@ -226 +227 @@
+-    simp only [beyondSquare, hR, hL, hT, hB, mem_setOf_eq, mem_union, lt_abs]
++    simp only [beyondSquare, hR, hL, hT, hB, mem_ofPred_eq, mem_union, lt_abs]
+--- upstream/Schoenflies/SquareCycle.lean
++++ local/Schoenflies/SquareCycle.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -653 +654 @@
+-  rw [sqCoord, if_pos hz]
++  rw [sqCoord, ite_eq_left hz]
+@@ -661,2 +662,2 @@
+-    rw [sqCoord, if_pos htop, dist_sqNE_sqNW c hr, dist_self, add_zero]
+-  · rw [sqCoord, if_neg htop, if_pos hz]
++    rw [sqCoord, ite_eq_left htop, dist_sqNE_sqNW c hr, dist_self, add_zero]
++  · rw [sqCoord, ite_eq_right htop, ite_eq_left hz]
+@@ -670 +671 @@
+-    rw [sqCoord, if_neg htop, if_pos hleft, dist_sqNW_sqSW c hr.le, dist_self, add_zero]
++    rw [sqCoord, ite_eq_right htop, ite_eq_left hleft, dist_sqNW_sqSW c hr.le, dist_self, add_zero]
+@@ -672 +673 @@
+-  · rw [sqCoord, if_neg htop, if_neg hleft, if_pos hz]
++  · rw [sqCoord, ite_eq_right htop, ite_eq_right hleft, ite_eq_left hz]
+@@ -682 +683 @@
+-    rw [sqCoord, if_neg htop, if_neg hleft, if_pos hbot, dist_sqSW_sqSE c hr.le, dist_self,
++    rw [sqCoord, ite_eq_right htop, ite_eq_right hleft, ite_eq_left hbot, dist_sqSW_sqSE c hr.le, dist_self,
+@@ -685 +686 @@
+-  · rw [sqCoord, if_neg htop, if_neg hleft, if_neg hbot]
++  · rw [sqCoord, ite_eq_right htop, ite_eq_right hleft, ite_eq_right hbot]
+--- upstream/Schoenflies/SquareMesh.lean
++++ local/Schoenflies/SquareMesh.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -113 +114 @@
+-    mem_Icc, ringSet, mem_setOf_eq, Plane.supNorm]
++    mem_Icc, ringSet, mem_ofPred_eq, Plane.supNorm]
+@@ -278 +279 @@
+-  · refine ⟨(P.1, p), by rw [splitAt, if_pos hp]; simp, ?_, Or.inr rfl⟩
++  · refine ⟨(P.1, p), by rw [splitAt, ite_eq_left hp]; simp, ?_, Or.inr rfl⟩
+@@ -280 +281 @@
+-  · refine ⟨P, by rw [splitAt, if_neg hp]; simp, subset_rfl, ?_⟩
++  · refine ⟨P, by rw [splitAt, ite_eq_right hp]; simp, subset_rfl, ?_⟩
+@@ -292 +293 @@
+-    · refine ⟨(P.1, q), by rw [splitAt, if_pos hq]; simp, ?_, Or.inl rfl⟩
++    · refine ⟨(P.1, q), by rw [splitAt, ite_eq_left hq]; simp, ?_, Or.inl rfl⟩
+@@ -294 +295 @@
+-    · refine ⟨(q, P.2), by rw [splitAt, if_pos hq]; simp, ?_, Or.inr rfl⟩
++    · refine ⟨(q, P.2), by rw [splitAt, ite_eq_left hq]; simp, ?_, Or.inr rfl⟩
+@@ -296 +297 @@
+-  · exact ⟨P, by rw [splitAt, if_neg hq]; simp, subset_rfl, h⟩
++  · exact ⟨P, by rw [splitAt, ite_eq_right hq]; simp, subset_rfl, h⟩
+--- upstream/Schoenflies/SquareMeshClosed.lean
++++ local/Schoenflies/SquareMeshClosed.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -219 +220 @@
+-  have hd : outerCycleData δ fresh anchors = h.choose := dif_pos h
++  have hd : outerCycleData δ fresh anchors = h.choose := dite_eq_left h
+@@ -748 +749 @@
+-  rw [spokeWalk, dif_pos h]
++  rw [spokeWalk, dite_eq_left h]
+@@ -837 +838 @@
+-  rw [ringArc, dif_pos h]
++  rw [ringArc, dite_eq_left h]
+--- upstream/Schoenflies/SquareMeshConnected.lean
++++ local/Schoenflies/SquareMeshConnected.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -317 +318 @@
+-    simp only [Set.mem_setOf_eq]
++    simp only [Set.mem_ofPred_eq]
+@@ -364 +365 @@
+-  simp only [endSet, Set.mem_setOf_eq, Set.mem_union, List.mem_append]
++  simp only [endSet, Set.mem_ofPred_eq, Set.mem_union, List.mem_append]
+@@ -381 +382 @@
+-    endSet, Set.mem_setOf_eq, pieceListGraph_mem_edgeSet, edgeArc_segmentDrawing, cover]
++    endSet, Set.mem_ofPred_eq, pieceListGraph_mem_edgeSet, edgeArc_segmentDrawing, cover]
+@@ -665,3 +666,3 @@
+-theorem bIdx_bottom {m n t : ℕ} (h : t ≤ m) : bIdx m n t = t := by unfold bIdx; exact if_pos h
+-
+-theorem bIdy_bottom {m n t : ℕ} (h : t ≤ m) : bIdy m n t = 0 := by unfold bIdy; exact if_pos h
++theorem bIdx_bottom {m n t : ℕ} (h : t ≤ m) : bIdx m n t = t := by unfold bIdx; exact ite_eq_left h
++
++theorem bIdy_bottom {m n t : ℕ} (h : t ≤ m) : bIdy m n t = 0 := by unfold bIdy; exact ite_eq_left h
+@@ -740 +741 @@
+-    rw [if_pos h₁, bIdx_bottom (by omega), bIdy_bottom (by omega), bIdx_bottom (by omega),
++    rw [ite_eq_left h₁, bIdx_bottom (by omega), bIdy_bottom (by omega), bIdx_bottom (by omega),
+@@ -745 +746 @@
+-    rw [if_neg (by omega), if_pos h₂, bIdx_right (by omega) (by omega),
++    rw [ite_eq_right (by omega), ite_eq_left h₂, bIdx_right (by omega) (by omega),
+@@ -751 +752 @@
+-    rw [if_neg (by omega), if_neg (by omega), if_pos h₃, bIdx_top (by omega) (by omega),
++    rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left h₃, bIdx_top (by omega) (by omega),
+@@ -758 +759 @@
+-    rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), bIdx_left (by omega) (by omega),
++    rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), bIdx_left (by omega) (by omega),
+@@ -817 +818 @@
+-  unfold gridBoundaryEdge; rw [if_pos h]
++  unfold gridBoundaryEdge; rw [ite_eq_left h]
+@@ -822 +823 @@
+-  rw [if_neg (by omega), if_pos (by omega), show m + j - m = j by omega]
++  rw [ite_eq_right (by omega), ite_eq_left (by omega), show m + j - m = j by omega]
+@@ -827 +828 @@
+-  rw [if_neg (by omega), if_neg (by omega), if_pos (by omega),
++  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left (by omega),
+@@ -833 +834 @@
+-  rw [if_neg (by omega), if_neg (by omega), if_neg (by omega),
++  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega),
+--- upstream/Schoenflies/SquareMeshFixed.lean
++++ local/Schoenflies/SquareMeshFixed.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -136 +137 @@
+-  simp only [endSet, mem_setOf_eq, List.mem_cons, List.not_mem_nil, or_false, mem_insert_iff,
++  simp only [endSet, mem_ofPred_eq, List.mem_cons, List.not_mem_nil, or_false, mem_insert_iff,
+@@ -243 +244 @@
+-    rw [splitAllAt, List.flatMap_cons, splitAt, if_neg (h R (List.mem_cons_self ..))]
++    rw [splitAllAt, List.flatMap_cons, splitAt, ite_eq_right (h R (List.mem_cons_self ..))]
+@@ -259 +260 @@
+-      rw [splitAt, if_pos hqS] at hRS
++      rw [splitAt, ite_eq_left hqS] at hRS
+@@ -261 +262 @@
+-    · rw [splitAt, if_neg hqS] at hRS
++    · rw [splitAt, ite_eq_right hqS] at hRS
+@@ -266,2 +267,2 @@
+-      exact List.mem_flatMap.2 ⟨R, hR, by rw [splitAt, if_neg hqR]; simp⟩
+-    · exact List.mem_flatMap.2 ⟨P, hP, by rw [splitAt, if_pos hq]; exact hR⟩
++      exact List.mem_flatMap.2 ⟨R, hR, by rw [splitAt, ite_eq_right hqR]; simp⟩
++    · exact List.mem_flatMap.2 ⟨P, hP, by rw [splitAt, ite_eq_left hq]; exact hR⟩
+@@ -274 +275 @@
+-  simp only [endSet, mem_setOf_eq, mem_union, mem_singleton_iff]
++  simp only [endSet, mem_ofPred_eq, mem_union, mem_singleton_iff]
+@@ -376 +377 @@
+-    · rw [splitAt, if_pos hq'R] at hRR₀ hSS₀
++    · rw [splitAt, ite_eq_left hq'R] at hRR₀ hSS₀
+@@ -384 +385 @@
+-    · rw [splitAt, if_neg hq'R] at hRR₀ hSS₀
++    · rw [splitAt, ite_eq_right hq'R] at hRR₀ hSS₀
+--- upstream/Schoenflies/SquareMover.lean
++++ local/Schoenflies/SquareMover.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -99 +100 @@
+-theorem bend_of_le (h : u ≤ p) : bend r p q u = -r + (u + r) * (q + r) / (p + r) := if_pos h
++theorem bend_of_le (h : u ≤ p) : bend r p q u = -r + (u + r) * (q + r) / (p + r) := ite_eq_left h
+@@ -102 +103 @@
+-  if_neg (not_le.2 h)
++  ite_eq_right (not_le.2 h)
+@@ -282 +283 @@
+-    if_true, mul_one]
++    ite_true, mul_one]
+@@ -588 +589 @@
+-    exact ⟨le_of_eq h, by rw [openSquare, mem_setOf_eq, h]; exact lt_irrefl r⟩
++    exact ⟨le_of_eq h, by rw [openSquare, mem_ofPred_eq, h]; exact lt_irrefl r⟩
+@@ -594 +595 @@
+-  rw [frontier_closedSquare, mem_setOf_eq] at hz
++  rw [frontier_closedSquare, mem_ofPred_eq] at hz
+@@ -606,2 +607,2 @@
+-  continuous_toFun := h.continuousOn.restrict.subtype_mk _
+-  continuous_invFun := h.continuousOn_inv.restrict.subtype_mk _
++  continuous_toFun := h.continuousOn.domRestrict.subtype_mk _
++  continuous_invFun := h.continuousOn_inv.domRestrict.subtype_mk _
+--- upstream/Schoenflies/Strip.lean
++++ local/Schoenflies/Strip.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -210 +211 @@
+-      simp only [mem_union, mem_setOf_eq]
++      simp only [mem_union, mem_ofPred_eq]
+@@ -230 +231 @@
+-      simp only [mem_inter_iff, mem_setOf_eq]
++      simp only [mem_inter_iff, mem_ofPred_eq]
+@@ -278 +279 @@
+-    refine ⟨by rw [mem_setOf_eq, he]; exact hd, ?_⟩
++    refine ⟨by rw [mem_ofPred_eq, he]; exact hd, ?_⟩
+@@ -391 +392 @@
+-    simp only [mem_strip_iff, mem_inter_iff, mem_setOf_eq]
++    simp only [mem_strip_iff, mem_inter_iff, mem_ofPred_eq]
+@@ -410 +411 @@
+-    simp only [mem_strip_iff, mem_inter_iff, mem_setOf_eq, h1, h2]
++    simp only [mem_strip_iff, mem_inter_iff, mem_ofPred_eq, h1, h2]
+--- upstream/Schoenflies/StripLocal.lean
++++ local/Schoenflies/StripLocal.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+@@ -291 +292 @@
+-  · rw [Set.mem_setOf_eq, hsub]
++  · rw [Set.mem_ofPred_eq, hsub]
+@@ -312 +313 @@
+-  · rw [Set.mem_setOf_eq, hsub]
++  · rw [Set.mem_ofPred_eq, hsub]

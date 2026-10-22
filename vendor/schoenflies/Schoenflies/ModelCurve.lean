@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.Concatenate
 import Schoenflies.Polygonal
@@ -167,7 +168,7 @@ coordinate is `±1` and the other is dominated by it. -/
 theorem modelCurve_eq_sides :
     modelCurve = (sideTop ∪ sideLeft) ∪ (sideBottom ∪ sideRight) := by
   ext x
-  simp only [modelCurve, mem_setOf_eq, mem_union, mem_sideTop, mem_sideLeft, mem_sideBottom,
+  simp only [modelCurve, mem_ofPred_eq, mem_union, mem_sideTop, mem_sideLeft, mem_sideBottom,
     mem_sideRight, Plane.supNorm]
   constructor
   · intro h
@@ -373,7 +374,7 @@ theorem interior_closedSquare_zero_one :
 theorem modelCurve_eq_frontier : modelCurve = frontier (Plane.closedSquare 0 1) := by
   rw [(Plane.isClosed_closedSquare 0 1).frontier_eq, interior_closedSquare_zero_one]
   ext x
-  simp only [modelCurve, mem_setOf_eq, mem_sdiff, mem_closedSquare_zero_one,
+  simp only [modelCurve, mem_ofPred_eq, mem_sdiff, mem_closedSquare_zero_one,
     mem_openSquare_zero_one, not_lt]
   exact ⟨fun h => ⟨h.le, h.ge⟩, fun h => le_antisymm h.1 h.2⟩
 
@@ -426,8 +427,8 @@ theorem exists_homeomorph (hf : IsLoop f) (hg : IsLoop g) :
   -- the two parametrizations, read as maps of subtypes
   set q : ↥I → ↥(f '' I) := fun t => ⟨f t, mem_image_of_mem f t.2⟩ with hq
   set q' : ↥I → ↥(g '' I) := fun t => ⟨g t, mem_image_of_mem g t.2⟩ with hq'
-  have hqc : Continuous q := (hf.continuousOn.restrict).subtype_mk _
-  have hq'c : Continuous q' := (hg.continuousOn.restrict).subtype_mk _
+  have hqc : Continuous q := (hf.continuousOn.domRestrict).subtype_mk _
+  have hq'c : Continuous q' := (hg.continuousOn.domRestrict).subtype_mk _
   have hqs : Function.Surjective q := by
     rintro ⟨z, t, ht, rfl⟩
     exact ⟨⟨t, ht⟩, rfl⟩

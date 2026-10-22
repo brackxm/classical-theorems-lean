@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.DimStretta
@@ -77,7 +78,7 @@ theorem punto_fuori_retta {g : Set (E n)} (v x : E n) (hvx : v ≠ x)
     (hdim : faceDim g = 2) :
     ∃ p ∈ g, p ∉ affineSpan ℝ ({v, x} : Set (E n)) := by
   by_contra hall
-  push_neg at hall
+  push Not at hall
   have hsub : g ⊆ (affineSpan ℝ ({v, x} : Set (E n)) : Set (E n)) := hall
   have hle : affineSpan ℝ g ≤ affineSpan ℝ ({v, x} : Set (E n)) :=
     affineSpan_le.mpr hsub
@@ -145,14 +146,14 @@ theorem segno_opposto {gi gj a b : ℝ} (hrel : gi * a + gj * b = 0)
   · have h1 : 0 < gi * a := mul_pos_of_neg_of_neg h ha
     have h3 : 0 < gj := by
       by_contra hle
-      push_neg at hle
+      push Not at hle
       have h2 : 0 ≤ (-gj) * (-b) := mul_nonneg (by linarith) (by linarith)
       nlinarith
     exact mul_neg_of_neg_of_pos h h3
   · have h1 : gi * a < 0 := mul_neg_of_pos_of_neg h ha
     have h3 : gj < 0 := by
       by_contra hle
-      push_neg at hle
+      push Not at hle
       have h2 : 0 ≤ gj * (-b) := mul_nonneg hle (by linarith)
       nlinarith
     exact mul_neg_of_pos_of_neg h h3
@@ -344,7 +345,7 @@ theorem spigolo_in_due_faccette (P : ConvexPolytope 3) (v : E 3)
     ⦃x : E 3⦄ (hx : x ∈ A ∩ B) (hxv : x ≠ v) (hxC : x ∈ C) :
     C = A ∨ C = B := by
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   exact diamante P hA hdA hB hdB hC hdC hAB
     (fun h => hcon.1 h.symm) (fun h => hcon.2 h.symm)
     (Ne.symm hxv) hvA hvB hvC hx.1 hx.2 hxC

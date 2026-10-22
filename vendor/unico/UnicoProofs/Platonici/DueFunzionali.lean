@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 
@@ -37,7 +38,7 @@ theorem exists_two_orthogonal_indep {U W : Submodule ℝ (E n)}
   -- due vettori indipendenti in V
   obtain ⟨v, hvV, hv0⟩ : ∃ v ∈ V, v ≠ 0 := by
     by_contra hall
-    push_neg at hall
+    push Not at hall
     have : V = ⊥ := by
       ext x
       simp only [Submodule.mem_bot]
@@ -50,7 +51,7 @@ theorem exists_two_orthogonal_indep {U W : Submodule ℝ (E n)}
     omega
   obtain ⟨v', hv'V, hv'span⟩ : ∃ v' ∈ V, v' ∉ Submodule.span ℝ {v} := by
     by_contra hall
-    push_neg at hall
+    push Not at hall
     have hle : V ≤ Submodule.span ℝ {v} := fun x hx => hall x hx
     have := Submodule.finrank_mono hle
     omega

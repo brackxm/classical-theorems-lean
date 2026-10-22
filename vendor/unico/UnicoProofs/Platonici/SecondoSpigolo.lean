@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.VerticiEsposti
@@ -149,7 +150,7 @@ theorem secondo_spigolo (Q : ConvexPolytope n)
           field_simp
         nlinarith
       · -- lato non positivo: entrambi i pezzi scendono
-        push_neg at hside
+        push Not at hside
         have h1 : l u ≤ l v := hlmax u (subset_convexHull ℝ _ huV)
         have h2 : t * ⟪w', u⟫ ≤ t * ⟪w', v⟫ :=
           mul_le_mul_of_nonneg_left hside (le_of_lt htpos)

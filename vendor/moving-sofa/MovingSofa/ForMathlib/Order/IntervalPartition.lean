@@ -1,6 +1,7 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib.Order.SuccPred.LinearLocallyFinite
 
-import Mathlib.Data.Fin.SuccPredOrder
+import Mathlib.Order.SuccPred.Fin
 
 import Mathlib.Order.SuccPred.IntervalSucc
 import Mathlib.Order.Fin.Basic

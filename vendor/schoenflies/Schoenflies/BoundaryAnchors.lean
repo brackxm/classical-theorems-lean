@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.InteriorHomeomorphism
 
@@ -119,7 +120,7 @@ theorem Graph.pointSet_traceGraph_eq_interiorPart
       have harc := h.edge_isArcBetween hxy
       apply Or.inr
       exact Set.mem_iUnion₂.2 ⟨e, by
-        rw [Graph.edgeSet_eq_setOf_exists_isLink]
+        rw [Graph.edgeSet_eq_setOfPred_exists_isLink]
         exact ⟨x, y, (Graph.traceGraph_isLink D).2
           ⟨heD, hxy, heD harc.left_mem, heD harc.right_mem⟩⟩, hze⟩
 

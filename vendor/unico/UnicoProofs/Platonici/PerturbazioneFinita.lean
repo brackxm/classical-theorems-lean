@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.FacciaArgmax
@@ -101,7 +102,7 @@ theorem isFace_of_isExposed_isFace (P : ConvexPolytope n)
     refine ⟨l', ?_⟩
     rw [hl', hfT]
   -- caso B: c'è un vertice fuori da f
-  · push_neg at hA
+  · push Not at hA
     obtain ⟨v₀, hv₀V, hv₀f⟩ := hA
     set Vout : Finset (E n) := P.vertices.filter (· ∉ f) with hVout
     have hVoutne : Vout.Nonempty := ⟨v₀, by simp [hVout, hv₀V, hv₀f]⟩
@@ -156,11 +157,11 @@ theorem isFace_of_isExposed_isFace (P : ConvexPolytope n)
           exact Finset.le_max' (P.vertices.image (fun w => |l' w|)) (|l' v|)
             (Finset.mem_image_of_mem (fun w => |l' w|) hvV)
         have h2b := neg_abs_le (l' v)
-        simp only [ContinuousLinearMap.neg_apply]
+        simp only [neg_apply]
         linarith
       intro x hx
       have := h2 x hx
-      simp only [ContinuousLinearMap.neg_apply] at this
+      simp only [neg_apply] at this
       linarith
     -- la perturbazione
     set ε : ℝ := δ / (2 * C + 1) with hε
@@ -174,8 +175,8 @@ theorem isFace_of_isExposed_isFace (P : ConvexPolytope n)
     set L : E n →L[ℝ] ℝ := l + ε • l' with hLdef
     have hLapp : ∀ x, L x = l x + ε * l' x := by
       intro x
-      simp [hLdef, ContinuousLinearMap.add_apply,
-        ContinuousLinearMap.smul_apply, smul_eq_mul]
+      simp [hLdef, add_apply,
+        smul_apply, smul_eq_mul]
     refine ⟨?_, hene⟩
     intro _
     refine ⟨L, ?_⟩

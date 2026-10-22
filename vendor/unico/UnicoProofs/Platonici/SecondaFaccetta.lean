@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.VerticiEsposti
@@ -61,7 +62,7 @@ theorem seconda_faccetta (P : ConvexPolytope 3) (hfull : P.IsFullDim)
   -- il punto di A fuori da δ
   have ha₁ : ∃ a₁ ∈ A, a₁ ∉ δ := by
     by_contra hall
-    push_neg at hall
+    push Not at hall
     have hsub : A ⊆ δ := hall
     have hle := vectorSpan_mono ℝ hsub
     have h1 := Submodule.finrank_mono hle
@@ -158,7 +159,7 @@ theorem seconda_faccetta (P : ConvexPolytope 3) (hfull : P.IsFullDim)
             l p₀ - l u
           exact div_mul_cancel₀ _ (ne_of_gt hgap)
         nlinarith
-      · push_neg at hside
+      · push Not at hside
         have h1 : l u ≤ l p₀ := hlmax u (subset_convexHull ℝ _ huV)
         have h2 : t * ⟪w', u⟫ ≤ t * ⟪w', p₀⟫ :=
           mul_le_mul_of_nonneg_left hside (le_of_lt htpos)

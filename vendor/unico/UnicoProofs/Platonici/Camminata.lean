@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 
 /-!
@@ -42,7 +43,7 @@ theorem camminata_del_simplesso {α : Type*} [DecidableEq α]
       have h1 := hlg m hmX hloc xs hxs
       have h2 := hunico m hmX hms
       linarith
-    push_neg at hnotmax
+    push Not at hnotmax
     obtain ⟨y, hyX, hadj, hlt⟩ := hnotmax
     -- il vicino è raggiunto, quindi sta in R: contraddice l'argmax
     have hyragg : raggiunto y := hmragg.tail ⟨hyX, hadj⟩

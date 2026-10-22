@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.DimStretta
@@ -30,7 +31,7 @@ variable {n : ℕ}
 theorem faccia_ha_secondo_punto {g : Set (E n)} (hd : faceDim g = 1)
     {v : E n} : ∃ p ∈ g, p ≠ v := by
   by_contra hall
-  push_neg at hall
+  push Not at hall
   have hsub : g ⊆ ({v} : Set (E n)) := fun p hp => hall p hp
   have hle := vectorSpan_mono ℝ hsub
   rw [vectorSpan_singleton] at hle

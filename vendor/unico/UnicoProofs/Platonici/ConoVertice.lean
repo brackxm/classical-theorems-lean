@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.VerticiEsposti
@@ -119,7 +120,7 @@ theorem spigolo_segmento (P : ConvexPolytope n) {e : Set (E n)}
   have hmin : ∀ z ∈ e, ∀ s : ℝ, z = w + s • d → 0 ≤ s := by
     intro z hz sz hsz
     by_contra hneg
-    push_neg at hneg
+    push Not at hneg
     have hτ : (0:ℝ) < sa - sz := by linarith
     have hne : sa - sz ≠ 0 := ne_of_gt hτ
     have hcomb : w ∈ openSegment ℝ z a := by
@@ -312,7 +313,7 @@ theorem cono_al_vertice (Q : ConvexPolytope n)
     have h1 := hmax₁ z hz
     rw [hs1] at h1
     by_contra hneg
-    push_neg at hneg
+    push Not at hneg
     nlinarith
   -- l₂ dà il segno di c 0
   have hs2 : l₂ z = l₂ w + c 0 * (l₂ a - l₂ w) := by
@@ -322,7 +323,7 @@ theorem cono_al_vertice (Q : ConvexPolytope n)
     have h1 := hmax₂ z hz
     rw [hs2] at h1
     by_contra hneg
-    push_neg at hneg
+    push Not at hneg
     nlinarith
   exact ⟨c 0, c 1, hs, ht, hzval⟩
 

@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.SourceJoining
 import Schoenflies.QuantitativeStages
@@ -34,8 +35,8 @@ theorem localGrid_frame_subset {p : Plane} {s : ℝ} {k : ℕ}
   rw [Plane.closedSquare_eq_inter] at hclosed
   have hopen := hz.2
   rw [Plane.openSquare_eq_inter] at hopen
-  simp only [Set.mem_inter_iff, Set.mem_setOf_eq] at hclosed
-  simp only [Set.mem_inter_iff, Set.mem_setOf_eq, not_and_or, not_lt] at hopen
+  simp only [Set.mem_inter_iff, Set.mem_ofPred_eq] at hclosed
+  simp only [Set.mem_inter_iff, Set.mem_ofPred_eq, not_and_or, not_lt] at hopen
   rcases hopen with hX | hY
   · rcases hX with hleft | hright
     · exact mem_cover_of_coord_eq hs hk (Nat.zero_le k) hz.1 (by

@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.PerturbazioneFinita
@@ -36,7 +37,7 @@ theorem faceDim_lt_of_ssubset (P : ConvexPolytope n) {f g : Set (E n)}
   have hgconv : Convex ℝ g := hg.1.convex (convex_convexHull ℝ _)
   have hout : ∃ w ∈ (facePolytope P hg).vertices, w ∉ f := by
     by_contra hall
-    push_neg at hall
+    push Not at hall
     have hsubg : g ⊆ f := by
       have h1 : g = (facePolytope P hg).toSet := (facePolytope_toSet P hg).symm
       rw [h1]

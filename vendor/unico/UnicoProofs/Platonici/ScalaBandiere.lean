@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.PerturbazioneFinita
@@ -110,10 +111,10 @@ theorem chain_exists (P : ConvexPolytope n) :
     · intro k hk
       by_cases hkm : k = m
       · subst hkm
-        simp only [if_pos rfl]
+        simp only [ite_eq_left rfl]
         exact ⟨hf, hfdim⟩
       · have hklt : k < m := by omega
-        simp only [if_neg hkm]
+        simp only [ite_eq_right hkm]
         obtain ⟨h1, h2⟩ := hc'1 k hklt
         exact ⟨isFace_of_facePolytope P hf h1, h2⟩
     · intro j k hjk hk
@@ -121,7 +122,7 @@ theorem chain_exists (P : ConvexPolytope n) :
       · subst hkm
         have hjm : j ≠ k := by omega
         have hjlt : j < k := hjk
-        simp only [if_pos rfl, if_neg hjm]
+        simp only [ite_eq_left rfl, ite_eq_right hjm]
         obtain ⟨h1, h2⟩ := hc'1 j hjlt
         constructor
         · have hsub1 : c' j ⊆ (facePolytope P hf).toSet :=
@@ -137,7 +138,7 @@ theorem chain_exists (P : ConvexPolytope n) :
           omega
       · have hklt : k < m := by omega
         have hjm : j ≠ m := by omega
-        simp only [if_neg hkm, if_neg hjm]
+        simp only [ite_eq_right hkm, ite_eq_right hjm]
         exact hc'2 j k hjk hklt
 
 /-- S4: LE BANDIERE ESISTONO — ogni politopo full-dimensionale ha una Flag. -/

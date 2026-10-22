@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.PerturbazioneFinita
@@ -41,7 +42,7 @@ noncomputable def facePolytope (P : ConvexPolytope n) {f : Set (E n)}
     have hfe := face_eq_hull_vertices P hf
     rw [← hfe, hf.1.isExtreme.extremePoints_eq]
     ext x
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, Set.mem_inter_iff]
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, Set.mem_inter_iff]
     constructor
     · rintro ⟨hxV, hxf⟩
       refine ⟨hxf, ?_⟩

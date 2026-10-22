@@ -1,5 +1,6 @@
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Angle
-import Mathlib.Topology.Separation.Lemmas
+import Mathlib.Topology.Separation.CompletelyRegular
 
 namespace Real
 

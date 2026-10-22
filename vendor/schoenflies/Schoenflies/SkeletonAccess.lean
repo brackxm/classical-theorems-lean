@@ -2,6 +2,7 @@
 Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
+Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
 -/
 import Schoenflies.SkeletonSectors
 import Schoenflies.AccessibleJoin
@@ -648,8 +649,8 @@ theorem frontier_openSquare_subset (c : Plane) (s : ℝ) :
     frontier (Plane.openSquare c s) ⊆ Plane.closedSquare c s \ Plane.openSquare c s := by
   have hsub : Plane.openSquare c s ⊆ Plane.closedSquare c s := by
     intro w hw
-    simp only [Plane.openSquare, mem_setOf_eq] at hw
-    simp only [Plane.closedSquare, mem_setOf_eq]
+    simp only [Plane.openSquare, mem_ofPred_eq] at hw
+    simp only [Plane.closedSquare, mem_ofPred_eq]
     exact hw.le
   rw [(Plane.isOpen_openSquare c s).frontier_eq]
   exact Set.sdiff_subset_sdiff_left
