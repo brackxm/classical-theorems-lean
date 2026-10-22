@@ -18,12 +18,27 @@ jobs:
         run: python3 scripts/check_vendor.py
       - name: Check the complete source import closure
         run: python3 scripts/check_imports.py
+      - name: Install kernel-check sandbox
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes bubblewrap apparmor-profiles
+          sudo mkdir -p /run/user
+          # Use Ubuntu's bubblewrap profile when AppArmor restricts user namespaces.
+          sandbox_profile=/usr/share/apparmor/extra-profiles/bwrap-userns-restrict
+          if [[ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns 2>/dev/null)" == 1 && -f "$sandbox_profile" ]]; then
+            sudo install -m 0644 "$sandbox_profile" /etc/apparmor.d/bwrap-userns-restrict
+            sudo apparmor_parser -r /etc/apparmor.d/bwrap-userns-restrict
+          fi
+          bwrap --ro-bind / / --unshare-all --proc /proc --dev /dev -- /bin/true
       - uses: leanprover/lean-action@v1
         with:
           auto-config: "false"
           build: "true"
+          build-args: "--fail-fast"
           use-mathlib-cache: "true"
       - name: Check standalone source and dependency layout
         run: python3 scripts/check_standalone.py
       - name: Check proof-audit regressions
         run: python3 scripts/test_checks.py
+      - name: Replay proofs with Lean's kernel
+        run: lake check
