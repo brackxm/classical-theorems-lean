@@ -38,7 +38,7 @@ theorem complex_signedArea_eq_domain_area (D : Set ℂ) (γ : ℝ → ℂ)
       _ = Γ := by rw [hBoundary, image_image]; rfl
   have hEopen : IsOpen E := e.toHomeomorph.isOpenMap D hDomain
   have hEconn : IsConnected E := hConnected.image e e.continuous.continuousOn
-  have hEbdd : Bornology.IsBounded E := e.lipschitz.isBounded_image hBounded
+  have hEbdd : Bornology.IsBounded E := e.lipschitzWith.isBounded_image hBounded
   have hE : E = jordanInterior Γ := by
     have hJ : IsJordanCurve (frontier E) := hfront.symm ▸ hJordan
     simpa only [hfront] using domain_eq_jordanInterior E hEopen hEconn hEbdd hJ

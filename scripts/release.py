@@ -90,6 +90,8 @@ def source_files():
 
 def run_checks():
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+    # Large arithmetic syntax modules have high peak memory use with parallel Lean jobs.
+    env.setdefault('LEAN_NUM_THREADS', '1')
     commands = [
         ([sys.executable, 'scripts/check_vendor.py'], ROOT),
         ([sys.executable, 'scripts/check_imports.py'], ROOT),

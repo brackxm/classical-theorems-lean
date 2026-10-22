@@ -40,11 +40,16 @@ class Checks(unittest.TestCase):
             toolchain = (ROOT/'lean-toolchain').read_text().strip()
             config = tomllib.loads((ROOT/'lakefile.toml').read_text())
             revision = next(dep['rev'] for dep in config['require'] if dep['name'] == 'mathlib')
-            for case in ['valid', 'toolchain', 'lock', 'shared-revision', 'dependency-kind']:
+            for case in ['valid', 'quoted-name', 'wrong-name', 'toolchain', 'lock',
+                         'shared-revision', 'dependency-kind']:
                 for name, text in original.items():
                     (root/name).write_text(text)
                 if case == 'toolchain':
                     (root/'lean-toolchain').write_text('leanprover/lean4:v4.0.0\n')
+                elif case in ['quoted-name', 'wrong-name']:
+                    lock = json.loads(original['lake-manifest.json'])
+                    lock['name'] = '«HOLLightPort»' if case == 'quoted-name' else '«wrong»'
+                    (root/'lake-manifest.json').write_text(json.dumps(lock))
                 elif case != 'valid':
                     lock = json.loads(original['lake-manifest.json'])
                     pin = next(p for p in lock['packages'] if p['name'] == 'mathlib')
@@ -56,7 +61,7 @@ class Checks(unittest.TestCase):
                     if case == 'shared-revision':
                         (root/'lakefile.toml').write_text(original['lakefile.toml'].replace(revision, pin['rev']))
                 with self.subTest(case=case):
-                    if case == 'valid':
+                    if case in ['valid', 'quoted-name']:
                         check_package_pins(root, toolchain, revision)
                     else:
                         with self.assertRaises(AssertionError):

@@ -21,7 +21,7 @@ theorem jordan_lipschitz_equality_circle (δ : ℝ → Point) (K : NNReal)
     ∃ c : Point, ∃ r : ℝ, 0 < r ∧ Γ = Metric.sphere c r := by
   let T : Point ≃ₗᵢ[ℝ] ℂ := Complex.orthonormalBasisOneI.repr.symm
   let ζ := T ∘ δ
-  have hζ : LipschitzWith K ζ := by simpa only [one_mul] using T.lipschitz.comp hδ
+  have hζ : LipschitzWith K ζ := by simpa only [one_mul] using T.lipschitzWith.comp hδ
   have hclosed : δ 0 = δ 1 := horiented.2.2.2.2.1
   have hsimple : InjOn δ (Ico (0 : ℝ) 1) := by
     intro x hx y hy hxy

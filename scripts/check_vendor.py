@@ -11,7 +11,7 @@ def check_package_pins(directory, toolchain, mathlib_revision):
     assert (directory/'lean-toolchain').read_text().strip() == toolchain, directory
     config = tomllib.loads((directory/'lakefile.toml').read_text())
     lock = json.loads((directory/'lake-manifest.json').read_text())
-    assert config['name'] == lock['name'], directory
+    assert config['name'] == lock['name'].strip('«»'), directory
     pins = {p['name'].strip('«»'): p for p in lock['packages']}
     for dep in config.get('require', []):
         pin = pins[dep['name']]

@@ -9,7 +9,7 @@ jobs:
   lean:
     runs-on: ubuntu-latest
     env:
-      LEAN_NUM_THREADS: "4"
+      LEAN_NUM_THREADS: "1"
     steps:
       - uses: actions/checkout@v4
       - name: Check release metadata

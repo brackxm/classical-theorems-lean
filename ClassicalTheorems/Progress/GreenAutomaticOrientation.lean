@@ -41,7 +41,7 @@ theorem complex_domain_winding_sign (D : Set ℂ) (γ : ℝ → ℂ)
     simpa only [hfront] using domain_eq_jordanInterior E
       (e.toHomeomorph.isOpenMap D hDomain)
       (hConnected.image e e.continuous.continuousOn)
-      (e.lipschitz.isBounded_image hBounded) hJ
+      (e.lipschitzWith.isBounded_image hBounded) hJ
   have hi : InjOn (fun t : Icc (0 : ℝ) 1 => δ t) {t | (t : ℝ) < 1} := by
     intro s hs t ht he
     exact Subtype.ext (hinj ⟨s.property.1, hs⟩ ⟨t.property.1, ht⟩ he)

@@ -4,8 +4,8 @@
   "revision": "4d5569131940815f47a9ccf3e90a4c5043c56127",
   "package": "MovingSofa",
   "upstream_toolchain": "leanprover/lean4:v4.35.0-rc1",
-  "target_toolchain": "leanprover/lean4:v4.34.1",
-  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "target_toolchain": "leanprover/lean4:v4.35.0",
+  "target_mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -145,7 +145,9 @@
     "LICENSE": "LICENSE"
   },
   "verification": "verified",
-  "modified_files": [],
+  "modified_files": [
+    "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean"
+  ],
   "local_entry_points": [],
   "local_sha256": {
     "LICENSE": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
@@ -174,7 +176,7 @@
     "MovingSofa/Curve/Jordan/WindingLocalConstancy.lean": "b3fa02f98ee605ab2f81fe17a5e5c98a8d217411846805146553a6c803451a14",
     "MovingSofa/Curve/NullRange.lean": "c44731755db61aa3af591f3fe214830ac91733fbc6d169557b23153fe47890c7",
     "MovingSofa/Curve/StieltjesChainRule.lean": "13f20eff96711bb8b5bdca536c9d4191f3bebbf9a18ad5ab1229218affe96508",
-    "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean": "f11284c2db9c401f4bc9373a71ab95462422eeded7683acc7c0b8b166fec306d",
+    "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean": "5634fd589f351cc2fce257f2c30912a1a6ad83d46f99d39979e5d6a38c623d54",
     "MovingSofa/ForMathlib/Analysis/InnerProductSpace/Linear.lean": "95af8f703956eb16c2cded78889ec437960bd4d6267cd58344092c7b3dc2de15",
     "MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean": "1c2a4fe2be00ceefb83fc0bff1f0d528de884b6a2e97ddc7fcd50df6000f8889",
     "MovingSofa/ForMathlib/Analysis/SpecialFunctions/Arctan.lean": "357f6b792f65bdf90790997646927471400433acf975894e74da639453d588ef",
@@ -191,11 +193,11 @@
     "MovingSofa/Geometry/Basic.lean": "8a81b7595dfe18aa32eb9f1dfc0dc6927ca921377600306674c3b16651778dda",
     "MovingSofa/Geometry/Frame.lean": "5e2ed2a7bb2bd1f21e81342a6c5165df8f83fa818fbc509d1a0fc4a14668f76b",
     "MovingSofa/Geometry/Plane.lean": "6a86e5e428f119a944dfab69935d27bf87fa8d0a0ad061f335c98e2972e37cc7",
-    "patches.diff": "15e2145cebf5fffdec5968f33ff69fb367f720ce50ae71ebc6c61c387c969612",
-    "lakefile.toml": "3fc0d370e456de5f1b14dc3433fc997717a88f4cda86cc63a799bbbee6f79934",
-    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+    "patches.diff": "6f3a2c2b372fccf6f0ee9e2498f9b8d53774ac1e232f16dd21aba3d7ed1f4a37",
+    "lakefile.toml": "27a0173c3a248a01bb27454a45c2bc03e28ab263c12f3776c9cd53eb544b8065",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
   },
-  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
+  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22. Updated the disk-integrability rewrite to supply null measurability for mathlib 4.35.0; theorem statements are unchanged.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
     "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."

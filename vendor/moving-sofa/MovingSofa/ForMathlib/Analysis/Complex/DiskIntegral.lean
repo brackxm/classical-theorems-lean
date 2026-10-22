@@ -1,3 +1,5 @@
+/- Modified for ClassicalTheorems on 2026-10-22:
+   supply null measurability for the Lean 4.35.0 mathlib rewrite API. -/
 import Mathlib.Analysis.Complex.MeanValue
 import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 
@@ -88,7 +90,7 @@ theorem integrableOn_inv_norm_ball (S : ℝ) :
   rw [indicator_ball_inv_norm_eq,
     MeasureTheory.integrable_fun_norm_addHaar volume (f := invNormCutoff S)]
   refine IntegrableOn.congr_fun_ae ?_ (radial_invNormCutoff_ae S).symm
-  rw [integrableOn_indicator_iff measurableSet_Iio, Set.Iio_inter_Ioi]
+  rw [integrableOn_indicator_iff measurableSet_Iio.nullMeasurableSet, Set.Iio_inter_Ioi]
   exact integrableOn_const (by simp)
 
 /-- The integral of inverse distance from zero over a complex disk centred at zero. -/

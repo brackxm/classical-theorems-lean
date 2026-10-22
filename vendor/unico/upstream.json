@@ -4,8 +4,8 @@
   "revision": "794568d279e377c34e3ab93a5e0626467f7d9e0d",
   "package": "unico-lean-proofs",
   "upstream_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "target_toolchain": "leanprover/lean4:v4.34.1",
-  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "target_toolchain": "leanprover/lean4:v4.35.0",
+  "target_mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE",
@@ -115,10 +115,10 @@
     "UnicoProofs/Platonici/SottoPolitopo.lean": "49a4272cf6add53998dac0ef073790d1421cd86aacaf1f887583091477eacd73",
     "UnicoProofs/Platonici/VerticiEsposti.lean": "6af0ab4fa323874de8254501f497f9b0208e40e175312b1d2f7cf05932f475b1",
     "UnicoProofs/Platonici/VerticiFaccette.lean": "840dc577f4f43f04ffc4cbe229e748e63937db68828c0ea94313a904bc6daf7d",
-    "lakefile.toml": "afc23451b75e8ce83024feea87ebe135a31c587f653d596aeddc5c644acb8ce2",
-    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+    "lakefile.toml": "64638e2df0549e2626eb277e6d161a08b4b93f20e3b795c98cdd171b4f33ec27",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
   },
-  "port_notes": "Relation.ReflTransGen API and stronger numeric simplification; theorem statements preserved. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
+  "port_notes": "Relation.ReflTransGen API and stronger numeric simplification; theorem statements preserved. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
     "notice_update": "Local adaptation and modification notices use the current library name. Mathematical proof bodies, upstream source text, copyright notices and licenses are preserved."

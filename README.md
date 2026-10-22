@@ -17,7 +17,7 @@ The eight theorems are represented by **ten audited Lean declarations**; Pascal 
 
 **AI-use disclosure:** OpenAI Codex was used extensively, under human direction, to develop proof strategies, write and refactor this project’s Lean code, and prepare documentation. Lean’s kernel checks the resulting formal proof terms, and the build audits their axioms as described below.
 
-Use Lean **4.34.1**, Python **3.11 or newer**, and the pinned mathlib revision in `lake-manifest.json`:
+Use Lean **4.35.0**, Python **3.11 or newer**, and the pinned mathlib revision in `lake-manifest.json`:
 
 ```sh
 lake exe cache get
@@ -25,6 +25,7 @@ python3 scripts/release.py
 ```
 
 The verification command checks source integrity, builds the library and audits proof axioms.
+It uses one Lean worker by default to limit peak memory use; set `LEAN_NUM_THREADS` to override this.
 
 Use `import ClassicalTheorems` for the full library, or import an individual theorem module such as `ClassicalTheorems.Euler`. [theorems.md](theorems.md) links to all eight theorem modules. `ClassicalTheorems.Translations` imports Pascal and Desargues together. Public theorem names include `ClassicalTheorems.euler_polyhedron`; the translated proofs use the `HOLLightPort.Pascal` and `HOLLightPort.Desargues` namespaces.
 

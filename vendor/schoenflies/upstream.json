@@ -4,8 +4,8 @@
   "revision": "05a43d29cde026618777db3d4e4316204ccca237",
   "package": "schoenflies-lean",
   "upstream_toolchain": "leanprover/lean4:v4.32.2",
-  "target_toolchain": "leanprover/lean4:v4.34.1",
-  "target_mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "target_toolchain": "leanprover/lean4:v4.35.0",
+  "target_mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "license": "Apache-2.0",
   "license_files": [
     "LICENSE"
@@ -553,10 +553,10 @@
     "Schoenflies/UniformBound.lean": "ef5cfd476900bb4fd82672d5b57ea719e28b6c1953623cca48e33f625a82f64d",
     "Schoenflies/Windows.lean": "cb38d1c7f04e49b0c506f9243ce83089d4081d3ea269253581f42d639ce4dcd7",
     "formalization.yaml": "e4a00e6974c896df352427d517d0a31d255dffb50a5dbcaa760244abdb44147b",
-    "lakefile.toml": "d650bd4fa137908533270b587125c3de08104869fa55e29dacdec110ff9df390",
-    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+    "lakefile.toml": "e708096bf3cebcee687fe01bc240c7a579726caf0bd66f88c213984e0d579b88",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
   },
-  "port_notes": "Selected 128-module import closure for JordanSchoenflies; Comparator challenge and unneeded modules excluded. Port updates an interval unfolding and two domain-restriction API sites, and renames the private-to-this-development Graph.IsBridge interface to avoid a collision with pinned mathlib. All source headers and the Apache-2.0 license are retained. The headline theorem passes the transitive standard-axiom audit. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07.",
+  "port_notes": "Selected 128-module import closure for JordanSchoenflies; Comparator challenge and unneeded modules excluded. Port updates an interval unfolding and two domain-restriction API sites, and renames the private-to-this-development Graph.IsBridge interface to avoid a collision with pinned mathlib. All source headers and the Apache-2.0 license are retained. The headline theorem passes the transitive standard-axiom audit. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22.",
   "upstream_mathlib_revision": "905b95818eb32af7874a58b427f50c1711a5e96c",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",

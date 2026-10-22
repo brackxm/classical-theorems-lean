@@ -59,3 +59,11 @@
 -name = "Forgive"
 -git = "https://github.com/FormalizedFormalLogic/forgive"
 -rev = "v4.34.0"
+--- upstream/Foundation/FirstOrder/Arithmetic/R0/Representation.lean
++++ local/Foundation/FirstOrder/Arithmetic/R0/Representation.lean
+@@ -0,0 +1,2 @@
++/- Modified for ClassicalTheorems on 2026-10-22:
++   update the wlog case tag for Lean 4.35.0. -/
+@@ -327 +329 @@
+-    case inr =>
++    case rfind.isFalse =>

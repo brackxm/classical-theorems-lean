@@ -216,7 +216,7 @@ theorem polygon_geometry {m : ℕ} (poly : Schoenflies.PrePolygon m) :
   have hs := poly.isSeparating_carrier
   let e := Complex.orthonormalBasisOneI.repr.symm
   refine ⟨e.toHomeomorph.isOpenMap _ hs.isOpen_inside,
-    e.lipschitz.isBounded_image hs.isBounded_inside,
+    e.lipschitzWith.isBounded_image hs.isBounded_inside,
     hs.isConnected_inside.image e e.continuous.continuousOn, ?_⟩
   change frontier (e '' Schoenflies.inside poly.carrier) = _
   calc
