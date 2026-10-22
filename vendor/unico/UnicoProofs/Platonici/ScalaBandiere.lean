@@ -1,4 +1,6 @@
-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.PerturbazioneFinita
@@ -111,7 +113,7 @@ theorem chain_exists (P : ConvexPolytope n) :
     · intro k hk
       by_cases hkm : k = m
       · subst hkm
-        simp only [ite_eq_left rfl]
+        simp only
         exact ⟨hf, hfdim⟩
       · have hklt : k < m := by omega
         simp only [ite_eq_right hkm]
@@ -122,7 +124,7 @@ theorem chain_exists (P : ConvexPolytope n) :
       · subst hkm
         have hjm : j ≠ k := by omega
         have hjlt : j < k := hjk
-        simp only [ite_eq_left rfl, ite_eq_right hjm]
+        simp only [ite_eq_right hjm]
         obtain ⟨h1, h2⟩ := hc'1 j hjlt
         constructor
         · have hsub1 : c' j ⊆ (facePolytope P hf).toSet :=

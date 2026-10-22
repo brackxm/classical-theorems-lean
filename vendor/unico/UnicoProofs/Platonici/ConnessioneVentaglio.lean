@@ -1,5 +1,6 @@
 /- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
-   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
+   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
@@ -702,13 +703,13 @@ theorem spigoli_del_ventaglio_connessi (P : ConvexPolytope 3)
   let φ : SpigoloPer P v → ℝ :=
     fun e => h (SpigoloPer.taglio P v hv l c e)
   let FaceType := {f : Set (E 3) // P.IsFace f}
-  letI : Fintype FaceType := (facce_finite P).fintype
+  let : Fintype FaceType := (facce_finite P).fintype
   let incl : SpigoloPer P v → FaceType := fun e => ⟨e.val, e.property.1⟩
   have hincl : Function.Injective incl := by
     intro e d hed
     apply Subtype.ext
     exact congrArg (fun f : FaceType => f.val) hed
-  letI : Fintype (SpigoloPer P v) := Fintype.ofInjective incl hincl
+  let : Fintype (SpigoloPer P v) := Fintype.ofInjective incl hincl
   let X : Finset (SpigoloPer P v) := Finset.univ
   have hlg : ∀ e ∈ X,
       (∀ d ∈ X, CondividonoFaccetta P v e d → φ d ≤ φ e) →

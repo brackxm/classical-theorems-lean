@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
 import MovingSofa.Analysis.Stieltjes.Integral
 import MovingSofa.ForMathlib.MeasureTheory.VectorMeasure.WithDensity
 import Mathlib.Analysis.BoundedVariation
@@ -83,7 +84,7 @@ theorem intervalStieltjes_integration_by_parts_Ioo (a b : ℝ) (hab : a < b)
   simp only [hfa, hga, ContinuousLinearMap.mul_apply']
   ring
 
-theorem intervalStieltjes_product (a b : ℝ) (hab : a ≤ b)
+theorem intervalStieltjes_product (a b : ℝ) (_hab : a ≤ b)
     (f g : RightContinuousIntervalBV a b)
     (hcont : Continuous f.toFun ∨ Continuous g.toFun) :
     ∃ h : RightContinuousIntervalBV a b,

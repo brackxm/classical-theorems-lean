@@ -1261,3 +1261,207 @@
 @@ -312 +313 @@
 -  · rw [Set.mem_setOf_eq, hsub]
 +  · rw [Set.mem_ofPred_eq, hsub]
+--- upstream/Schoenflies/ArcComplement.lean
++++ local/Schoenflies/ArcComplement.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -718 +719 @@
+-  haveI : (Graph.chainUnion (familyChain c ((n + 1) * m) m r) 0 n).Finite :=
++  have : (Graph.chainUnion (familyChain c ((n + 1) * m) m r) 0 n).Finite :=
+--- upstream/Schoenflies/BoundaryAnchors.lean
++++ local/Schoenflies/BoundaryAnchors.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -250 +251 @@
+-    letI : K.Finite := Graph.Finite.of_le hKle
++    let : K.Finite := Graph.Finite.of_le hKle
+@@ -797 +798 @@
+-  letI : r.pair.src.graph.Finite := CellStructure.Realization.finite_graph r.pair.src
++  let : r.pair.src.graph.Finite := CellStructure.Realization.finite_graph r.pair.src
+--- upstream/Schoenflies/BoundaryContinuity2.lean
++++ local/Schoenflies/BoundaryContinuity2.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -497 +498 @@
+-  haveI : l'.NeBot := by
++  have : l'.NeBot := by
+@@ -524 +525 @@
+-    haveI : m.NeBot := hqcl
++    have : m.NeBot := hqcl
+--- upstream/Schoenflies/CommonSubdivision.lean
++++ local/Schoenflies/CommonSubdivision.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -52,2 +53,2 @@
+-  letI : A.Finite := Graph.Finite.of_le hAle
+-  letI : B.Finite := Graph.Finite.of_le hBle
++  let : A.Finite := Graph.Finite.of_le hAle
++  let : B.Finite := Graph.Finite.of_le hBle
+@@ -306,2 +307,2 @@
+-  letI : H.Finite := hH.finite
+-  letI : K.Finite := Graph.Finite.of_le hKle
++  let : H.Finite := hH.finite
++  let : K.Finite := Graph.Finite.of_le hKle
+@@ -687,2 +688,2 @@
+-  letI : K.Finite := h.finite
+-  letI : T.Finite := Graph.Finite.of_le hTK
++  let : K.Finite := h.finite
++  let : T.Finite := Graph.Finite.of_le hTK
+@@ -1330 +1331 @@
+-      letI : Finite (Fin 3) := inferInstance
++      let : Finite (Fin 3) := inferInstance
+--- upstream/Schoenflies/FaceCyclesProof.lean
++++ local/Schoenflies/FaceCyclesProof.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -843 +844 @@
+-  haveI : B.Finite := Finite.of_le hBG
++  have : B.Finite := Finite.of_le hBG
+--- upstream/Schoenflies/FiniteTransfer.lean
++++ local/Schoenflies/FiniteTransfer.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -738 +739 @@
+-  letI : Fintype ι := Fintype.ofFinite ι
++  let : Fintype ι := Fintype.ofFinite ι
+@@ -756 +757 @@
+-  letI : Finite inner := Set.finite_coe_iff.mpr (hs.subset fun x hx => hx.1)
++  let : Finite inner := Set.finite_coe_iff.mpr (hs.subset fun x hx => hx.1)
+@@ -1151 +1152 @@
+-  letI : Finite E(Q) := Set.finite_coe_iff.mpr hQfinE
++  let : Finite E(Q) := Set.finite_coe_iff.mpr hQfinE
+@@ -1386 +1387 @@
+-  haveI := hH.finite
++  have := hH.finite
+@@ -1552 +1553 @@
+-  letI : (P.str.skel.map P.tgt.pos).Finite := {
++  let : (P.str.skel.map P.tgt.pos).Finite := {
+--- upstream/Schoenflies/FiniteTransferTarget.lean
++++ local/Schoenflies/FiniteTransferTarget.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -564 +565 @@
+-  letI : Finite E(Q) := Set.finite_coe_iff.mpr hQfinE
++  let : Finite E(Q) := Set.finite_coe_iff.mpr hQfinE
+@@ -1131,2 +1132,2 @@
+-  letI : H.Finite := hH.finite
+-  letI : B.Finite := Graph.Finite.of_le hBH
++  let : H.Finite := hH.finite
++  let : B.Finite := Graph.Finite.of_le hBH
+@@ -1434 +1435 @@
+-  letI : G.Finite := Graph.Finite.of_le Graph.deleteEdges_le
++  let : G.Finite := Graph.Finite.of_le Graph.deleteEdges_le
+@@ -1444 +1445 @@
+-  letI : O.Finite := Graph.Finite.of_le hOle
++  let : O.Finite := Graph.Finite.of_le hOle
+@@ -1797 +1798 @@
+-  haveI := hH.finite
++  have := hH.finite
+--- upstream/Schoenflies/FreshDenseSelection.lean
++++ local/Schoenflies/FreshDenseSelection.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -61,2 +62,2 @@
+-  letI : ConnectedSpace C := Subtype.connectedSpace hC.isConnected
+-  letI : Nontrivial C := by
++  let : ConnectedSpace C := Subtype.connectedSpace hC.isConnected
++  let : Nontrivial C := by
+@@ -348 +349 @@
+-  letI : Graph.Finite P.tgt.graph :=
++  let : Graph.Finite P.tgt.graph :=
+--- upstream/Schoenflies/Graph/Tree.lean
++++ local/Schoenflies/Graph/Tree.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -286 +287 @@
+-    haveI := hfin
++    have := hfin
+@@ -292 +293 @@
+-    haveI := hfin
++    have := hfin
+@@ -295 +296 @@
+-      haveI : (G.deleteVerts {x}).Finite := Finite.of_le deleteVerts_le
++      have : (G.deleteVerts {x}).Finite := Finite.of_le deleteVerts_le
+--- upstream/Schoenflies/InitialPair.lean
++++ local/Schoenflies/InitialPair.lean
+@@ -6,0 +7 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -1056,2 +1056,0 @@
+-                Or.inl (Plane.eq_mk (by linarith) (by linarith))⟩
+-            | exact ⟨Or.inl (Plane.eq_mk (by linarith) (by linarith)),
+--- upstream/Schoenflies/ModelCurve.lean
++++ local/Schoenflies/ModelCurve.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -424,2 +425,2 @@
+-  haveI : CompactSpace ↥I := isCompact_iff_compactSpace.mp isCompact_I
+-  haveI : CompactSpace ↥(f '' I) :=
++  have : CompactSpace ↥I := isCompact_iff_compactSpace.mp isCompact_I
++  have : CompactSpace ↥(f '' I) :=
+--- upstream/Schoenflies/OuterChain.lean
++++ local/Schoenflies/OuterChain.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -783 +784 @@
+-  haveI : (chainUnion Γ 0 n).Finite := h.block_finite (i := 0) (m := n) (by omega)
++  have : (chainUnion Γ 0 n).Finite := h.block_finite (i := 0) (m := n) (by omega)
+--- upstream/Schoenflies/OverlayExtension.lean
++++ local/Schoenflies/OverlayExtension.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -25 +26 @@
+-open Graph
++open _root_.Schoenflies.Graph
+--- upstream/Schoenflies/QuantitativeRecursion.lean
++++ local/Schoenflies/QuantitativeRecursion.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -194 +195 @@
+-  letI : Nonempty (inside C) := hC.isConnected_inside.nonempty.to_subtype
++  let : Nonempty (inside C) := hC.isConnected_inside.nonempty.to_subtype
+--- upstream/Schoenflies/Realization.lean
++++ local/Schoenflies/Realization.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -880 +881 @@
+-  haveI : NeZero n := ⟨by omega⟩
++  have : NeZero n := ⟨by omega⟩
+@@ -1091 +1092 @@
+-  haveI : NeZero n := ⟨by omega⟩
++  have : NeZero n := ⟨by omega⟩
+--- upstream/Schoenflies/SkeletonSectors.lean
++++ local/Schoenflies/SkeletonSectors.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -984 +985 @@
+-  haveI : CompactSpace ↥(I : Set ℝ) := isCompact_iff_compactSpace.1 isCompact_I
++  have : CompactSpace ↥(I : Set ℝ) := isCompact_iff_compactSpace.1 isCompact_I
+--- upstream/Schoenflies/SourceAttachment.lean
++++ local/Schoenflies/SourceAttachment.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -33 +34 @@
+-open Graph
++open _root_.Schoenflies.Graph
+--- upstream/Schoenflies/SourceJoining.lean
++++ local/Schoenflies/SourceJoining.lean
+@@ -5,0 +6 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -28 +29 @@
+-open Graph
++open _root_.Schoenflies.Graph
+@@ -640,2 +641,2 @@
+-  letI : u.graph.Finite := u.graph_finite
+-  letI : T.Finite := _root_.Graph.Finite.of_le hTle
++  let : u.graph.Finite := u.graph_finite
++  let : T.Finite := _root_.Graph.Finite.of_le hTle
+--- upstream/Schoenflies/TargetOverlay.lean
++++ local/Schoenflies/TargetOverlay.lean
+@@ -4,0 +5 @@
++Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+@@ -87 +88 @@
+-  letI : Graph.Finite P.tgt.graph :=
++  let : Graph.Finite P.tgt.graph :=
+@@ -1027 +1028 @@
+-  letI : P.str.skel.Finite :=
++  let : P.str.skel.Finite :=

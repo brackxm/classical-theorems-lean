@@ -3,6 +3,7 @@ Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
 Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
 -/
 import Schoenflies.ArcComplementPrep
 import Schoenflies.CombinatorialInvariance
@@ -715,7 +716,7 @@ theorem exists_face_of_notMem_arc {A : Set Plane} (hA : IsArc A) (h2c : SquaresT
     (outerOnPairs_familyChain hcontain (hxfar u hmemu))
   have houtw := outer_face_familyChain hchain
     (outerOnPairs_familyChain hcontain (hxfar w hmemw))
-  haveI : (Graph.chainUnion (familyChain c ((n + 1) * m) m r) 0 n).Finite :=
+  have : (Graph.chainUnion (familyChain c ((n + 1) * m) m r) 0 n).Finite :=
     hchain.block_finite (i := 0) (m := n) (by omega)
   have hdraw : Graph.IsDrawing (Graph.chainUnion (familyChain c ((n + 1) * m) m r) 0 n)
       segmentDrawing := hchain.block_isDrawing (by omega)

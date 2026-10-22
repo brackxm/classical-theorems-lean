@@ -420,3 +420,112 @@
 @@ -44 +45 @@
 -    simp only [Finset.coe_filter, Set.mem_setOf_eq, Set.mem_inter_iff]
 +    simp only [Finset.coe_filter, Set.mem_ofPred_eq, Set.mem_inter_iff]
+--- upstream/UnicoProofs/Platonici/Balinski.lean
++++ local/UnicoProofs/Platonici/Balinski.lean
+@@ -2 +2,2 @@
+-   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -23 +24 @@
+-  letI : Fintype FaceType := (facce_finite P).fintype
++  let : Fintype FaceType := (facce_finite P).fintype
+@@ -46 +47 @@
+-  letI : Fintype (SpigoloPer P v) := Fintype.ofFinite _
++  let : Fintype (SpigoloPer P v) := Fintype.ofFinite _
+--- upstream/UnicoProofs/Platonici/ConnessioneVentaglio.lean
++++ local/UnicoProofs/Platonici/ConnessioneVentaglio.lean
+@@ -2 +2,2 @@
+-   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
++   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -705 +706 @@
+-  letI : Fintype FaceType := (facce_finite P).fintype
++  let : Fintype FaceType := (facce_finite P).fintype
+@@ -711 +712 @@
+-  letI : Fintype (SpigoloPer P v) := Fintype.ofInjective incl hincl
++  let : Fintype (SpigoloPer P v) := Fintype.ofInjective incl hincl
+--- upstream/UnicoProofs/Platonici/ConoVertice.lean
++++ local/UnicoProofs/Platonici/ConoVertice.lean
+@@ -1 +1,3 @@
+-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
++   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -178 +180,2 @@
+-        match_scalars <;> field_simp <;> ring
++        match_scalars <;> field_simp
++        ring
+@@ -186 +189 @@
+-    {w : E n} (hwV : w ∈ Q.vertices)
++    {w : E n} (_hwV : w ∈ Q.vertices)
+@@ -189,2 +192,2 @@
+-    {a b : E n} (hae : a ∈ e₁) (haw : a ≠ w) (hseg₁ : e₁ = segment ℝ w a)
+-    (hbe : b ∈ e₂) (hbw : b ≠ w) (hseg₂ : e₂ = segment ℝ w b)
++    {a b : E n} (hae : a ∈ e₁) (haw : a ≠ w) (_hseg₁ : e₁ = segment ℝ w a)
++    (hbe : b ∈ e₂) (hbw : b ≠ w) (_hseg₂ : e₂ = segment ℝ w b)
+--- upstream/UnicoProofs/Platonici/Diamante.lean
++++ local/UnicoProofs/Platonici/Diamante.lean
+@@ -1 +1,3 @@
+-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
++   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -143 +145 @@
+-    (ha : a < 0) (hb : b < 0) (hgi : gi ≠ 0) (hgj : gj ≠ 0) :
++    (ha : a < 0) (hb : b < 0) (hgi : gi ≠ 0) (_hgj : gj ≠ 0) :
+@@ -205,2 +207 @@
+-    have h4 : (4 : ℕ) ≤ 3 := by simpa [Fintype.card_fin] using hcard
+-    omega
++    simp [Fintype.card_fin] at hcard
+--- upstream/UnicoProofs/Platonici/FacciaArgmax.lean
++++ local/UnicoProofs/Platonici/FacciaArgmax.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
+@@ -88 +89 @@
+-    simp [Finset.mem_filter]
++    simp
+--- upstream/UnicoProofs/Platonici/Fondamenta.lean
++++ local/UnicoProofs/Platonici/Fondamenta.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
+@@ -128 +129 @@
+-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
++      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+@@ -132 +133 @@
+-    letI : FiniteDimensional ℝ S := hSfin
++    let : FiniteDimensional ℝ S := hSfin
+@@ -144 +145 @@
+-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
++      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+@@ -149 +150 @@
+-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
++      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+@@ -154 +155 @@
+-      letI : FiniteDimensional ℝ (vectorSpan ℝ G) :=
++      let : FiniteDimensional ℝ (vectorSpan ℝ G) :=
+@@ -363 +364 @@
+-    simpa [Fin.coe_ofNat_eq_mod] using this
++    simp [Fin.coe_ofNat_eq_mod]
+--- upstream/UnicoProofs/Platonici/ScalaBandiere.lean
++++ local/UnicoProofs/Platonici/ScalaBandiere.lean
+@@ -1 +1,3 @@
+-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
++   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -114 +116 @@
+-        simp only [ite_eq_left rfl]
++        simp only
+@@ -125 +127 @@
+-        simp only [ite_eq_left rfl, ite_eq_right hjm]
++        simp only [ite_eq_right hjm]
+--- upstream/UnicoProofs/Platonici/SecondoSpigolo.lean
++++ local/UnicoProofs/Platonici/SecondoSpigolo.lean
+@@ -1 +1,3 @@
+-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
++/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
++   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
++-/
+@@ -68 +70 @@
+-    (hve₁ : v ∈ e₁) :
++    (_hve₁ : v ∈ e₁) :

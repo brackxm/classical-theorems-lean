@@ -1,5 +1,6 @@
 /- Modified for the ClassicalTheorems project by Codex on 2026-10-02:
-   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. -/
+   compatibility updates for Lean 4.34.0 and the pinned mathlib revision. Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
@@ -20,7 +21,7 @@ open ConvexPolytope
 instance spigoloPer_finito (P : ConvexPolytope 3) (v : E 3) :
     Finite (SpigoloPer P v) := by
   let FaceType := {f : Set (E 3) // P.IsFace f}
-  letI : Fintype FaceType := (facce_finite P).fintype
+  let : Fintype FaceType := (facce_finite P).fintype
   let incl : SpigoloPer P v → FaceType := fun e => ⟨e.val, e.property.1⟩
   have hincl : Function.Injective incl := by
     intro e d hed
@@ -43,7 +44,7 @@ theorem locale_globale_vertice (P : ConvexPolytope 3)
     exact Set.mem_singleton v
   let e0 : SpigoloPer P v :=
     ⟨F.face 1, F.isFace 1, F.dim_eq 1, hvone⟩
-  letI : Fintype (SpigoloPer P v) := Fintype.ofFinite _
+  let : Fintype (SpigoloPer P v) := Fintype.ofFinite _
   let X : Finset (SpigoloPer P v) := Finset.univ
   let phi : SpigoloPer P v → ℝ :=
     fun e => h (SpigoloPer.taglio P v hv l c e)

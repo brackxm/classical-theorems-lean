@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
 Modified for the ClassicalTheorems project: update domain-restriction API.
 Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
 -/
 import Schoenflies.CombinatorialInvariance
 import Schoenflies.GeneralCrosscut
@@ -1052,8 +1053,6 @@ theorem tgtOuter_meet (hα : |α| < 1) (hβ : |β| < 1) (i j : Fin 6) (hij : i �
       | · rintro p ⟨⟨e1, e2, e3⟩, f1, f2, f3⟩
           first
             | (exfalso; linarith)
-            | exact ⟨Or.inl (Plane.eq_mk (by linarith) (by linarith)),
-                Or.inl (Plane.eq_mk (by linarith) (by linarith))⟩
             | exact ⟨Or.inl (Plane.eq_mk (by linarith) (by linarith)),
                 Or.inr (Plane.eq_mk (by linarith) (by linarith))⟩
             | exact ⟨Or.inr (Plane.eq_mk (by linarith) (by linarith)),

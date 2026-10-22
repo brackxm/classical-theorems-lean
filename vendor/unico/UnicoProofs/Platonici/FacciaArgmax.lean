@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
 import Mathlib
 
 /-!
@@ -85,7 +86,7 @@ theorem faccia_argmax (s : Finset E) (l : E →L[ℝ] ℝ) {y : E}
   have hset : (sf : Set E) = {x ∈ (s : Set E) | l x = l y} := by
     rw [hsfdef]
     ext x
-    simp [Finset.mem_filter]
+    simp
   rw [← hset]
   exact hmem
 

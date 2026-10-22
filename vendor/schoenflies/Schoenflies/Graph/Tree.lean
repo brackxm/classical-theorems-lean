@@ -3,6 +3,7 @@ Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
 Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
 -/
 import Schoenflies.Graph.Cycle
 import Schoenflies.Graph.Degree
@@ -283,16 +284,16 @@ private theorem isTree_edge_count_aux :
   induction n with
   | zero =>
     intro G hfin hle hT
-    haveI := hfin
+    have := hfin
     obtain ⟨a, ha⟩ := hT.connected.nonempty
     have := (Set.ncard_pos (finite_vertexSet G)).2 ⟨a, ha⟩
     omega
   | succ n ih =>
     intro G hfin hle hT
-    haveI := hfin
+    have := hfin
     by_cases h2 : 2 ≤ V(G).ncard
     · obtain ⟨x, hx⟩ := hT.has_leaf h2
-      haveI : (G.deleteVerts {x}).Finite := Finite.of_le deleteVerts_le
+      have : (G.deleteVerts {x}).Finite := Finite.of_le deleteVerts_le
       have hT' : (G.deleteVerts {x}).IsTree := hT.delete_leaf hx h2
       have hV : V(G.deleteVerts {x}).ncard = V(G).ncard - 1 := by
         rw [vertexSet_deleteVerts, Set.ncard_sdiff_singleton_of_mem hx.mem_vertexSet]

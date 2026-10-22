@@ -1,4 +1,6 @@
-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.VerticiEsposti
@@ -65,7 +67,7 @@ theorem secondo_spigolo (Q : ConvexPolytope n)
     (hdim : Module.finrank ℝ (vectorSpan ℝ Q.toSet) = 2)
     {v : E n} (hv : v ∈ Q.vertices)
     {e₁ : Set (E n)} (he₁ : Q.IsFace e₁) (hde₁ : faceDim e₁ = 1)
-    (hve₁ : v ∈ e₁) :
+    (_hve₁ : v ∈ e₁) :
     ∃ e₂ : Set (E n), Q.IsFace e₂ ∧ faceDim e₂ = 1 ∧ v ∈ e₂ ∧ e₂ ≠ e₁ := by
   classical
   -- l'espositore del vertice

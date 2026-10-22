@@ -3,6 +3,7 @@ Copyright (c) 2026 Álvaro Begué. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Álvaro Begué
 Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
 -/
 import Schoenflies.SourceOverlay
 
@@ -30,7 +31,7 @@ open scoped Graph
 
 namespace Schoenflies
 
-open Graph
+open _root_.Schoenflies.Graph
 
 variable {γ : Type*} {S₀ : CellStructure γ}
   {srcOuter srcDom tgtOuter tgtDom : Set Plane}

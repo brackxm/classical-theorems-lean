@@ -1,3 +1,4 @@
+/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
 import Mathlib
 
 /-!
@@ -125,11 +126,11 @@ theorem intersezione_spigolo_semiretta (P : FiniteConvexPolytope A)
     have hxS : x - v ∈ S := vsub_mem_vectorSpan ℝ hx hvI
     have hyS : y - v ∈ S := vsub_mem_vectorSpan ℝ hy hvI
     have hSfin : FiniteDimensional ℝ S := by
-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
         FiniteDimensional.of_finrank_pos (by rw [hF.2]; norm_num)
       exact FiniteDimensional.of_injective (Submodule.inclusion hSF)
         (Submodule.inclusion_injective hSF)
-    letI : FiniteDimensional ℝ S := hSfin
+    let : FiniteDimensional ℝ S := hSfin
     let b : Fin 2 → S := ![⟨x - v, hxS⟩, ⟨y - v, hyS⟩]
     have hlib : LinearIndependent ℝ b := by
       apply LinearIndependent.of_comp S.subtype
@@ -141,17 +142,17 @@ theorem intersezione_spigolo_semiretta (P : FiniteConvexPolytope A)
     have hSge : 2 ≤ Module.finrank ℝ S := by
       simpa using hlib.fintype_card_le_finrank
     have hSle : Module.finrank ℝ S ≤ 2 := by
-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
         FiniteDimensional.of_finrank_pos (by rw [hF.2]; norm_num)
       simpa [hF.2] using Submodule.finrank_mono hSF
     have hSrank : Module.finrank ℝ S = 2 := le_antisymm hSle hSge
     have hspanF : vectorSpan ℝ (F ∩ G) = vectorSpan ℝ F := by
-      letI : FiniteDimensional ℝ (vectorSpan ℝ F) :=
+      let : FiniteDimensional ℝ (vectorSpan ℝ F) :=
         FiniteDimensional.of_finrank_pos (by rw [hF.2]; norm_num)
       exact Submodule.eq_of_le_of_finrank_eq hSF (hSrank.trans hF.2.symm)
     have hSG : S ≤ vectorSpan ℝ G := vectorSpan_mono ℝ inter_subset_right
     have hspanG : vectorSpan ℝ (F ∩ G) = vectorSpan ℝ G := by
-      letI : FiniteDimensional ℝ (vectorSpan ℝ G) :=
+      let : FiniteDimensional ℝ (vectorSpan ℝ G) :=
         FiniteDimensional.of_finrank_pos (by rw [hG.2]; norm_num)
       exact Submodule.eq_of_le_of_finrank_eq hSG (hSrank.trans hG.2.symm)
     have haffF : affineSpan ℝ (F ∩ G) = affineSpan ℝ F := by
@@ -360,7 +361,7 @@ theorem finRotate_due_ne {q : ℕ} (hq : 3 ≤ q) (i : Fin q) :
   have hval := congrArg Fin.val hdue
   have hmod : ((2 : Fin (m + 3)) : ℕ) = 2 := by
     have : (2 : ℕ) % (m + 3) = 2 := Nat.mod_eq_of_lt (by omega)
-    simpa [Fin.coe_ofNat_eq_mod] using this
+    simp [Fin.coe_ofNat_eq_mod]
   rw [hmod, Fin.val_zero] at hval
   omega
 

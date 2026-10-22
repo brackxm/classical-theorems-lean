@@ -1,4 +1,6 @@
-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.DimStretta
@@ -140,7 +142,7 @@ theorem strict_su_terza (P : ConvexPolytope n) {Φ Ψ : Set (E n)} {v x : E n}
 
 /-- Da `gi·a + gj·b = 0` con `a, b < 0` e `gi, gj ≠ 0` segue `gi·gj < 0`. -/
 theorem segno_opposto {gi gj a b : ℝ} (hrel : gi * a + gj * b = 0)
-    (ha : a < 0) (hb : b < 0) (hgi : gi ≠ 0) (hgj : gj ≠ 0) :
+    (ha : a < 0) (hb : b < 0) (hgi : gi ≠ 0) (_hgj : gj ≠ 0) :
     gi * gj < 0 := by
   rcases lt_or_gt_of_ne hgi with h | h
   · have h1 : 0 < gi * a := mul_pos_of_neg_of_neg h ha
@@ -202,8 +204,7 @@ theorem diamante (P : ConvexPolytope 3) {A B C : Set (E 3)}
     intro hli
     have hcard := hli.fintype_card_le_finrank
     rw [finrank_euclideanSpace] at hcard
-    have h4 : (4 : ℕ) ≤ 3 := by simpa [Fintype.card_fin] using hcard
-    omega
+    simp [Fintype.card_fin] at hcard
   obtain ⟨gc, hgsum, i0, hgne⟩ := Fintype.not_linearIndependent_iff.mp hdep
   rw [Fin.sum_univ_four] at hgsum
   have hgsum4 : gc 0 • (p1 - v) + gc 1 • (p2 - v) + gc 2 • (p3 - v) +

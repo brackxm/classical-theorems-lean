@@ -81,3 +81,10 @@
 @@ -3 +4 @@
 -import Mathlib.Data.Fin.SuccPredOrder
 +import Mathlib.Order.SuccPred.Fin
+--- upstream/MovingSofa/Analysis/Stieltjes/Calculus.lean
++++ local/MovingSofa/Analysis/Stieltjes/Calculus.lean
+@@ -0,0 +1 @@
++/- Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings. -/
+@@ -86 +87 @@
+-theorem intervalStieltjes_product (a b : ℝ) (hab : a ≤ b)
++theorem intervalStieltjes_product (a b : ℝ) (_hab : a ≤ b)

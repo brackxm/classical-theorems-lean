@@ -146,6 +146,7 @@
   },
   "verification": "verified",
   "modified_files": [
+    "MovingSofa/Analysis/Stieltjes/Calculus.lean",
     "MovingSofa/ForMathlib/Analysis/Complex/DiskIntegral.lean",
     "MovingSofa/ForMathlib/Analysis/SpecialFunctions/AngleLift.lean",
     "MovingSofa/ForMathlib/Order/IntervalPartition.lean"
@@ -156,7 +157,7 @@
     "MovingSofa/Analysis/BoundedVariation.lean": "08ec3ba8b17280bd14807e053c7be9efbfb45f4789a8f2d45f5470bf2223a170",
     "MovingSofa/Analysis/MeasureProducts.lean": "961b4ce2caef1c40aae7ee940b0ba8d4d2d77aa64652da7c6fe7da3654a6e120",
     "MovingSofa/Analysis/Stieltjes/AbsoluteContinuity.lean": "16fee80413e9ba42b4443387e961d52eba4cdd884909c02fdc3663ff99859369",
-    "MovingSofa/Analysis/Stieltjes/Calculus.lean": "95fd564550a63657ddf69a3a69657588e2d89ac2a90b89c45fe9891a2edada74",
+    "MovingSofa/Analysis/Stieltjes/Calculus.lean": "41e15f0bbf99b562816b78ba57abb72c18a0f291d2595316722fdc554da75958",
     "MovingSofa/Analysis/Stieltjes/Continuous.lean": "af617beb1238f5a1a08cd01f5ffd7944f07b5ad94ae73af7718e780e089568bc",
     "MovingSofa/Analysis/Stieltjes/DensityIntegration.lean": "1793c2637105b405a023c13f89140f8569dde7f98a94ce98257dd08572a31eb2",
     "MovingSofa/Analysis/Stieltjes/Integral.lean": "9ab5661c7abe080785a5915f9e7971bba09637035494ff8c513de21bfa6f69e0",
@@ -195,13 +196,13 @@
     "MovingSofa/Geometry/Basic.lean": "8a81b7595dfe18aa32eb9f1dfc0dc6927ca921377600306674c3b16651778dda",
     "MovingSofa/Geometry/Frame.lean": "5e2ed2a7bb2bd1f21e81342a6c5165df8f83fa818fbc509d1a0fc4a14668f76b",
     "MovingSofa/Geometry/Plane.lean": "6a86e5e428f119a944dfab69935d27bf87fa8d0a0ad061f335c98e2972e37cc7",
-    "patches.diff": "c04b196773ca8238b5a9e1a99031b335ba50caf0842c1b21a7972c4209a67694",
+    "patches.diff": "10ba8da572edd74a4dfc070662d98f30d3640fd5a023fcb1a85f5b7c89c27bc8",
     "lakefile.toml": "27a0173c3a248a01bb27454a45c2bc03e28ab263c12f3776c9cd53eb544b8065",
     "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
   },
-  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22. Updated the disk-integrability rewrite to supply null measurability for mathlib 4.35.0; theorem statements are unchanged. Replaced deprecated Lean/mathlib APIs on 2026-10-22; theorem statements, attribution and licenses are unchanged.",
+  "port_notes": "Selected Jordan signed-area and C1/Stieltjes density integration closure; all selected upstream Lean sources compiled unchanged on Lean 4.34.0. Jordan separation comes from the existing jordan-pick dependency. Sofa submission, leancert and other bundled libraries are omitted. Supports the area case of #21; does not prove the general Green statement. Toolchain and mathlib pins updated for Lean 4.34.1 on 2026-10-07. Toolchain and mathlib pins updated for Lean 4.35.0 on 2026-10-22. Updated the disk-integrability rewrite to supply null measurability for mathlib 4.35.0; theorem statements are unchanged. Replaced deprecated Lean/mathlib APIs on 2026-10-22; theorem statements, attribution and licenses are unchanged. Resolved remaining Lean/mathlib lint warnings on 2026-10-22 by updating local-instance syntax, qualifying namespace openings, marking unused parameters and simplifying redundant tactics; theorem hypotheses and conclusions are unchanged.",
   "selection": {
     "description": "Licensed transitive source closure required by ClassicalTheorems. patches.diff records the complete compatibility port; the selected source files are listed and hashed here.",
-    "notice_update": "Local adaptation and modification notices use the current library name. Theorem statements, copyright notices and licenses are preserved; local proof and API adaptations are recorded in patches.diff."
+    "notice_update": "Local adaptation and modification notices use the current library name. Theorem hypotheses and conclusions, copyright notices and licenses are preserved; local proof and API adaptations are recorded in patches.diff."
   }
 }

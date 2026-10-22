@@ -1,4 +1,6 @@
-/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs. -/
+/- Modified for ClassicalTheorems on 2026-10-22: replace deprecated Lean/mathlib APIs.
+   Modified for ClassicalTheorems on 2026-10-22: resolve Lean/mathlib lint warnings.
+-/
 import Mathlib
 import UnicoProofs.Platonici.Benchmark
 import UnicoProofs.Platonici.VerticiEsposti
@@ -175,7 +177,8 @@ theorem spigolo_segmento (P : ConvexPolytope n) {e : Set (E n)}
         linarith
       · exact div_nonneg hs0 (le_of_lt hsapos)
       · rw [hs, hsa]
-        match_scalars <;> field_simp <;> ring
+        match_scalars <;> field_simp
+        ring
     · have hconv : Convex ℝ e := he.1.convex (convex_convexHull ℝ _)
       exact hconv.segment_subset hwe hae
 
@@ -183,11 +186,11 @@ theorem spigolo_segmento (P : ConvexPolytope n) {e : Set (E n)}
 [w,b] distinti, ogni punto del poligono è w + s(a−w) + t(b−w) con s,t ≥ 0. -/
 theorem cono_al_vertice (Q : ConvexPolytope n)
     (hdim : Module.finrank ℝ (vectorSpan ℝ Q.toSet) = 2)
-    {w : E n} (hwV : w ∈ Q.vertices)
+    {w : E n} (_hwV : w ∈ Q.vertices)
     {e₁ e₂ : Set (E n)} (he₁ : Q.IsFace e₁) (hde₁ : faceDim e₁ = 1)
     (he₂ : Q.IsFace e₂) (hde₂ : faceDim e₂ = 1) (hne : e₁ ≠ e₂)
-    {a b : E n} (hae : a ∈ e₁) (haw : a ≠ w) (hseg₁ : e₁ = segment ℝ w a)
-    (hbe : b ∈ e₂) (hbw : b ≠ w) (hseg₂ : e₂ = segment ℝ w b)
+    {a b : E n} (hae : a ∈ e₁) (haw : a ≠ w) (_hseg₁ : e₁ = segment ℝ w a)
+    (hbe : b ∈ e₂) (hbw : b ≠ w) (_hseg₂ : e₂ = segment ℝ w b)
     (hwe₁ : w ∈ e₁) (hwe₂ : w ∈ e₂) :
     ∀ z ∈ Q.toSet, ∃ s t : ℝ, 0 ≤ s ∧ 0 ≤ t ∧
       z = w + s • (a - w) + t • (b - w) := by
