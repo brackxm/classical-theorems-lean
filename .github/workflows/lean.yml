@@ -1,23 +1,62 @@
 name: ClassicalTheorems
 on:
   push:
+    branches: ['**']
   pull_request:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  lean:
-    runs-on: ubuntu-latest
-    env:
-      LEAN_NUM_THREADS: "1"
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Validate citation schema
+        # CITATION.cff uses JSON, which is a YAML subset; validate its parsed content directly.
+        run: >-
+          pipx run check-jsonschema==0.39.0 --force-filetype json --schemafile
+          https://raw.githubusercontent.com/citation-file-format/citation-file-format/396f738fb025b1d8acdb02a56ffc923f95dc8999/schema.json
+          CITATION.cff
       - name: Check release metadata
         run: python3 scripts/release.py --metadata-only
       - name: Check source and license integrity
         run: python3 scripts/check_vendor.py
       - name: Check the complete source import closure
         run: python3 scripts/check_imports.py
+      - name: Check comparator coverage and generated files
+        run: python3 scripts/check_comparator.py
+  lean:
+    needs: checks
+    # Keep the existing lean check failing when its prerequisite fails, rather than skipped.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: "1"
+    steps:
+      - name: Require successful source checks
+        if: needs.checks.result != 'success'
+        run: |
+          echo "::error::Source and metadata checks did not pass."
+          exit 1
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Free disk space on the hosted runner
+        if: runner.environment == 'github-hosted'
+        run: |
+          df -h / /mnt || df -h /
+          # These preinstalled SDKs are not used by Lean or the proof checks.
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /usr/local/share/boost \
+            /usr/local/share/powershell
+          df -h / /mnt || df -h /
       - name: Install kernel-check sandbox
         run: |
           sudo apt-get update
@@ -30,15 +69,30 @@ jobs:
             sudo apparmor_parser -r /etc/apparmor.d/bwrap-userns-restrict
           fi
           bwrap --ro-bind / / --unshare-all --proc /proc --dev /dev -- /bin/true
+      - name: Cache the pinned Lean toolchain
+        uses: actions/cache@v6
+        with:
+          path: ~/.elan
+          key: elan-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}
       - uses: leanprover/lean-action@v1
         with:
           auto-config: "false"
           build: "true"
           build-args: "--fail-fast"
           use-mathlib-cache: "true"
+          # Mathlib supplies its own cache; compressing all of .lake duplicates gigabytes.
+          use-github-cache: "false"
       - name: Check standalone source and dependency layout
         run: python3 scripts/check_standalone.py
       - name: Check proof-audit regressions
         run: python3 scripts/test_checks.py
-      - name: Replay proofs with Lean's kernel
+      - name: Compare indexed statements and replay their proofs
+        run: lake comparator
+      - name: Replay the complete library with Lean's kernel
+        if: github.event_name == 'workflow_dispatch'
         run: lake check
+      - name: Report disk usage
+        if: always()
+        run: |
+          df -h / /mnt || df -h /
+          du -sh .lake vendor/*/.lake "$HOME/.elan" 2>/dev/null || true

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Regression checks for proof audits, source layout and release metadata."""
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -9,13 +10,23 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 import release
-from check_imports import imports
+from check_comparator import check as check_comparator
+from check_imports import imports, main as check_imports
 from check_standalone import check_layout
 from check_vendor import ROOT, check_package_pins
 class Checks(unittest.TestCase):
     def test_public_imports_and_nested_comments(self):
         source = 'module\npublic import Foundation.A\nmeta import Mathlib.B\n/- import Bogus.C /- nested -/ -/\n-- import Bogus.D\nimport ClassicalTheorems.Audit\n'
         self.assertEqual(imports(source), ['Foundation.A', 'Mathlib.B', 'ClassicalTheorems.Audit'])
+    def test_production_imports_reject_comparator_placeholders(self):
+        with tempfile.TemporaryDirectory(prefix='classical-import-boundary-') as directory:
+            root = Path(directory)
+            (root/'Comparator').mkdir()
+            (root/'Comparator/Challenge.lean').write_text('theorem pending : True := sorry\n')
+            (root/'ClassicalTheorems.lean').write_text('import Comparator.Challenge\n')
+            with patch('check_imports.ROOT', root):
+                with self.assertRaisesRegex(AssertionError, 'must not be imported by production'):
+                    check_imports()
     def test_standalone_layout_rejects_external_dependency_and_cache_link(self):
         with tempfile.TemporaryDirectory(prefix='classical-layout-') as directory:
             base = Path(directory)
@@ -148,6 +159,107 @@ class Checks(unittest.TestCase):
                 (root/'LICENSE').unlink()
                 (root/'LICENSE').symlink_to('README.md')
                 with self.assertRaises(ValueError): release.source_files()
+
+    def test_comparator_coverage_and_generated_files(self):
+        paths = ['Comparator/Challenge.lean', 'Comparator/Solution.lean', 'comparator.json',
+                 'ClassicalTheorems/IndexAudit.lean', 'theorems.md']
+        with tempfile.TemporaryDirectory(prefix='classical-comparator-') as directory:
+            root = Path(directory)
+            originals = {p: (ROOT/p).read_text() for p in paths}
+            for case in ['valid', 'missing-target', 'extra-axiom', 'changed-solution',
+                         'missing-audit-entry', 'missing-documentation-entry', 'duplicate-target']:
+                for p, text in originals.items():
+                    (root/p).parent.mkdir(parents=True, exist_ok=True)
+                    (root/p).write_text(text)
+                if case in ['missing-target', 'extra-axiom', 'duplicate-target']:
+                    config = json.loads(originals['comparator.json'])
+                    if case == 'missing-target': config['theorem_names'].pop()
+                    elif case == 'extra-axiom': config['permitted_axioms'].append('sorryAx')
+                    else: config['theorem_names'].append(config['theorem_names'][0])
+                    (root/'comparator.json').write_text(json.dumps(config, indent=2) + '\n')
+                elif case == 'changed-solution':
+                    path = root/'Comparator/Solution.lean'
+                    path.write_text(path.read_text().replace(
+                        'type_of% @_root_.ClassicalTheorems.godel_incompleteness', 'True'))
+                elif case == 'missing-audit-entry':
+                    path = root/'ClassicalTheorems/IndexAudit.lean'
+                    path.write_text(path.read_text().replace(
+                        '#check_indexed ClassicalTheorems.godel_incompleteness', ''))
+                elif case == 'missing-documentation-entry':
+                    path = root/'theorems.md'
+                    path.write_text(path.read_text().replace(
+                        '[`ClassicalTheorems.godel_incompleteness`]', 'Incompleteness'))
+                with self.subTest(case=case):
+                    if case == 'valid': self.assertEqual(check_comparator(root), 10)
+                    else:
+                        with self.assertRaises(ValueError): check_comparator(root)
+
+    def test_comparator_challenge_is_independent_and_never_generated(self):
+        paths = ['Comparator/Challenge.lean', 'Comparator/Solution.lean', 'comparator.json',
+                 'ClassicalTheorems/IndexAudit.lean', 'theorems.md']
+        with tempfile.TemporaryDirectory(prefix='classical-statements-') as directory:
+            root = Path(directory)
+            for p in paths:
+                (root/p).parent.mkdir(parents=True, exist_ok=True)
+                (root/p).write_text((ROOT/p).read_text())
+            path = root/'Comparator/Challenge.lean'
+            original = path.read_text()
+            for bad in [original.replace(':= sorry', ':= by trivial', 1),
+                        original + '\naxiom extra : False\n',
+                        original + '\ntheorem unindexed : True := sorry\n',
+                        original.replace('∃ euclidean hyperbolic : NeutralPlane,',
+                                         'type_of% ClassicalTheorems.parallel_postulate_independence --')]:
+                path.write_text(bad)
+                with self.subTest(source=bad[-60:]):
+                    with self.assertRaises(ValueError): check_comparator(root)
+            # A changed mathematical contract must survive generation for Lean's comparator
+            # to judge: the generator must never copy the implementation's statement over it.
+            changed = original.replace('faceCount P 2 : ℤ) = 2', 'faceCount P 2 : ℤ) = 3')
+            self.assertNotEqual(changed, original)
+            path.write_text(changed)
+            self.assertEqual(check_comparator(root, write=True), 10)
+            self.assertEqual(path.read_text(), changed)
+            self.assertEqual((root/'Comparator/Solution.lean').read_text(),
+                             (ROOT/'Comparator/Solution.lean').read_text())
+
+    def test_lean_comparator_rejects_statement_drift_and_extra_axioms(self):
+        with tempfile.TemporaryDirectory(prefix='classical-comparator-kernel-') as directory:
+            root = Path(directory)
+            (root/'Fixture').mkdir()
+            (root/'lean-toolchain').write_text((ROOT/'lean-toolchain').read_text())
+            (root/'lakefile.toml').write_text(
+                'name = "comparator_fixture"\n[[lean_lib]]\n'
+                'name = "Fixture"\nglobs = ["Fixture.+"]\n')
+            (root/'comparator.json').write_text(json.dumps({
+                'challenge_module': 'Fixture.Challenge',
+                'solution_module': 'Fixture.Solution',
+                'theorem_names': ['Fixture.result'],
+                'permitted_axioms': ['propext', 'Classical.choice', 'Quot.sound'],
+            }))
+            (root/'Fixture/Challenge.lean').write_text('theorem Fixture.result : True := sorry\n')
+            env = dict(os.environ, LEAN_NUM_THREADS='1')
+            result = subprocess.run(['lake', 'update'], cwd=root, env=env,
+                                    capture_output=True, text=True, timeout=60)
+            self.assertEqual(result.returncode, 0, result.stdout+result.stderr)
+            cases = [
+                ('valid', 'theorem Fixture.result : True := True.intro\n', None),
+                ('statement', 'theorem Fixture.result : True ∧ True := ⟨True.intro, True.intro⟩\n',
+                 'Challenge and solution theorem statement do not match'),
+                ('axiom', 'axiom Fixture.forbidden : False\n'
+                 'theorem Fixture.result : True := False.elim Fixture.forbidden\n',
+                 "Illegal axiom detected: 'Fixture.forbidden'"),
+            ]
+            for case, source, error in cases:
+                with self.subTest(case=case):
+                    (root/'Fixture/Solution.lean').write_text(source)
+                    # Only these fixed, self-generated fixtures run without a sandbox, so the
+                    # tests work on macOS too. CI's actual theorem comparison stays sandboxed.
+                    result = subprocess.run(['lake', 'comparator', '--inadvisably-no-sandbox'],
+                                            cwd=root, env=env, capture_output=True, text=True,
+                                            timeout=120)
+                    output = result.stdout+result.stderr
+                    self.assertEqual(result.returncode, 0 if error is None else 1, output)
+                    self.assertIn(error or 'Your solution is okay!', output)
 
     def test_local_proofs_build_without_warnings(self):
         sources = [ROOT/'ClassicalTheorems.lean'] + sorted((ROOT/'ClassicalTheorems').rglob('*.lean'))

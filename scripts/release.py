@@ -16,8 +16,9 @@ ROOT_FILES = {
     'README.md', 'theorems.md', 'proofs.md',
     'third-party.md',
     'ClassicalTheorems.lean', 'lakefile.toml', 'lake-manifest.json', 'lean-toolchain',
+    'comparator.json',
 }
-SOURCE_DIRS = {'.github', 'ClassicalTheorems', 'scripts', 'vendor'}
+SOURCE_DIRS = {'.github', 'ClassicalTheorems', 'Comparator', 'scripts', 'vendor'}
 EXCLUDED_DIRS = {'.git', '.lake', '__pycache__', 'dist'}
 
 
@@ -95,6 +96,7 @@ def run_checks():
     commands = [
         ([sys.executable, 'scripts/check_vendor.py'], ROOT),
         ([sys.executable, 'scripts/check_imports.py'], ROOT),
+        ([sys.executable, 'scripts/check_comparator.py'], ROOT),
         ([sys.executable, 'scripts/check_standalone.py'], ROOT),
         (['lake', 'build'], ROOT),
         ([sys.executable, 'scripts/test_checks.py'], ROOT),

@@ -31,7 +31,11 @@ Use `import ClassicalTheorems` for the full library, or import an individual the
 
 Reusable sign lemmas are in `ClassicalTheorems.Progress.Orientation`. `ClassicalTheorems.Progress.HeronAlgebra` proves the determinant and side-length identity independently of Jordan area and Green’s theorem. Euler’s general cycle-filling proof is independent of pyramid face counting.
 
-The build checks the axioms used by all ten main theorem declarations, including those reached through dependencies. Only `propext`, `Classical.choice` and `Quot.sound` are accepted; `sorryAx` and other axioms cause the audit to fail. Supporting results are also audited. Project proofs contain no unfinished placeholders.
+The build checks the axioms used by all ten main theorem declarations, including those reached through dependencies. Only `propext`, `Classical.choice` and `Quot.sound` are accepted; `sorryAx` and other axioms cause the audit to fail. Supporting results are also audited. The production library contains no unfinished proof placeholders.
+
+CI also runs `lake comparator` against the ten independently written statements in [Comparator/Challenge.lean](Comparator/Challenge.lean). It compares their elaborated types with the actual library declarations, checks their axioms and replays their proofs through Lean's kernel. The challenge's intentional `sorry` placeholders are isolated from production imports and the default build. On Linux with bubblewrap configured, run `lake comparator` locally; manually dispatched CI runs additionally use `lake check` to replay the complete library.
+
+When changing an indexed statement, review the challenge and its referenced definitions, then run `python3 scripts/check_comparator.py --write` to update the solution wrappers and configuration. This command never rewrites the challenge statements. CI checks that the comparator covers exactly the declarations in the theorem index and axiom audit.
 
 Licensed supporting sources from Foundation, Unico, MovingSofa, Jordan Pick, Schönflies and HOL Light are bundled. Their upstream revisions, licenses, modification notices and hashes are preserved in [third-party.md](third-party.md), [NOTICE](NOTICE) and `vendor/*/upstream.json`.
 

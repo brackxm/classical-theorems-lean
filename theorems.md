@@ -2,6 +2,8 @@
 
 The eight theorems below are represented by ten main Lean declarations. Pascal and Desargues each have two declarations; supporting modules and proof outlines are described in [proofs.md](proofs.md).
 
+Their independently written formal statements are in [Comparator/Challenge.lean](Comparator/Challenge.lean). CI uses `lake comparator` to check that the library proves exactly those statements with only the permitted axioms. Review the definitions those statements use as well as the statements themselves when assessing their mathematical meaning.
+
 | Theorem | Audited declarations |
 |---|---|
 | Gödel’s Incompleteness Theorem | [`ClassicalTheorems.godel_incompleteness`](ClassicalTheorems/Godel.lean) |

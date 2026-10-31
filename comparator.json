@@ -1,0 +1,21 @@
+{
+  "challenge_module": "Comparator.Challenge",
+  "solution_module": "Comparator.Solution",
+  "theorem_names": [
+    "Comparator.ClassicalTheorems.godel_incompleteness",
+    "Comparator.ClassicalTheorems.parallel_postulate_independence",
+    "Comparator.ClassicalTheorems.euler_polyhedron",
+    "Comparator.ClassicalTheorems.greens_theorem",
+    "Comparator.ClassicalTheorems.isoperimetric_theorem_jordan",
+    "Comparator.ClassicalTheorems.heron_area",
+    "Comparator.HOLLightPort.Pascal.pascal",
+    "Comparator.HOLLightPort.Pascal.pascals_hexagon",
+    "Comparator.HOLLightPort.Desargues.desargues",
+    "Comparator.HOLLightPort.Desargues.desargues_converse"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

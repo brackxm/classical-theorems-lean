@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-def imports(text):
+def code_without_comments(text):
     cleaned = []
     i = depth = 0
     while i < len(text):
@@ -23,21 +23,27 @@ def imports(text):
             if not depth or text[i] == '\n':
                 cleaned.append(text[i])
             i += 1
+    return ''.join(cleaned)
+
+def imports(text):
     return [module for match in re.finditer(
         r'^\s*(?:(?:public|private|meta)\s+)*import\s+([^\n]+)',
-        ''.join(cleaned), re.M) for module in match.group(1).split()]
+        code_without_comments(text), re.M) for module in match.group(1).split()]
 
 def main():
     records = [(p.parent, json.loads(p.read_text()))
                for p in sorted((ROOT/'vendor').glob('*/upstream.json'))]
     roots = [ROOT] + [d for d, _ in records]
     sources = list((ROOT/'ClassicalTheorems').rglob('*.lean')) + [ROOT/'ClassicalTheorems.lean']
+    sources += list((ROOT/'Comparator').rglob('*.lean'))
     sources += [d/p for d, r in records for p in r['local_sha256']
                 if p.endswith('.lean')]
     external = ('Mathlib', 'Lean', 'Init', 'Batteries', 'Aesop', 'Qq',
                 'ProofWidgets', 'Plausible', 'ImportGraph', 'LeanSearchClient')
     for p in sources:
         for m in imports(p.read_text()):
+            assert m.split('.')[0] != 'Comparator' or p.is_relative_to(ROOT/'Comparator'), (
+                p, 'Comparator modules must not be imported by production sources')
             if m.split('.')[0] in external:
                 continue
             rel = m.replace('.', '/')+'.lean'

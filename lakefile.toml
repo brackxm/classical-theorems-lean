@@ -32,6 +32,11 @@ path = "vendor/schoenflies"
 [[lean_lib]]
 name = "ClassicalTheorems"
 
+# Intentional challenge placeholders are outside the default production target.
+[[lean_lib]]
+name = "Comparator"
+globs = ["Comparator.+"]
+
 [[require]]
 name = "HOLLightPort"
 path = "vendor/hol-light-port"
