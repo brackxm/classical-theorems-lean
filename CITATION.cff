@@ -4,7 +4,8 @@
   "type": "software",
   "title": "Classical Theorems in Lean",
   "version": "0.0.2",
-  "date-released": "2026-10-07",
+  "doi": "10.5281/zenodo.23144254",
+  "date-released": "2026-10-31",
   "authors": [
     {
       "family-names": "Brackx",
