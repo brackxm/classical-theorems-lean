@@ -18,7 +18,7 @@ ROOT_FILES = {
     'ClassicalTheorems.lean', 'lakefile.toml', 'lake-manifest.json', 'lean-toolchain',
     'comparator.json',
 }
-SOURCE_DIRS = {'.github', 'ClassicalTheorems', 'Comparator', 'scripts', 'vendor'}
+SOURCE_DIRS = {'.github', 'ClassicalTheorems', 'Comparator', 'Tests', 'scripts', 'vendor'}
 EXCLUDED_DIRS = {'.git', '.lake', '__pycache__', 'dist'}
 
 
@@ -72,7 +72,8 @@ def source_files():
             if (base/name).is_symlink():
                 raise ValueError(f'Source directory is a symlink: {base/name}')
         for name in sorted(names):
-            if name == '.DS_Store' or name.endswith('.pyc'):
+            # AppleDouble sidecars can accompany both source files and directories.
+            if name.startswith('._') or name == '.DS_Store' or name.endswith('.pyc'):
                 continue
             path = base/name
             if base == ROOT and name not in ROOT_FILES:

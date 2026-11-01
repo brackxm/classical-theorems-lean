@@ -27,6 +27,19 @@ python3 scripts/release.py
 The verification command checks source integrity, builds the library and audits proof axioms.
 It uses one Lean worker by default to limit peak memory use; set `LEAN_NUM_THREADS` to override this.
 
+CI and release verification also compile mathematical examples:
+
+- [Triangle](Tests/Triangle.lean): a translated 3–4–5 triangle has enclosed Lebesgue area 6 in either vertex order; collinear vertices fail the noncollinearity hypothesis.
+- [Pascal](Tests/Pascal.lean): six distinct points on a nonsingular conic exercise both formulations, with finite intersections on an explicit common line.
+- [Desargues](Tests/Desargues.lean): noncollinear perspective triangles exercise both directions, with nonzero joins and expected affine intersections.
+- [Circle](Tests/Circle.lean): a translated radius-3 circle has an open-disk interior, area 9π and total-variation perimeter 6π, and attains equality in the Jordan isoperimetric theorem.
+- [Euler](Tests/Euler.lean): a translated nonregular tetrahedron has 4 geometric vertices, 6 edges and 4 facets; its full dimension and an exposed triangular facet are established before applying Euler's theorem.
+- [Green](Tests/Green.lean): a translated triangle with corners gives boundary integrals 18 and −18 for P = −y, Q = 2x; Green recovers area 6 and a common orientation for all C¹ fields, including a zero integral for x dx + y dy.
+- [Parallel](Tests/Parallel.lean): an asymmetric Tarski-axiom configuration has explicit Euclidean witnesses and no Klein-disk witnesses; equal Euclidean chords are also distinguished by the hyperbolic congruence relation.
+- [Gödel](Tests/Godel.lean): named-variable semantics, quantifier-order preservation through the proof-language bridge, and code round trips; the public theorem applies to a satisfiable finite arithmetic extension, while a contradictory extension is rejected.
+
+Run any example with `lake env lean -DwarningAsError=true Tests/Triangle.lean`, replacing the filename as needed; unfinished proofs and other warnings fail the test, and the declarations undergo the axiom audit.
+
 Use `import ClassicalTheorems` for the full library, or import an individual theorem module such as `ClassicalTheorems.Euler`. [theorems.md](theorems.md) links to all eight theorem modules. `ClassicalTheorems.Translations` imports Pascal and Desargues together. Public theorem names include `ClassicalTheorems.euler_polyhedron`; the translated proofs use the `HOLLightPort.Pascal` and `HOLLightPort.Desargues` namespaces.
 
 Reusable sign lemmas are in `ClassicalTheorems.Progress.Orientation`. `ClassicalTheorems.Progress.HeronAlgebra` proves the determinant and side-length identity independently of Jordan area and Green’s theorem. Euler’s general cycle-filling proof is independent of pyramid face counting.

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Regression checks for proof audits, source layout and release metadata."""
+"""Regression checks for mathematical examples, proof audits and release integrity."""
+import hashlib
 import json
 import os
 import re
@@ -13,7 +14,7 @@ import release
 from check_comparator import check as check_comparator
 from check_imports import imports, main as check_imports
 from check_standalone import check_layout
-from check_vendor import ROOT, check_package_pins
+from check_vendor import ROOT, check_package_pins, main as check_vendor
 class Checks(unittest.TestCase):
     def test_public_imports_and_nested_comments(self):
         source = 'module\npublic import Foundation.A\nmeta import Mathlib.B\n/- import Bogus.C /- nested -/ -/\n-- import Bogus.D\nimport ClassicalTheorems.Audit\n'
@@ -160,6 +161,82 @@ class Checks(unittest.TestCase):
                 (root/'LICENSE').symlink_to('README.md')
                 with self.assertRaises(ValueError): release.source_files()
 
+    def test_release_sources_ignore_macos_sidecars(self):
+        with tempfile.TemporaryDirectory(prefix='classical-sidecars-') as directory:
+            root = Path(directory)
+            for name in release.ROOT_FILES:
+                (root/name).write_text('Fixture source.\n')
+            sources = [root/'Tests/Example.lean', root/'vendor/example/Source.lean']
+            for source in sources:
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text('Fixture source.\n')
+            expected = {root/name for name in release.ROOT_FILES} | set(sources)
+            sidecars = ['._README.md', '._Tests', 'Tests/._Example.lean',
+                        'vendor/example/._Source.lean']
+            with patch.object(release, 'ROOT', root):
+                for name in sidecars:
+                    with self.subTest(sidecar=name):
+                        path = root/name
+                        path.write_bytes(bytes.fromhex('00051607') + b'Metadata fixture.')
+                        try:
+                            self.assertEqual(set(release.source_files()), expected)
+                        finally:
+                            path.unlink()
+                (root/'._LICENSE').write_bytes(b'Metadata fixture.')
+                (root/'LICENSE').unlink()
+                with self.assertRaisesRegex(ValueError, 'Missing required release files.*LICENSE'):
+                    release.source_files()
+
+    def test_source_checks_ignore_macos_sidecars(self):
+        with tempfile.TemporaryDirectory(prefix='classical-metadata-scans-') as directory:
+            root = Path(directory)
+            package = root/'vendor/support'
+            package.mkdir(parents=True)
+            toolchain, revision = 'leanprover/lean4:v4.35.0', 'fixture-revision'
+            url = 'https://example.com/mathlib.git'
+            for target, name in [(root, 'fixture'), (package, 'support')]:
+                (target/'lean-toolchain').write_text(toolchain+'\n')
+                (target/'lakefile.toml').write_text(f'name = "{name}"\n')
+                (target/'lake-manifest.json').write_text(json.dumps({
+                    'name': name, 'packagesDir': '.lake/packages',
+                    'packages': [{'name': 'mathlib', 'type': 'git', 'inherited': False,
+                                  'url': url, 'rev': revision}] if target == root else [],
+                }))
+            with (root/'lakefile.toml').open('a') as config:
+                config.write(f'[[require]]\nname = "mathlib"\ngit = "{url}"\nrev = "{revision}"\n')
+            (root/'ClassicalTheorems.lean').write_text('')
+            (root/'Tests').mkdir()
+            example = root/'Tests/Example.lean'
+            example.write_text('')
+            source = package/'Support.lean'
+            source.write_text('-- Fixture source.\n')
+            digest = hashlib.sha256(source.read_bytes()).hexdigest()
+            (package/'upstream.json').write_text(json.dumps({
+                'id': 'support', 'target_toolchain': toolchain,
+                'target_mathlib_revision': revision, 'local_sha256': {'Support.lean': digest},
+                'upstream_sha256': {'Support.lean': digest}, 'modified_files': [], 'license_files': [],
+            }))
+            expected_layout = check_layout(root)
+            for path in [root/'._README.md', root/'Tests/._Example.lean', package/'._Support.lean']:
+                path.write_bytes(bytes.fromhex('00051607ff'))
+            # Finder metadata may contain old path names; it is not source text.
+            (root/'._README.md').write_bytes(bytes.fromhex('00051607') + ('100'+'-theorems').encode())
+            with patch('check_imports.ROOT', root), patch('check_vendor.ROOT', root):
+                check_imports()
+                check_vendor()
+                self.assertEqual(check_layout(root), expected_layout)
+                example.write_text('import Missing.Module\n')
+                with self.assertRaises(AssertionError): check_imports()
+                example.write_text('100'+'-theorems')
+                with self.assertRaises(AssertionError): check_layout(root)
+                example.write_text('')
+                unexpected = package/'Unexpected.lean'
+                unexpected.write_text('-- Genuine unrecorded source.\n')
+                with self.assertRaises(AssertionError): check_vendor()
+                unexpected.unlink()
+                source.write_text('-- Changed source.\n')
+                with self.assertRaises(AssertionError): check_vendor()
+
     def test_comparator_coverage_and_generated_files(self):
         paths = ['Comparator/Challenge.lean', 'Comparator/Solution.lean', 'comparator.json',
                  'ClassicalTheorems/IndexAudit.lean', 'theorems.md']
@@ -271,6 +348,37 @@ class Checks(unittest.TestCase):
                 log = json.loads(trace.read_text())['log']
                 warnings = [entry['message'] for entry in log if entry['level'] == 'warning']
                 self.assertEqual(warnings, [], '\n'.join(warnings))
+
+    def _check_lean_example(self, name):
+        result = subprocess.run(
+            ['lake', 'env', 'lean', '-DwarningAsError=true', f'Tests/{name}.lean'],
+            cwd=ROOT, env=dict(os.environ, LEAN_NUM_THREADS='1'),
+            capture_output=True, text=True, timeout=180)
+        self.assertEqual(result.returncode, 0, result.stdout+result.stderr)
+
+    def test_triangle_area(self):
+        self._check_lean_example('Triangle')
+
+    def test_pascal_hexagon(self):
+        self._check_lean_example('Pascal')
+
+    def test_desargues_triangles(self):
+        self._check_lean_example('Desargues')
+
+    def test_circle_isoperimetry(self):
+        self._check_lean_example('Circle')
+
+    def test_euler_tetrahedron(self):
+        self._check_lean_example('Euler')
+
+    def test_green_orientation(self):
+        self._check_lean_example('Green')
+
+    def test_parallel_models(self):
+        self._check_lean_example('Parallel')
+
+    def test_godel_arithmetic(self):
+        self._check_lean_example('Godel')
 
     def test_documented_theorems_exist_and_pass_axiom_audit(self):
         indexed = set(re.findall(r'\[`([A-Za-z_][A-Za-z0-9_.]*)`\]\(',

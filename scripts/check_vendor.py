@@ -48,7 +48,8 @@ def main():
         assert sorted(changed) == sorted(r['modified_files']), d
         for rel in r['license_files']:
             assert r['local_sha256'][rel] == r['upstream_sha256'][rel], rel
-        actual = {str(p.relative_to(d)) for p in d.rglob('*.lean') if '.lake' not in p.relative_to(d).parts}
+        actual = {str(p.relative_to(d)) for p in d.rglob('*.lean')
+                  if '.lake' not in p.relative_to(d).parts and not p.name.startswith('._')}
         assert actual == {p for p in r['local_sha256'] if p.endswith('.lean')}, d
     packages = [ROOT] + [d for d, _ in records]
     toolchain = (ROOT/'lean-toolchain').read_text().strip()

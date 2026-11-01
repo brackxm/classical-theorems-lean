@@ -84,7 +84,7 @@ jobs:
           use-github-cache: "false"
       - name: Check standalone source and dependency layout
         run: python3 scripts/check_standalone.py
-      - name: Check proof-audit regressions
+      - name: Check mathematical and proof-audit regressions
         run: python3 scripts/test_checks.py
       - name: Compare indexed statements and replay their proofs
         run: lake comparator

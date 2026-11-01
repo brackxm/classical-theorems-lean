@@ -58,6 +58,11 @@ jobs:
           build-args: '--fail-fast'
           use-mathlib-cache: 'true'
           use-github-cache: 'false'
+      - name: Check mathematical examples
+        run: |
+          for example in Tests/*.lean; do
+            lake env lean -DwarningAsError=true "$example"
+          done
       - name: Compare all indexed theorem contracts with independent checkers
         run: lake comparator --paranoid
       - name: Replay full-library exports with independent checkers

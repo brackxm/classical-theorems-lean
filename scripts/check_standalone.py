@@ -38,7 +38,7 @@ def check_layout(root):
         if '.lake' in base.relative_to(root).parts:
             continue
         for name in files:
-            if name == '.DS_Store':
+            if name.startswith('._') or name == '.DS_Store':
                 continue
             path = base/name
             try:

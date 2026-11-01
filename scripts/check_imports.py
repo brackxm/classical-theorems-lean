@@ -36,8 +36,10 @@ def main():
     roots = [ROOT] + [d for d, _ in records]
     sources = list((ROOT/'ClassicalTheorems').rglob('*.lean')) + [ROOT/'ClassicalTheorems.lean']
     sources += list((ROOT/'Comparator').rglob('*.lean'))
+    sources += list((ROOT/'Tests').rglob('*.lean'))
     sources += [d/p for d, r in records for p in r['local_sha256']
                 if p.endswith('.lean')]
+    sources = [p for p in sources if not p.name.startswith('._')]
     external = ('Mathlib', 'Lean', 'Init', 'Batteries', 'Aesop', 'Qq',
                 'ProofWidgets', 'Plausible', 'ImportGraph', 'LeanSearchClient')
     for p in sources:
