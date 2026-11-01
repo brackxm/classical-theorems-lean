@@ -37,11 +37,13 @@ CI also runs `lake comparator` against the ten independently written statements 
 
 When changing an indexed statement, review the challenge and its referenced definitions, then run `python3 scripts/check_comparator.py --write` to update the solution wrappers and configuration. This command never rewrites the challenge statements. CI checks that the comparator covers exactly the declarations in the theorem index and axiom audit.
 
+[Deep proof verification](.github/workflows/deep-verification.yml) runs `lake comparator --paranoid` and `lake check --paranoid` with the additional checkers bundled with Lean 4.35.0. It runs on version tags and manual dispatch and requires Linux with the kernel-check sandbox configured.
+
 Licensed supporting sources from Foundation, Unico, MovingSofa, Jordan Pick, Schönflies and HOL Light are bundled. Their upstream revisions, licenses, modification notices and hashes are preserved in [third-party.md](third-party.md), [NOTICE](NOTICE) and `vendor/*/upstream.json`.
 
 Package dependencies use relative paths within the project or pinned Git revisions. Source archives must omit every `.lake` directory; Lake retrieves the pinned external packages and their caches during setup.
 
-Run the verification command above before sharing changed sources.
+Run the verification command above before sharing changed sources. Before publishing a tagged release, also check that deep proof verification passed for the exact tag.
 
 Original project code and documentation are licensed under [Apache-2.0](LICENSE). Files with explicit BSD-2-Clause notices and bundled third-party sources retain their respective licenses; see [NOTICE](NOTICE) and [third-party.md](third-party.md).
 

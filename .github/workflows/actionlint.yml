@@ -1,0 +1,20 @@
+name: Lint GitHub Actions
+on:
+  push:
+    branches: ['**']
+    paths: ['.github/**']
+  pull_request:
+    paths: ['.github/**']
+permissions:
+  contents: read
+jobs:
+  actionlint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: raven-actions/actionlint@205b530c5d9fa8f44ae9ed59f341a0db994aa6f8 # v2.1.2
+        with:
+          version: '1.7.12'
